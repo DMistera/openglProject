@@ -6,10 +6,10 @@ Shader::Shader()
 {
 }
 
-bool Shader::init(const char* path)
+bool Shader::init(const char* path, GLenum type)
 {
 	//Obtain shader id
-	m_id = glCreateShader(GL_VERTEX_SHADER);
+	m_id = glCreateShader(type);
 	
 	//Read the file
 	std::string code;
@@ -21,7 +21,7 @@ bool Shader::init(const char* path)
 		inputStream.close();
 	}
 	else {
-		perror("Count not open shader's source file");
+		std::cerr << "Count not open shader's source file";
 		return false;
 	}
 	const char* codePointer = code.c_str();
@@ -34,7 +34,7 @@ bool Shader::init(const char* path)
 	GLint result;
 	glGetShaderiv(m_id, GL_COMPILE_STATUS, &result);
 	if (result == GL_FALSE) {
-		perror("Shader compilation was not successful!");
+		std::cerr << "Shader compilation was not successful!";
 		//TODO Display error message here
 		return false;
 	}

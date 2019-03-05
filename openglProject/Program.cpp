@@ -8,17 +8,18 @@ Program::Program()
 
 bool Program::create(const char* vertexPath, const char* fragmentPath)
 {
-	//Obtain program id
-	m_id = glCreateProgram();
 
 	//Initialize shaders
 	Shader vertex, fragment;
-	if (!vertex.init(vertexPath)) {
+	if (!vertex.init(vertexPath, GL_VERTEX_SHADER)) {
 		return false;
 	}
-	if (!fragment.init(fragmentPath)) {
+	if (!fragment.init(fragmentPath, GL_FRAGMENT_SHADER)) {
 		return false;
 	}
+
+	//Obtain program id
+	m_id = glCreateProgram();
 
 	//Attach shaders to program
 	glAttachShader(m_id, vertex.getID());
@@ -30,11 +31,20 @@ bool Program::create(const char* vertexPath, const char* fragmentPath)
 	GLint result;
 	glGetProgramiv(m_id, GL_LINK_STATUS, &result);
 	if (result == GL_FALSE) {
-		perror("Failed to link program!");
-		//TOOD Display a log here
+		int infoLength;
+		glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &infoLength);
+		GLchar* errorMsg = new GLchar[infoLength];
+		glGetProgramInfoLog(m_id, infoLength, NULL, errorMsg);
+		std::cerr << "Failed to link program!\n" << errorMsg;
 		return false;
 	}
+
 	return true;
+}
+
+void Program::use()
+{
+	glUseProgram(m_id);
 }
 
 
