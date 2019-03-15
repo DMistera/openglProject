@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
+#include "App.h"
 
 int main(void)
 {
@@ -40,21 +41,24 @@ int main(void)
 		return -1;
 	}
 
-	//glDebugMessageCallback(messageCallback, 0);
-
 	Renderer renderer(window);
-
 	renderer.init();
+
+	App app;
+	app.start();
+
+	int time = 0;
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
+		app.update(0);
 
 		glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		renderer.draw();
+		app.draw(&renderer);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);

@@ -2,13 +2,15 @@
 
 #include "Program.h"
 #include <GLFW/glfw3.h>
+#include "Entity.h"
+#include "Camera.h"
 
 class Renderer
 {
 public:
 	Renderer(GLFWwindow* window);
 	bool init();
-	void draw();
+	void draw(Entity* entity, Camera* camera);
 	~Renderer();
 private:
 	GLFWwindow* m_window;

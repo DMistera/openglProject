@@ -125,7 +125,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Program.cpp" />
@@ -134,7 +137,10 @@
     <ClCompile Include="Transformable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Renderer.h" />

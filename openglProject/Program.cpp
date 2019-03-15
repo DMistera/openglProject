@@ -47,6 +47,11 @@ void Program::use()
 	glUseProgram(m_id);
 }
 
+void Program::setUniform(glm::mat4 value, const char * identifier)
+{
+	glUniformMatrix4fv(glGetUniformLocation(m_id, identifier), 1, GL_FALSE, glm::value_ptr(value));
+}
+
 
 Program::~Program()
 {
