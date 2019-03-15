@@ -9,12 +9,19 @@ Renderer::Renderer(GLFWwindow* window)
 
 bool Renderer::init()
 {
+	GLuint vertexArrayID = 0;
+	glGenVertexArrays(1, &vertexArrayID);
+	glBindVertexArray(vertexArrayID);
 	return true;
 }
 
 void Renderer::draw(Entity* entity, Camera* camera)
 {
 	entity->draw(camera);
+	int err;
+	if ((err = glGetError())) {
+		std::cerr << "OpenGL error number " << err;
+	}
 }
 
 

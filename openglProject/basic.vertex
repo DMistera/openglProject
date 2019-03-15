@@ -4,11 +4,8 @@ uniform mat4 p_matrix;
 uniform mat4 v_matrix;
 uniform mat4 m_matrix;
 
-layout(location = 0) in vec3 vertexPosition_modelspace;
+layout(location = 0) in vec3 vertexPosition;
 
 void main(){
-	vec4 v;
-	v.xyz = vertexPosition_modelspace;
-	v.w = 1.0;
-	gl_Position.xyz = p_matrix*v_matrix*m_matrix*v;
+	gl_Position = p_matrix*v_matrix*m_matrix*vec4(vertexPosition, 1.0);
 }

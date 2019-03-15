@@ -25,12 +25,11 @@ void Entity::addEntity(Entity * e)
 void Entity::draw(Camera* camera)
 {
 	m_program->use();
-
 	m_program->setUniform(getMatrix(), "m_matrix");
 	m_program->setUniform(camera->getPerspectiveMatrix(), "p_matrix");
 	m_program->setUniform(camera->getViewMatrix(), "v_matrix");
 
 	m_mesh->useVertexBuffer();
-
-	glDrawArrays(GL_TRIANGLES, 0, m_mesh->getVertices().size());
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, m_mesh->getVertices().size()*3);
+	glDisableVertexAttribArray(0);
 }

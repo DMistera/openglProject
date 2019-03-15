@@ -34,8 +34,11 @@ bool Shader::init(const char* path, GLenum type)
 	GLint result;
 	glGetShaderiv(m_id, GL_COMPILE_STATUS, &result);
 	if (result == GL_FALSE) {
-		std::cerr << "Shader compilation was not successful!";
-		//TODO Display error message here
+		GLint logLength = 0;
+		GLchar* infoLog = new GLchar[logLength];
+		glGetShaderiv(m_id, GL_INFO_LOG_LENGTH, &logLength);
+		glGetShaderInfoLog(m_id, logLength, &logLength, infoLog);
+		std::cerr << "Shader compilation was not successful!" << std::endl << infoLog;
 		return false;
 	}
 	return true;

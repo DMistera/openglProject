@@ -28,10 +28,11 @@ void Camera::setNoseVector(glm::vec3 v)
 
 glm::mat4 Camera::getViewMatrix()
 {
-	return glm::lookAt(m_position, m_center, m_noseVector);
+	glm::mat4 result = glm::lookAt(m_position, m_center, m_noseVector);
+	return result;
 }
 
 glm::mat4 Camera::getPerspectiveMatrix()
 {
-	return glm::perspective(50.0f*3.14f / 180.0f, 1.0f, 1.0f, 50.0f);
+	return glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 }

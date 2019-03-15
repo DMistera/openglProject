@@ -20,17 +20,19 @@ void Mesh::init()
 		}
 	}
 
-	GLuint vertexArrayID = 0;
-	glGenVertexArrays(1, &vertexArrayID);
-	glBindVertexArray(vertexArrayID);
-
-	GLfloat* bufferData = new GLfloat[m_vertices.size() * 3];
+	std::vector <GLfloat> bufferData;
+	for (int i = 0; i < m_vertices.size(); i++) {
+		glm::vec3 vertex = m_vertices.at(i);
+		bufferData.push_back(vertex.x);
+		bufferData.push_back(vertex.y);
+		bufferData.push_back(vertex.z);
+	}
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer
 	glGenBuffers(1, &m_vertexBuffer);
 	// The following commands will talk about our 'vertexbuffer' buffer
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	// Give our vertices to OpenGL.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(bufferData), bufferData, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*bufferData.size(), bufferData.data(), GL_STATIC_DRAW);
 }
 
 void Mesh::useVertexBuffer()

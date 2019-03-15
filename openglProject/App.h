@@ -10,7 +10,7 @@ public:
 
 	// Inherited via GameEngine
 	virtual void start() override;
-	virtual void update(int time) override;
+	virtual void update(double time) override;
 	virtual void draw(Renderer * renderer) override;
 
 private:
