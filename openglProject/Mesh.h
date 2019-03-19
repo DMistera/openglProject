@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "Face.h"
 
 #pragma once
 class Mesh

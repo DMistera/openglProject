@@ -18,7 +18,7 @@ void App::start()
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
 
 
-	Mesh* cubeMesh = new Mesh("assets/cube.obj");
+	Mesh* cubeMesh = new Mesh("assets/monkey.obj");
 	cubeMesh->init();
 	Program* program = new Program();
 	program->create("basic.vertex", "basic.fragment");
@@ -26,13 +26,13 @@ void App::start()
 	m_cube->setToDraw(cubeMesh, program);
 }
 
-float elapsed = 0;
+double elapsed = 0;
 
 void App::update(double time)
 {
 	elapsed += time;
 	std::cout << time << std::endl;
-	m_camera->setPosition(glm::vec3(0.0f, 0.0f, -5.0f - (2.0*sin(elapsed)) ));
+	m_camera->setPosition(glm::vec3(5.0*cos(elapsed), 0.0f, 5.0*sin(elapsed)));
 }
 
 void App::draw(Renderer * renderer)

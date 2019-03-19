@@ -8,6 +8,10 @@ Mesh::Mesh(const char* path)
 void Mesh::init()
 {
 
+	std::vector<glm::vec4> vertices;
+	std::vector<glm::vec2> texCoords;
+	std::vector<glm::vec3> normals;
+
 	std::ifstream in(m_path);
 	std::string line;
 	while (std::getline(in, line)) {
@@ -16,7 +20,14 @@ void Mesh::init()
 			std::istringstream s(line.substr(2));
 			glm::vec4 vertex;
 			s >> vertex.x; s >> vertex.y; s >> vertex.z; s >> vertex.w;
-			m_vertices.push_back(vertex);
+			vertices.push_back(vertex);
+		}
+		else if (line.substr(0, 2) == "f ") {
+			Face face = Face(line, &vertices, &texCoords, &normals);
+			std::vector<glm::vec4> triangles = face.getTriangles();
+			for (int i = 0; i < triangles.size(); i++) {
+				m_vertices.push_back(triangles.at(i));
+			}
 		}
 	}
 
