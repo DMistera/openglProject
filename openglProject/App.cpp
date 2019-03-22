@@ -31,7 +31,6 @@ double elapsed = 0;
 void App::update(double time)
 {
 	elapsed += time;
-	std::cout << time << std::endl;
 	m_camera->setPosition(glm::vec3(5.0*cos(elapsed), 0.0f, 5.0*sin(elapsed)));
 }
 

@@ -14,12 +14,16 @@ public:
 	Mesh(const char* path);
 	void init();
 	void useVertexBuffer();
-	std::vector<glm::vec4> getVertices();
+	std::vector<Face> getFaces();
+	int getVertexCount();
 	~Mesh();
 private:
 	const char* m_path;
 	GLuint m_vertexBuffer;
+	GLuint m_normalBuffer;
 	//Array of vertices
-	std::vector<glm::vec4> m_vertices;
+	std::vector<Face> m_faces;
+	float* m_bufferDataArray;
+	int m_vertexCount;
 };
 

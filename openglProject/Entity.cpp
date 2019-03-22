@@ -30,6 +30,6 @@ void Entity::draw(Camera* camera)
 	m_program->setUniform(camera->getViewMatrix(), "v_matrix");
 
 	m_mesh->useVertexBuffer();
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, m_mesh->getVertices().size()*3);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, m_mesh->getVertexCount()*3);
 	glDisableVertexAttribArray(0);
 }

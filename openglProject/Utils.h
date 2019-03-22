@@ -6,7 +6,7 @@
 static std::vector<std::string> split(std::string line, char separator) {
 	std::vector<std::string> result;
 	std::string temp = "";
-	for (int i = 0; i < line.size(); i++) {
+	for (unsigned int i = 0; i < line.size(); i++) {
 		char c = line.at(i);
 		if (c != separator) {
 			temp += c;

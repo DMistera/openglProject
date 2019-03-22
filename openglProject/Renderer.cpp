@@ -12,6 +12,7 @@ bool Renderer::init()
 	GLuint vertexArrayID = 0;
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);
+	glEnable(GL_DEPTH_TEST);
 	return true;
 }
 
