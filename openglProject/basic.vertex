@@ -22,4 +22,5 @@ void main(){
     float nl = clamp(dot(n,lightDir),0,1);
 
     i_color = vec4(color.rgb*nl,color.a);
+	
 }

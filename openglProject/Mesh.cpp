@@ -46,19 +46,18 @@ void Mesh::init()
 	std::vector <GLfloat> normalBufferData; //vec3
 	for (int j = 0; j < m_faces.size(); j++) {
 		Face face = m_faces.at(j);
-		std::vector<glm::vec4> triangles = face.getTriangles();
-		glm::vec3 normal = face.getNormal();
+		std::vector<Vertex> triangles = face.getTriangles();
 		m_vertexCount += triangles.size();
 		for (int i = 0; i < triangles.size(); i++) {
-			glm::vec4 vertex = triangles.at(i);
-			vertexBufferData.push_back(vertex.x);
-			vertexBufferData.push_back(vertex.y);
-			vertexBufferData.push_back(vertex.z);
-			vertexBufferData.push_back(vertex.w);
+			Vertex vertex = triangles.at(i);
+			vertexBufferData.push_back(vertex.position.x);
+			vertexBufferData.push_back(vertex.position.y);
+			vertexBufferData.push_back(vertex.position.z);
+			vertexBufferData.push_back(vertex.position.w);
 			
-			normalBufferData.push_back(normal.x);
-			normalBufferData.push_back(normal.y);
-			normalBufferData.push_back(normal.z);
+			normalBufferData.push_back(vertex.normal.x);
+			normalBufferData.push_back(vertex.normal.y);
+			normalBufferData.push_back(vertex.normal.z);
 		}
 	}
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer

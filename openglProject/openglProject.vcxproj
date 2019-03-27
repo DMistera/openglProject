@@ -149,6 +149,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="basic.fragment" />
