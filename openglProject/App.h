@@ -20,5 +20,7 @@ private:
 	BasicEntity* m_sculpture;
 	Entity* m_lightEntity;
 	LightSource* m_lightSource;
+	Entity* m_lightEntity2;
+	LightSource* m_lightSource2;
 };
 

@@ -43,4 +43,5 @@ void Entity::setUniforms(Camera * camera)
 	glUniformMatrix4fv(m_program->getLocation("m_matrix"), 1, GL_FALSE, glm::value_ptr(getMatrix()));
 	glUniformMatrix4fv(m_program->getLocation("p_matrix"), 1, GL_FALSE, glm::value_ptr(camera->getPerspectiveMatrix()));
 	glUniformMatrix4fv(m_program->getLocation("v_matrix"), 1, GL_FALSE, glm::value_ptr(camera->getViewMatrix()));
+	glUniform3fv(m_program->getLocation("viewPos"), 1, glm::value_ptr(camera->getPosition()));
 }

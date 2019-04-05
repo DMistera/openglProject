@@ -31,24 +31,22 @@ in vec3 i_fragPos;
 in vec3 i_normal;
 
 vec3 calcPointLight(LightSource light, vec3 normal, vec3 fragPos, vec3 viewDir) {
+
+    // ambient
+    vec3 ambient = light.ambientColor * material.ambientColor;
+  	
+    // diffuse 
     vec3 lightDir = normalize(light.position - fragPos);
-    // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
-    // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
+    vec3 diffuse = light.diffuseColor * (diff * material.diffuseColor);
+    
+    // specular
+    vec3 reflectDir = reflect(-lightDir, normal);  
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-    // attenuation
-    float distance    = length(light.position - fragPos);
-    float attenuation = 1.0 / (light.constant + light.linear * distance + 
-  			     light.quadratic * (distance * distance));    
-    // combine results
-    vec3 ambient  = light.ambientColor  * material.ambientColor;
-    vec3 diffuse  = light.diffuseColor  * diff * material.diffuseColor;
-    vec3 specular = light.specularColor * spec * material.specularColor;
-    ambient  *= attenuation;
-    diffuse  *= attenuation;
-    specular *= attenuation;
-    return (ambient + diffuse + specular);
+    vec3 specular = spec * light.specularColor;  
+        
+    vec3 result = (ambient + diffuse + specular)*material.ambientColor ;
+    return result;
 } 
 
 void main() {
@@ -61,5 +59,5 @@ void main() {
 		result += calcPointLight(lights[i], norm, i_fragPos, viewDir);
 	}
 
-	color = vec4(calcPointLight(lights[0], norm, i_fragPos, viewDir), 1.0);
+	color = vec4(result, 1.0);
 }
