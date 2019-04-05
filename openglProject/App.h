@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameEngine.h"
+#include "Player.h"
 
 class App : public GameEngine
 {
@@ -14,7 +15,8 @@ public:
 	virtual void draw(Renderer * renderer) override;
 
 private:
-	Camera* m_camera;
-	Entity* m_cube;
+	Player* m_player;
+	Entity* m_sculpture;
+	Entity* m_lightSource;
 };
 

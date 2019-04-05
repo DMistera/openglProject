@@ -45,11 +45,29 @@ bool Program::create(const char* vertexPath, const char* fragmentPath)
 void Program::use()
 {
 	glUseProgram(m_id);
+	if (m_onUse != nullptr) {
+		m_onUse();
+	}
 }
 
-void Program::setUniform(glm::mat4 value, const char * identifier)
+void Program::setUniformMat4(glm::mat4 value, const char * identifier)
 {
 	glUniformMatrix4fv(glGetUniformLocation(m_id, identifier), 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void Program::setUniformVec4(glm::vec4 value, const char * identifier)
+{
+	glUniform4fv(glGetUniformLocation(m_id, identifier), 1, glm::value_ptr(value));
+}
+
+void Program::setUniformVec3(glm::vec3 value, const char * identifier)
+{
+	glUniform3fv(glGetUniformLocation(m_id, identifier), 1, glm::value_ptr(value));
+}
+
+void Program::setOnUse(std::function<void()> lambda)
+{
+	m_onUse = lambda;
 }
 
 

@@ -14,6 +14,7 @@ public:
 	void setToDraw(Mesh* m, Program* program);
 	void addEntity(Entity* e);
 	void draw(Camera* camera);
+	Program* getProgram();
 private:
 	Mesh* m_mesh;
 	Program* m_program;

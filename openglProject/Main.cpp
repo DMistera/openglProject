@@ -45,6 +45,7 @@ int main(void)
 	renderer.init();
 
 	App app;
+	app.init(window);
 	app.start();
 
 	glfwSetTime(0);

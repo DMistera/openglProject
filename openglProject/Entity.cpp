@@ -25,11 +25,18 @@ void Entity::addEntity(Entity * e)
 void Entity::draw(Camera* camera)
 {
 	m_program->use();
-	m_program->setUniform(getMatrix(), "m_matrix");
-	m_program->setUniform(camera->getPerspectiveMatrix(), "p_matrix");
-	m_program->setUniform(camera->getViewMatrix(), "v_matrix");
+	m_program->setUniformMat4(getMatrix(), "m_matrix");
+	m_program->setUniformMat4(camera->getPerspectiveMatrix(), "p_matrix");
+	m_program->setUniformMat4(camera->getViewMatrix(), "v_matrix");
+
+	glm::vec4 lightPosition = glm::vec4(2.0f, 0.0f, 0.0f, 1.0f);
 
 	m_mesh->useVertexBuffer();
 	glDrawArrays(GL_TRIANGLES, 0, m_mesh->getVertexCount());
 	glDisableVertexAttribArray(0);
+}
+
+Program * Entity::getProgram()
+{
+	return m_program;
 }
