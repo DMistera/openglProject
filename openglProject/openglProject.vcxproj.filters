@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Shaders\Constant">
       <UniqueIdentifier>{ef21b47d-737f-4152-8c5c-8295b3fda910}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shaders\Basic">
+      <UniqueIdentifier>{9b9a41dc-643a-464a-92a8-11c412240573}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -62,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEntity.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,16 +116,28 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="f_basic.glsl">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="v_basic.glsl">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
     <None Include="f_constant.glsl">
       <Filter>Source Files\Shaders\Constant</Filter>
+    </None>
+    <None Include="f_basic.glsl">
+      <Filter>Source Files\Shaders\Basic</Filter>
+    </None>
+    <None Include="v_basic.glsl">
+      <Filter>Source Files\Shaders\Basic</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

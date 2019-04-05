@@ -105,6 +105,11 @@ int Mesh::getVertexCount()
 	return m_vertexCount;
 }
 
+const char * Mesh::getPath()
+{
+	return m_path;
+}
+
 Mesh::~Mesh()
 {
 }

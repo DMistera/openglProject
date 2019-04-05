@@ -7,69 +7,75 @@
 
 int main(void)
 {
-	GLFWwindow* window;
-	// Initialise GLFW
-	if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW\n");
-		getchar();
-		return -1;
-	}
+	try {
 
-	glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		GLFWwindow* window;
+		// Initialise GLFW
+		if (!glfwInit())
+		{
+			fprintf(stderr, "Failed to initialize GLFW\n");
+			getchar();
+			return -1;
+		}
 
-	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(1024, 768, "Funky", NULL, NULL);
-	if (window == NULL) {
-		fprintf(stderr, "Failed to open GLFW window.\n");
-		getchar();
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
+		glfwWindowHint(GLFW_SAMPLES, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
-		getchar();
-		glfwTerminate();
-		return -1;
-	}
+		// Open a window and create its OpenGL context
+		window = glfwCreateWindow(1024, 768, "Funky", NULL, NULL);
+		if (window == NULL) {
+			fprintf(stderr, "Failed to open GLFW window.\n");
+			getchar();
+			glfwTerminate();
+			return -1;
+		}
+		glfwMakeContextCurrent(window);
 
-	Renderer renderer(window);
-	renderer.init();
+		// Initialize GLEW
+		glewExperimental = true; // Needed for core profile
+		if (glewInit() != GLEW_OK) {
+			fprintf(stderr, "Failed to initialize GLEW\n");
+			getchar();
+			glfwTerminate();
+			return -1;
+		}
 
-	App app;
-	app.init(window);
-	app.start();
+		Renderer renderer(window);
+		renderer.init();
 
-	glfwSetTime(0);
+		App app;
+		app.init(window);
+		app.start();
 
-	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window))
-	{
-		app.update(glfwGetTime());
 		glfwSetTime(0);
 
-		glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
-		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		/* Loop until the user closes the window */
+		while (!glfwWindowShouldClose(window))
+		{
+			app.update(glfwGetTime());
+			glfwSetTime(0);
 
-		app.draw(&renderer);
+			glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
+			/* Render here */
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+			app.draw(&renderer);
 
-		/* Poll for and process events */
-		glfwPollEvents();
+			/* Swap front and back buffers */
+			glfwSwapBuffers(window);
+
+			/* Poll for and process events */
+			glfwPollEvents();
 		
-	}
+		}
 
-	glfwTerminate();
-	return 0;
+		glfwTerminate();
+		return 0;
+	}
+	catch (const std::invalid_argument& ia) {
+		std::cerr << "Invalid argument: " << ia.what() << '\n';
+	}
 }

@@ -11,11 +11,13 @@ class Entity : public Transformable
 public:
 	Entity();
 	~Entity();
+
 	void setToDraw(Mesh* m, Program* program);
 	void addEntity(Entity* e);
 	void draw(Camera* camera);
 	Program* getProgram();
-private:
+protected:
+	virtual void setUniforms(Camera* camera);
 	Mesh* m_mesh;
 	Program* m_program;
 	std::vector<Entity*> m_entities;

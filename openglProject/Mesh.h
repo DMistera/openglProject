@@ -14,8 +14,8 @@ public:
 	Mesh(const char* path);
 	void init();
 	void useVertexBuffer();
-	std::vector<Face> getFaces();
 	int getVertexCount();
+	const char* getPath();
 	~Mesh();
 private:
 	const char* m_path;

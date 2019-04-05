@@ -2,6 +2,7 @@
 
 #include "GameEngine.h"
 #include "Player.h"
+#include "BasicEntity.h"
 
 class App : public GameEngine
 {
@@ -16,7 +17,8 @@ public:
 
 private:
 	Player* m_player;
-	Entity* m_sculpture;
-	Entity* m_lightSource;
+	BasicEntity* m_sculpture;
+	Entity* m_lightEntity;
+	LightSource* m_lightSource;
 };
 

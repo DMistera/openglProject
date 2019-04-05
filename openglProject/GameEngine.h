@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renderer.h"
+#include "ResourceManager.h"
 
 class GameEngine
 {
@@ -13,5 +14,6 @@ public:
 	virtual void draw(Renderer* renderer) = 0;
 protected:
 	GLFWwindow* m_window;
+	ResourceManager* m_resourceManager;
 };
 
