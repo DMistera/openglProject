@@ -131,6 +131,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />

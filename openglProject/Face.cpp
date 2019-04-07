@@ -45,12 +45,17 @@ Vertex Face::readFaceElement(std::string str, std::vector<glm::vec4>* vertices, 
 	catch (std::invalid_argument e) {
 		result.texCoord = glm::vec3();
 	}
-	try {
-		int index3 = std::stoi(splitStr.at(2)) - 1;
-		result.normal = normals->at(index3);
+	if (splitStr.size() > 2) {
+		try {
+			int index3 = std::stoi(splitStr.at(2)) - 1;
+			result.normal = normals->at(index3);
+		}
+		catch (std::invalid_argument e) {
+			std::cout << "Invalid argument for normals!" << std::endl;
+			result.normal = glm::vec3();
+		}
 	}
-	catch (std::invalid_argument e) {
-		std::cout << "Invalid argument for normals!" << std::endl;
+	else {
 		result.normal = glm::vec3();
 	}
 	return result;

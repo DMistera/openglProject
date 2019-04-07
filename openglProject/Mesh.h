@@ -11,14 +11,15 @@
 class Mesh
 {
 public:
-	Mesh(const char* path);
+	Mesh(std::string path);
 	void init();
 	void useVertexBuffer();
 	int getVertexCount();
-	const char* getPath();
+	std::string getPath();
 	~Mesh();
 private:
-	const char* m_path;
+	std::string m_objPath;
+	std::string m_mtlPath;
 	GLuint m_vertexBuffer;
 	GLuint m_normalBuffer;
 	//Array of vertices

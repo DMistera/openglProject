@@ -9,8 +9,8 @@ class ResourceManager
 public:
 	ResourceManager();
 	~ResourceManager();
-	Mesh* getMesh(const char* path);
-	Program* getProgram(const char* vertex, const char* fragment);
+	Mesh* getMesh(std::string path);
+	Program* getProgram(std::string vertex, std::string fragment);
 private:
 	std::vector<Mesh*> m_meshes;
 	std::vector<Program*> m_programs;

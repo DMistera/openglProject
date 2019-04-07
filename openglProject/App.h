@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "BasicEntity.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 class App : public GameEngine
 {
 public:

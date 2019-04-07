@@ -6,7 +6,7 @@ Shader::Shader()
 {
 }
 
-bool Shader::init(const char* path, GLenum type)
+bool Shader::init(std::string path, GLenum type)
 {
 	//Obtain shader id
 	m_id = glCreateShader(type);

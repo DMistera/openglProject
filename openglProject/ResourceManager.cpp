@@ -11,11 +11,11 @@ ResourceManager::~ResourceManager()
 {
 }
 
-Mesh * ResourceManager::getMesh(const char * path)
+Mesh * ResourceManager::getMesh(std::string path)
 {
 	for (int i = 0; i < m_meshes.size(); i++) {
 		Mesh* m = m_meshes.at(i);
-		if (strcmp(path, m->getPath()) == 0) {
+		if (path == m->getPath()) {
 			return m;
 		}
 	}
@@ -25,11 +25,11 @@ Mesh * ResourceManager::getMesh(const char * path)
 	return m;
 }
 
-Program * ResourceManager::getProgram(const char * vertex, const char * fragment)
+Program * ResourceManager::getProgram(std::string vertex, std::string fragment)
 {
 	for (int i = 0; i < m_programs.size(); i++) {
 		Program* p = m_programs.at(i);
-		if (strcmp(p->getVertexPath(), vertex) == 0 && strcmp(p->getFragmentPath(), fragment) == 0) {
+		if (p->getVertexPath() == vertex && p->getFragmentPath() == fragment) {
 			return p;
 		}
 	}

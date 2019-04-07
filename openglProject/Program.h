@@ -11,17 +11,17 @@
 class Program
 {
 public:
-	Program(const char* vertexPath, const char* fragmentPath);
+	Program(std::string vertexPath, std::string fragmentPath);
 	bool init();
 	void use();
 	void setOnUse(std::function<void()> lambda);
 	GLuint getLocation(const char* attributeName);
-	const char* getVertexPath();
-	const char* getFragmentPath();
+	std::string getVertexPath();
+	std::string getFragmentPath();
 	~Program();
 private:
-	const char* m_vertexPath;
-	const char* m_fragmentPath;
+	std::string m_vertexPath;
+	std::string m_fragmentPath;
 	GLuint m_id;
 	std::function<void()> m_onUse;
 };

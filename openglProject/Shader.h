@@ -9,7 +9,7 @@ class Shader
 {
 public:
 	Shader();
-	bool init(const char* path, GLenum type);
+	bool init(std::string path, GLenum type);
 	GLuint getID();
 	~Shader();
 private:

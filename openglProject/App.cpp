@@ -16,10 +16,10 @@ void App::start()
 	m_player = new Player();
 	m_player->init(m_window);
 
-	Mesh* monkeyMesh = new Mesh("assets/monkey.obj");
+	Mesh* monkeyMesh = new Mesh("assets/monkey");
 	monkeyMesh->init();
 
-	Mesh* cubeMesh = new Mesh("assets/cube.obj");
+	Mesh* cubeMesh = new Mesh("assets/cube");
 	cubeMesh->init();
 
 	Program* constant = m_resourceManager->getProgram("v_constant.glsl", "f_constant.glsl");

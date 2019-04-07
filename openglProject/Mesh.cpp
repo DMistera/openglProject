@@ -1,8 +1,9 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const char* path)
+Mesh::Mesh(std::string path)
 {
-	m_path = path;
+	m_objPath = path + ".obj";
+	m_mtlPath = path + ".mtl";
 }
 
 void Mesh::init()
@@ -12,7 +13,7 @@ void Mesh::init()
 	std::vector<glm::vec2> texCoords;
 	std::vector<glm::vec3> normals;
 
-	std::ifstream in(m_path);
+	std::ifstream in(m_objPath);
 	std::string line;
 	while (std::getline(in, line)) {
 		if (line.substr(0, 2) == "v ") {
@@ -34,6 +35,13 @@ void Mesh::init()
 			glm::vec3 vertex;
 			s >> vertex.x; s >> vertex.y; s >> vertex.z;
 			normals.push_back(vertex);
+		}
+		else if (line.substr(0, 3) == "vt ") {
+			//This is a texture coord
+			std::istringstream s(line.substr(3));
+			glm::vec2 vertex;
+			s >> vertex.x; s >> vertex.y;
+			texCoords.push_back(vertex);
 		}
 		else if (line.substr(0, 2) == "f ") {
 			Face face = Face(line, &vertices, &texCoords, &normals);
@@ -105,9 +113,9 @@ int Mesh::getVertexCount()
 	return m_vertexCount;
 }
 
-const char * Mesh::getPath()
+std::string Mesh::getPath()
 {
-	return m_path;
+	return m_objPath;
 }
 
 Mesh::~Mesh()

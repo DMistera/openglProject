@@ -2,7 +2,7 @@
 
 
 
-Program::Program(const char* vertexPath, const char* fragmentPath)
+Program::Program(std::string vertexPath, std::string fragmentPath)
 {
 	m_vertexPath = vertexPath;
 	m_fragmentPath = fragmentPath;
@@ -62,12 +62,12 @@ GLuint Program::getLocation(const char * attributeName)
 	return glGetUniformLocation(m_id, attributeName);
 }
 
-const char * Program::getVertexPath()
+std::string Program::getVertexPath()
 {
 	return m_vertexPath;
 }
 
-const char * Program::getFragmentPath()
+std::string Program::getFragmentPath()
 {
 	return m_fragmentPath;
 }
