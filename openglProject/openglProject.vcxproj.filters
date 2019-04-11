@@ -31,21 +31,21 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{47097a35-d0a1-4ef6-9fea-0d7756046e9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Model">
+      <UniqueIdentifier>{1c3b4ebf-8916-4b39-b214-bf8a78451db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Program">
+      <UniqueIdentifier>{37d79250-a2a2-4d48-8220-b7dcb74ec64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Managers">
+      <UniqueIdentifier>{b1ae2518-e62f-4a96-a083-365c824593ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Program.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -63,16 +63,10 @@
     <ClCompile Include="App.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="Face.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
     <ClCompile Include="BasicEntity.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="LightSource.cpp">
@@ -80,6 +74,30 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Face.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Engine\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files\Engine\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="MtlParser.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +153,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtlParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

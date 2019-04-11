@@ -6,18 +6,23 @@
 #include <string>
 #include <vector>
 #include "Utils.h"
-#include "Vertex.h"
 #include <iostream>
+
+struct FaceTuple {
+	int positionIndex;
+	int normalIndex;
+	int textureIndex;
+	bool operator ==(FaceTuple other);
+};
 
 class Face
 {
 public:
-	Face(std::string line, std::vector <glm::vec4>* vertices, std::vector <glm::vec2>* textureCoords, std::vector <glm::vec3>* normals);
-	std::vector<Vertex> getTriangles();
-	std::vector<Vertex> m_elements;
+	Face(std::string line);
+	std::vector<FaceTuple> getTuples();
 	~Face();
 private:
-	Vertex readFaceElement(std::string str, std::vector <glm::vec4>* vertices, std::vector <glm::vec2>* textureCoords, std::vector <glm::vec3>* normals);
-
+	FaceTuple readFaceElement(std::string str);
+	std::vector<FaceTuple> m_tuples;
 };
 

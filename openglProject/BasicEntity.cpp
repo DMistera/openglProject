@@ -2,9 +2,9 @@
 
 
 
-BasicEntity::BasicEntity(Mesh * mesh) : Entity()
+BasicEntity::BasicEntity(Model * model) : Entity()
 {
-	m_mesh = mesh;
+	m_model = model;
 }
 
 BasicEntity::~BasicEntity()

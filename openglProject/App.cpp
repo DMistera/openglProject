@@ -16,11 +16,9 @@ void App::start()
 	m_player = new Player();
 	m_player->init(m_window);
 
-	Mesh* monkeyMesh = new Mesh("assets/monkey");
-	monkeyMesh->init();
+	Model* monkeyMesh = m_resourceManager->getModel("monkey.obj");
 
-	Mesh* cubeMesh = new Mesh("assets/cube");
-	cubeMesh->init();
+	Model* cubeMesh = m_resourceManager->getModel("monkey.obj");
 
 	Program* constant = m_resourceManager->getProgram("v_constant.glsl", "f_constant.glsl");
 
@@ -48,7 +46,6 @@ double elapsed = 0;
 void App::update(double time)
 {
 	elapsed += time;
-	//m_camera->setPosition(glm::vec3(5.0*cos(elapsed), 0.0f, 5.0*sin(elapsed)));
 	m_sculpture->setRotation(glm::vec3(0.0f, -elapsed, 0.0f));
 
 	glm::vec3 lightPos = glm::vec3(2.0*sin(elapsed), 0.0f, 2.0*cos(elapsed));

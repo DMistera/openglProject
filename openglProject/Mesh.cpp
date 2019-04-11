@@ -1,121 +1,70 @@
 #include "Mesh.h"
 
-Mesh::Mesh(std::string path)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
-	m_objPath = path + ".obj";
-	m_mtlPath = path + ".mtl";
+	m_vertices = vertices;
+	m_indices = indices;
 }
 
 void Mesh::init()
 {
+	glGenVertexArrays(1, &m_vertexArrayObject);
+	glGenBuffers(1, &m_vertexBufferObject);
+	glGenBuffers(1, &m_elementBufferObject);
 
-	std::vector<glm::vec4> vertices;
-	std::vector<glm::vec2> texCoords;
-	std::vector<glm::vec3> normals;
+	glBindVertexArray(m_vertexArrayObject);
 
-	std::ifstream in(m_objPath);
-	std::string line;
-	while (std::getline(in, line)) {
-		if (line.substr(0, 2) == "v ") {
-			//This is a vertex
-			std::istringstream s(line.substr(2));
-			glm::vec4 vertex;
-			s >> vertex.x; s >> vertex.y; s >> vertex.z;
-			if (!s.eof()) {
-				s >> vertex.w;
-			}
-			else {
-				vertex.w = 1.0;
-			}
-			vertices.push_back(vertex);
-		}
-		else if (line.substr(0, 3) == "vn ") {
-			//This is a normal
-			std::istringstream s(line.substr(3));
-			glm::vec3 vertex;
-			s >> vertex.x; s >> vertex.y; s >> vertex.z;
-			normals.push_back(vertex);
-		}
-		else if (line.substr(0, 3) == "vt ") {
-			//This is a texture coord
-			std::istringstream s(line.substr(3));
-			glm::vec2 vertex;
-			s >> vertex.x; s >> vertex.y;
-			texCoords.push_back(vertex);
-		}
-		else if (line.substr(0, 2) == "f ") {
-			Face face = Face(line, &vertices, &texCoords, &normals);
-			m_faces.push_back(face);
-		}
-	}
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*m_vertices.size(), m_vertices.data(), GL_STATIC_DRAW);
 
-	m_vertexCount = 0;
-	std::vector <GLfloat> vertexBufferData; //vec4
-	std::vector <GLfloat> normalBufferData; //vec3
-	for (int j = 0; j < m_faces.size(); j++) {
-		Face face = m_faces.at(j);
-		std::vector<Vertex> triangles = face.getTriangles();
-		m_vertexCount += triangles.size();
-		for (int i = 0; i < triangles.size(); i++) {
-			Vertex vertex = triangles.at(i);
-			vertexBufferData.push_back(vertex.position.x);
-			vertexBufferData.push_back(vertex.position.y);
-			vertexBufferData.push_back(vertex.position.z);
-			vertexBufferData.push_back(vertex.position.w);
-			
-			normalBufferData.push_back(vertex.normal.x);
-			normalBufferData.push_back(vertex.normal.y);
-			normalBufferData.push_back(vertex.normal.z);
-		}
-	}
-	// Generate 1 buffer, put the resulting identifier in vertexbuffer
-	glGenBuffers(1, &m_vertexBuffer);
-	// The following commands will talk about our 'vertexbuffer' buffer
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	// Give our vertices to OpenGL.
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*vertexBufferData.size(), vertexBufferData.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_elementBufferObject);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int)*m_indices.size(), m_indices.data(), GL_STATIC_DRAW);
 
-	glGenBuffers(1, &m_normalBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_normalBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*normalBufferData.size(), normalBufferData.data(), GL_STATIC_DRAW);
-}
-
-void Mesh::useVertexBuffer()
-{
 	// 1st attribute buffer : vertices
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 	glVertexAttribPointer(
 		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 		4,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
-		0,                  // stride
+		sizeof(Vertex),                  // stride
 		(void*)0            // array buffer offset
 	);
 
 	// 2nd attribute buffer : normals
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, m_normalBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 	glVertexAttribPointer(
 		1,                  // attribute 1
 		3,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
+		sizeof(Vertex),                  // stride
+		(void*)offsetof(Vertex, normal)     // array buffer offset
 	);
+
+	// 3rd attribute buffer : textureCoords
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
+	glVertexAttribPointer(
+		2,                  // attribute 2
+		2,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)offsetof(Vertex, texCoord)           // array buffer offset
+	);
+
+	glBindVertexArray(0);
 }
 
 
-int Mesh::getVertexCount()
+void Mesh::draw()
 {
-	return m_vertexCount;
-}
-
-std::string Mesh::getPath()
-{
-	return m_objPath;
+	glBindVertexArray(m_vertexArrayObject);
+	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
 Mesh::~Mesh()

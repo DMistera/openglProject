@@ -14,13 +14,17 @@ void Player::init(GLFWwindow* window)
 	m_camera = new Camera();
 	m_camera->setPosition(glm::vec3(0.0f, 0.0f, -5.0f));
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
+
+	InputManager::setCursorPositionCallback([&](double xpos,double ypos) {
+		m_camera->setRotation(glm::vec2(ypos / 100.0, xpos / 100.0));
+	});
 }
 
 void Player::update(GLFWwindow* window, double deltaTime)
 {
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
-	m_camera->setRotation(glm::vec2(ypos/100.0, xpos/100.0));
+	//double xpos, ypos;
+	//glfwGetCursorPos(window, &xpos, &ypos);
+	//m_camera->setRotation(glm::vec2(ypos/100.0, xpos/100.0));
 }
 
 

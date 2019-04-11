@@ -11,9 +11,9 @@ Entity::~Entity()
 {
 }
 
-void Entity::setToDraw(Mesh * m, Program* program)
+void Entity::setToDraw(Model * m, Program* program)
 {
-	m_mesh = m;
+	m_model = m;
 	m_program = program;
 }
 
@@ -28,8 +28,7 @@ void Entity::draw(Camera* camera)
 	m_program->use();
 	setUniforms(camera);
 
-	m_mesh->useVertexBuffer();
-	glDrawArrays(GL_TRIANGLES, 0, m_mesh->getVertexCount());
+	m_model->draw();
 	glDisableVertexAttribArray(0);
 }
 

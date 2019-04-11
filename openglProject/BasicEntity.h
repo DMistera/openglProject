@@ -10,7 +10,7 @@ class BasicEntity :
 	public Entity
 {
 public:
-	BasicEntity(Mesh* mesh);
+	BasicEntity(Model* mesh);
 	~BasicEntity();
 	void init(ResourceManager* manager);
 	void setMaterial(Material material);

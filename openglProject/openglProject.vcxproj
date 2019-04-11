@@ -134,7 +134,10 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MtlParser.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -146,6 +149,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="BasicEntity.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="EngineConstants.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="GameEngine.h" />
@@ -153,6 +157,8 @@
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="MtlParser.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Renderer.h" />

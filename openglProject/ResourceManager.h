@@ -2,17 +2,17 @@
 
 #include <vector>
 #include "Program.h"
-#include "Mesh.h"
+#include "Model.h"
 
 class ResourceManager
 {
 public:
 	ResourceManager();
 	~ResourceManager();
-	Mesh* getMesh(std::string path);
+	Model* getModel(std::string path);
 	Program* getProgram(std::string vertex, std::string fragment);
 private:
-	std::vector<Mesh*> m_meshes;
+	std::vector<Model*> m_models;
 	std::vector<Program*> m_programs;
 };
 

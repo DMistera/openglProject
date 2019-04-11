@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
 #include "App.h"
+#include "InputManager.h"
 
 int main(void)
 {
@@ -42,6 +43,8 @@ int main(void)
 			glfwTerminate();
 			return -1;
 		}
+
+		InputManager::init(window);
 
 		Renderer renderer(window);
 		renderer.init();

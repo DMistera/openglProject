@@ -2,28 +2,26 @@
 
 
 
-Face::Face(std::string line, std::vector <glm::vec4>* vertices, std::vector <glm::vec2>* textureCoords, std::vector <glm::vec3>* normals)
+Face::Face(std::string line)
 {
 	std::string str = line.substr(2);
 	std::vector<std::string> elements = split(str, ' ');
 	for (int i = 0; i < elements.size(); i++) {
-		Vertex f = readFaceElement(elements.at(i), vertices, textureCoords, normals);
-		m_elements.push_back(f);
+		FaceTuple tuple = readFaceElement(elements.at(i));
+		m_tuples.push_back(tuple);
 	}
 }
 
-std::vector<Vertex> Face::getTriangles()
+std::vector<FaceTuple> Face::getTuples()
 {
-	std::vector<Vertex> result;
-	Vertex v1 = m_elements.at(0);
-	Vertex v2;
-	Vertex v3;
-	for (int i = 1; i < m_elements.size() - 1; i++) {
-		v2 = m_elements.at(i);
-		v3 = m_elements.at(i + 1);
-		result.push_back(v1);
-		result.push_back(v2);
-		result.push_back(v3);
+	std::vector<FaceTuple> result;
+	result.push_back(m_tuples[0]);
+	result.push_back(m_tuples[1]);
+	result.push_back(m_tuples[2]);
+	for (int i = 3; i < m_tuples.size(); i++) {
+		result.push_back(m_tuples[0]);
+		result.push_back(m_tuples[i - 1]);
+		result.push_back(m_tuples[i]);
 	}
 	return result;
 }
@@ -32,31 +30,27 @@ Face::~Face()
 {
 }
 
-Vertex Face::readFaceElement(std::string str, std::vector<glm::vec4>* vertices, std::vector<glm::vec2>* textureCoords, std::vector<glm::vec3>* normals)
+FaceTuple Face::readFaceElement(std::string str)
 {
+	FaceTuple tuple;
 	std::vector<std::string> splitStr = split(str, '/');
-	Vertex result;
-	int index1 = std::stoi(splitStr.at(0)) - 1;
-	result.position = vertices->at(index1);
-	try {
-		int index2 = std::stoi(splitStr.at(1)) - 1;
-		result.texCoord = textureCoords->at(index2);
-	}
-	catch (std::invalid_argument e) {
-		result.texCoord = glm::vec3();
-	}
-	if (splitStr.size() > 2) {
-		try {
-			int index3 = std::stoi(splitStr.at(2)) - 1;
-			result.normal = normals->at(index3);
-		}
-		catch (std::invalid_argument e) {
-			std::cout << "Invalid argument for normals!" << std::endl;
-			result.normal = glm::vec3();
-		}
+	tuple.positionIndex = std::stoi(splitStr.at(0)) - 1;
+	if (splitStr.size() >= 2 && splitStr.at(1).length() > 0) {
+		tuple.textureIndex = std::stoi(splitStr.at(1)) - 1;
 	}
 	else {
-		result.normal = glm::vec3();
+		tuple.textureIndex = -1;
 	}
-	return result;
+	if (splitStr.size() >= 3 && splitStr.at(2).length() > 0) {
+		tuple.normalIndex = std::stoi(splitStr.at(2)) - 1;
+	}
+	else {
+		tuple.normalIndex = -1;
+	}
+	return tuple;
+}
+
+bool FaceTuple::operator==(FaceTuple other)
+{
+	return positionIndex == other.positionIndex && normalIndex == other.normalIndex && textureIndex == other.textureIndex;
 }

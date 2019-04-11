@@ -11,17 +11,17 @@ ResourceManager::~ResourceManager()
 {
 }
 
-Mesh * ResourceManager::getMesh(std::string path)
+Model * ResourceManager::getModel(std::string path)
 {
-	for (int i = 0; i < m_meshes.size(); i++) {
-		Mesh* m = m_meshes.at(i);
+	for (int i = 0; i < m_models.size(); i++) {
+		Model* m = m_models.at(i);
 		if (path == m->getPath()) {
 			return m;
 		}
 	}
-	Mesh* m = new Mesh(path);
+	Model* m = new Model(path);
 	m->init();
-	m_meshes.push_back(m);
+	m_models.push_back(m);
 	return m;
 }
 

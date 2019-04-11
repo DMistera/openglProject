@@ -1,30 +1,29 @@
+#pragma once
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <sstream>
 #include "Face.h"
+#include "Vertex.h"
 
-#pragma once
 class Mesh
 {
 public:
-	Mesh(std::string path);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
 	void init();
-	void useVertexBuffer();
 	int getVertexCount();
-	std::string getPath();
+	void draw();
 	~Mesh();
 private:
-	std::string m_objPath;
-	std::string m_mtlPath;
-	GLuint m_vertexBuffer;
-	GLuint m_normalBuffer;
-	//Array of vertices
-	std::vector<Face> m_faces;
-	float* m_bufferDataArray;
-	int m_vertexCount;
+	GLuint m_vertexArrayObject;
+	GLuint m_vertexBufferObject;
+	GLuint m_elementBufferObject;
+	
+
+	std::vector<Vertex> m_vertices;
+	std::vector<unsigned int> m_indices;
 };
 
