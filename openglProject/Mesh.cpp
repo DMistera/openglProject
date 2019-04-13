@@ -1,9 +1,11 @@
 #include "Mesh.h"
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
+Mesh::Mesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material* material)
 {
+	m_name = name;
 	m_vertices = vertices;
 	m_indices = indices;
+	m_material = material;
 }
 
 void Mesh::init()
@@ -60,8 +62,10 @@ void Mesh::init()
 }
 
 
-void Mesh::draw()
+void Mesh::draw(Program* program)
 {
+	m_material->use(program);
+
 	glBindVertexArray(m_vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);

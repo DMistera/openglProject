@@ -7,6 +7,9 @@ struct Material {
     vec3 diffuseColor;
     vec3 specularColor;
     float shininess;
+	sampler2D ambientMap;
+	sampler2D diffuseMap;
+	sampler2D specularMap;
 };
 
 struct LightSource {

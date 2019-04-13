@@ -14,5 +14,6 @@ public:
 private:
 	std::vector<Model*> m_models;
 	std::vector<Program*> m_programs;
+	TextureManager m_textureManager;
 };
 

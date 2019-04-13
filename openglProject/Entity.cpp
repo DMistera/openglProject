@@ -28,7 +28,7 @@ void Entity::draw(Camera* camera)
 	m_program->use();
 	setUniforms(camera);
 
-	m_model->draw();
+	m_model->draw(m_program);
 	glDisableVertexAttribArray(0);
 }
 

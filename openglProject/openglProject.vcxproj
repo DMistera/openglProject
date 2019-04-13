@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>dependencies\glfw-3.2.1.bin.WIN32\include;dependencies\glm-0.9.9.3;dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>dependencies\glfw-3.2.1.bin.WIN32\include;dependencies\glm-0.9.9.3;dependencies\glew-2.1.0\include;dependencies\lodepng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>dependencies\glfw-3.2.1.bin.WIN32\lib-vc2015;dependencies\glew-2.1.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>dependencies\glfw-3.2.1.bin.WIN32\include;dependencies\glm-0.9.9.3;dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>dependencies\glfw-3.2.1.bin.WIN32\include;dependencies\glm-0.9.9.3;dependencies\glew-2.1.0\include;dependencies\lodepng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>dependencies\glfw-3.2.1.bin.WIN32\lib-vc2015;dependencies\glew-2.1.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -128,6 +128,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BasicEntity.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="dependencies\lodepng\lodepng.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -137,12 +138,13 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="MtlParser.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transformable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,17 +155,19 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GLUtils.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="MtlParser.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vertex.h" />

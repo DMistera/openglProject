@@ -20,7 +20,7 @@ Model * ResourceManager::getModel(std::string path)
 		}
 	}
 	Model* m = new Model(path);
-	m->init();
+	m->init(&m_textureManager);
 	m_models.push_back(m);
 	return m;
 }

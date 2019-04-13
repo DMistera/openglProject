@@ -12,8 +12,9 @@ Model::~Model()
 {
 }
 
-void Model::init()
+void Model::init(TextureManager* texManager)
 {
+
 	std::vector<glm::vec4> verticesPos;
 	std::vector<glm::vec2> texCoords;
 	std::vector<glm::vec3> normals;
@@ -21,10 +22,15 @@ void Model::init()
 
 	std::ifstream in(ASSET_PATH + m_objPath);
 	std::string line;
+	std::string name;
+	Material* material = nullptr;
 	while (std::getline(in, line)) {
 		std::string first;
 		std::istringstream s(line);
 		s >> first;
+		if (first == "o") {
+			s >> name;
+		}
 		if (first == "v") {
 			//This is a vertex
 			glm::vec4 vertex;
@@ -54,12 +60,17 @@ void Model::init()
 			faces.push_back(face);
 		}
 		else if (first == "mtllib") {
-			//Do something with mtllib here
 			std::string path;
 			s >> path;
-			m_materialMap = MtlParser::parse(path);
+			m_materialMap = parseMtl(path, texManager);
+		}
+		else if (first == "usemtl") {
+			std::string materialName;
+			s >> materialName;
+			material = findMaterial(materialName);
 		}
 	}
+	in.close();
 
 	std::vector<FaceTuple> tuples;
 	for (int i = 0; i < faces.size(); i++) {
@@ -113,19 +124,88 @@ void Model::init()
 		vertices.push_back(v);
 	}
 
-	Mesh mesh(vertices, indices);
+	Mesh mesh(name, vertices, indices, material);
 	mesh.init();
 	m_meshes.push_back(mesh);
 }
 
-void Model::draw()
+void Model::draw(Program* p)
 {
 	for (int i = 0; i < m_meshes.size(); i++) {
-		m_meshes.at(i).draw();
+		m_meshes.at(i).draw(p);
 	}
 }
 
 std::string Model::getPath()
 {
 	return m_objPath;
+}
+
+std::vector<Material*> Model::parseMtl(std::string path, TextureManager* texManager)
+{
+	std::vector<Material*> result;
+	std::ifstream in(ASSET_PATH + path);
+	std::string line;
+	Material* material = nullptr;
+	while (std::getline(in, line)) {
+		std::istringstream stream(line);
+		std::string first;
+		stream >> first;
+		if (first == "newmtl") {
+			if (material != nullptr) {
+				result.push_back(material);
+			}
+			material = new Material();
+			material->name = line.substr(7);
+		}
+		else if (first == "Ka") {
+			glm::vec3 ambient;
+			stream >> ambient.x; stream >> ambient.y; stream >> ambient.z;
+			material->ambientColor = ambient;
+		}
+		else if (first == "Kd") {
+			glm::vec3 diffuse;
+			stream >> diffuse.x; stream >> diffuse.y; stream >> diffuse.z;
+			material->diffuseColor = diffuse;
+		}
+		else if (first == "Ks") {
+			glm::vec3 specular;
+			stream >> specular.x; stream >> specular.y; stream >> specular.z;
+			material->specularColor = specular;
+		}
+		else if (first == "Ns") {
+			stream >> material->shininess;
+		}
+		else if (first == "map_Ka") {
+			std::string path;
+			stream >> path;
+			material->ambientMap = texManager->getTexture(path);
+		}
+		else if (first == "map_Kd") {
+			std::string path;
+			stream >> path;
+			material->diffuseMap = texManager->getTexture(path);
+		}
+		else if (first == "map_Ks") {
+			std::string path;
+			stream >> path;
+			material->specularMap = texManager->getTexture(path);
+		}
+		else if (first == "map_Ns") {
+		}
+	}
+	if (material != nullptr) {
+		result.push_back(material);
+	}
+	return result;
+}
+
+Material * Model::findMaterial(std::string name)
+{
+	for (int i = 0; i < m_materialMap.size(); i++) {
+		if (name == m_materialMap.at(i)->name) {
+			return m_materialMap.at(i);
+		}
+	}
+	return nullptr;
 }

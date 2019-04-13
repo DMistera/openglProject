@@ -2,16 +2,21 @@
 
 #include <glm/vec3.hpp>
 #include <string>
-
+#include "Texture.h"
+#include "Program.h"
+#include <GL/glew.h>
 
 class Material {
 public:
 	Material();
-	void init();
 	~Material();
-	glm::vec3 ambient;
-	glm::vec3 diffuse;
-	glm::vec3 specular;
+	void use(Program* p);
+	glm::vec3 ambientColor;
+	glm::vec3 diffuseColor;
+	glm::vec3 specularColor;
 	float shininess;
 	std::string name;
+	Texture* ambientMap;
+	Texture* diffuseMap;
+	Texture* specularMap;
 };

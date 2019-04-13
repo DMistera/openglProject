@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Engine\Managers">
       <UniqueIdentifier>{b1ae2518-e62f-4a96-a083-365c824593ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Externals">
+      <UniqueIdentifier>{b000bdf8-b332-4d09-8968-5ee0aae43e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Static">
+      <UniqueIdentifier>{98564f29-f3e9-4859-8995-f725dd376017}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -93,11 +99,17 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files\Engine\Program</Filter>
     </ClCompile>
-    <ClCompile Include="MtlParser.cpp">
-      <Filter>Source Files\Engine\Model</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\lodepng\lodepng.cpp">
+      <Filter>Source Files\Externals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +143,6 @@
     <ClInclude Include="Face.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -158,11 +167,20 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MtlParser.h">
+    <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EngineConstants.h">
+    <ClInclude Include="TextureManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineConstants.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="GLUtils.h">
+      <Filter>Header Files\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

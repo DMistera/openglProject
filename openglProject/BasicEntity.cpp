@@ -14,10 +14,10 @@ BasicEntity::~BasicEntity()
 void BasicEntity::init(ResourceManager* manager)
 {
 	m_program = manager->getProgram("v_basic.glsl", "f_basic.glsl");
-	m_material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+	/*m_material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
-	m_material.shininess = 128.0f;
+	m_material.shininess = 128.0f;*/
 }
 
 void BasicEntity::setMaterial(Material material)
@@ -33,10 +33,6 @@ void BasicEntity::addLightSource(LightSource * light)
 void BasicEntity::setUniforms(Camera * camera)
 {
 	Entity::setUniforms(camera);
-	glUniform3fv(m_program->getLocation("material.ambientColor"), 1, glm::value_ptr(m_material.ambient));
-	glUniform3fv(m_program->getLocation("material.diffuseColor"), 1, glm::value_ptr(m_material.diffuse));
-	glUniform3fv(m_program->getLocation("material.specularColor"), 1, glm::value_ptr(m_material.specular));
-	glUniform1f(m_program->getLocation("material.shininess"), m_material.shininess);
 
 	for (int i = 0; i < m_lightSources.size(); i++) {
 		LightSource* l = m_lightSources.at(i);
