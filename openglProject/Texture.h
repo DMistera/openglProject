@@ -17,7 +17,6 @@ public:
 	std::string getPath();
 	void bind();
 private:
-	int findPower(int x);
 	GLuint m_id;
 	std::string m_path;
 };

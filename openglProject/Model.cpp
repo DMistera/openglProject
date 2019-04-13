@@ -99,6 +99,7 @@ void Model::init(TextureManager* texManager)
 		}
 	}
 
+	//Change touples to vertices
 	std::vector<Vertex> vertices;
 	for (int i = 0; i < uniqueTuples.size(); i++) {
 		FaceTuple t = uniqueTuples.at(i);
@@ -119,9 +120,25 @@ void Model::init(TextureManager* texManager)
 			v.texCoord = texCoords.at(t.textureIndex);
 		}
 		else {
-			v.texCoord = glm::vec2();
+			v.texCoord = glm::vec2(-1, -1);
 		}
 		vertices.push_back(v);
+	}
+
+	//Default tex coordinates
+	for (int i = 0; i < indices.size(); i++) {
+		Vertex& v = vertices.at(indices.at(i));
+		if (v.texCoord == glm::vec2(-1, -1)) {
+			if (i % 3 == 0) {
+				v.texCoord = glm::vec2(0.0, 0.0);
+			}
+			else if (i % 3 == 1) {
+				v.texCoord = glm::vec2(1.0, 0.0);
+			}
+			else if (i % 3 == 2) {
+				v.texCoord = glm::vec2(0.0, 1.0);
+			}
+		}
 	}
 
 	Mesh mesh(name, vertices, indices, material);

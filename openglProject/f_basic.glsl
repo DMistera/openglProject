@@ -32,6 +32,7 @@ out vec4 color;
 
 in vec3 i_fragPos;
 in vec3 i_normal;
+in vec2 i_texCoord;
 
 vec3 calcPointLight(LightSource light, vec3 normal, vec3 fragPos, vec3 viewDir) {
 
@@ -57,10 +58,13 @@ void main() {
 	vec3 norm = normalize(i_normal);
 	vec3 viewDir = normalize(viewPos - i_fragPos);
 
-	vec3 result = vec3(0.0, 0.0, 0.0);
+	//vec4 result = vec4(1.0, 0.0, 1.0, 1.0);
+	vec4 result = texture(material.diffuseMap, i_texCoord);
+	//vec4 result = vec4(i_texCoord, 0.0, 1.0);
+
 	for(int i = 0; i < MAX_LIGHTS; i++) {
-		result += calcPointLight(lights[i], norm, i_fragPos, viewDir);
+		result += vec4(calcPointLight(lights[i], norm, i_fragPos, viewDir), 1.0);
 	}
 
-	color = vec4(result, 1.0);
+	color = result;	
 }

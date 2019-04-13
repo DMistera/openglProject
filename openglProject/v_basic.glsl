@@ -10,11 +10,13 @@ layout(location = 2) in vec2 texCoord;
 
 out vec3 i_fragPos;
 out vec3 i_normal;
+out vec2 i_texCoord;
 
 void main(){
 
 	gl_Position = p_matrix*v_matrix*m_matrix*vertexPosition;
 
 	i_fragPos = vec3( m_matrix * vertexPosition);
+	i_texCoord = texCoord;
 	i_normal = mat3(transpose(inverse(m_matrix)))*vertexNormal;
 }

@@ -54,7 +54,7 @@ void Mesh::init()
 		2,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
-		0,                  // stride
+		sizeof(Vertex),                  // stride
 		(void*)offsetof(Vertex, texCoord)           // array buffer offset
 	);
 
