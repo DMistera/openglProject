@@ -13,6 +13,9 @@ public:
 	void setTarget(glm::vec3 v);
 	void setNoseVector(glm::vec3 v);
 	void setRotation(glm::vec2 rot);
+	void move(glm::vec3 v);
+	void moveForward(float distance);
+	void moveSideways(float distance);
 	glm::mat4 getViewMatrix();
 	glm::mat4 getPerspectiveMatrix();
 	glm::vec3 getPosition();

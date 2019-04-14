@@ -15,6 +15,8 @@ public:
 	~Player();
 private:
 	Camera* m_camera;
-	double m_cxPos, m_cyPos;
+	glm::vec2 m_velocity;
+	glm::vec2 m_startMousePos;
+	float m_speed;
 };
 

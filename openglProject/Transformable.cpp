@@ -41,3 +41,8 @@ void Transformable::setScale(float scale)
 {
 	setScale(glm::vec3(scale, scale, scale));
 }
+
+void Transformable::move(glm::vec3 v)
+{
+	m_position += v;
+}
