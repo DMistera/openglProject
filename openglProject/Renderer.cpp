@@ -10,6 +10,7 @@ Renderer::Renderer(GLFWwindow* window)
 bool Renderer::init()
 {
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 	checkGLError("Renderer initialization.");
 	return true;
 }

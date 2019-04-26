@@ -111,6 +111,9 @@
     <ClCompile Include="dependencies\lodepng\lodepng.cpp">
       <Filter>Source Files\Externals</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="GLUtils.h">
       <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

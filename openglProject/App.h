@@ -3,6 +3,7 @@
 #include "GameEngine.h"
 #include "Player.h"
 #include "BasicEntity.h"
+#include "Map.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -20,10 +21,6 @@ public:
 
 private:
 	Player* m_player;
-	BasicEntity* m_sculpture;
-	Entity* m_lightEntity;
-	LightSource* m_lightSource;
-	Entity* m_lightEntity2;
-	LightSource* m_lightSource2;
+	Map* m_map;
 };
 

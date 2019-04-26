@@ -18,6 +18,7 @@ void BasicEntity::init(ResourceManager* manager)
 	m_material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 	m_material.shininess = 128.0f;*/
+	m_drawable = true;
 }
 
 void BasicEntity::setMaterial(Material material)
@@ -28,6 +29,7 @@ void BasicEntity::setMaterial(Material material)
 void BasicEntity::addLightSource(LightSource * light)
 {
 	m_lightSources.push_back(light);
+	Entity::addLightSource(light);
 }
 
 void BasicEntity::setUniforms(Camera * camera)

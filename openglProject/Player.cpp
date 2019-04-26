@@ -12,19 +12,31 @@ void Player::init(GLFWwindow* window)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	m_camera = new Camera();
-	m_camera->setPosition(glm::vec3(0.0f, 0.0f, -5.0f));
+	m_camera->setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
+	m_camera->setRotation(glm::vec2(0.0f, 0.0f));
+
+	m_lightSource = new LightSource(m_camera->getPosition(), glm::vec3(0.0, 1.0, 0.0));
 
 	double xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
-	m_startMousePos = glm::vec2(xpos, ypos);
-
+	m_mousePos = glm::vec2(xpos, ypos);
+	m_cameraAngle = glm::vec2(0.0f);
 
 
 	InputManager::setCursorPositionCallback([&](double xpos,double ypos) {
-		float deltaY = m_startMousePos.y - ypos;
-		float deltaX = m_startMousePos.x - xpos;
-		m_camera->setRotation(glm::vec2(-deltaY / 100.0, deltaX / 100.0));
+		m_cameraAngle.x += (m_mousePos.x - xpos)*m_cameraSpeed;
+		m_cameraAngle.y += (m_mousePos.y - ypos)*m_cameraSpeed;
+		m_mousePos = glm::vec2(xpos, ypos);
+		float upThreshold = M_PI / 2.0 - 0.00001;
+		float bottomThreshold = -M_PI / 2.0 + 0.000001;
+		if (m_cameraAngle.y > upThreshold) {
+			m_cameraAngle.y = upThreshold;
+		}
+		else if (m_cameraAngle.y < bottomThreshold) {
+			m_cameraAngle.y = bottomThreshold;
+		}
+		m_camera->setRotation(m_cameraAngle);
 		//m_camera->setRotation(glm::vec2(1.0, 0.0));
 	});
 
@@ -64,6 +76,7 @@ void Player::update(GLFWwindow* window, double deltaTime)
 {
 	m_camera->moveForward(m_velocity.y*m_speed*deltaTime);
 	m_camera->moveSideways(m_velocity.x*m_speed*deltaTime);
+	m_lightSource->setPosition(m_camera->getPosition());
 	//m_camera->move((float)deltaTime*glm::vec3(m_velocity.x, 0.0f, m_velocity.y));
 }
 
@@ -71,6 +84,11 @@ void Player::update(GLFWwindow* window, double deltaTime)
 Camera * Player::getCamera()
 {
 	return m_camera;
+}
+
+LightSource * Player::getLightSource()
+{
+	return m_lightSource;
 }
 
 Player::~Player()
