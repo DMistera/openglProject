@@ -11,7 +11,7 @@ TextureManager::~TextureManager()
 {
 }
 
-Texture * TextureManager::getTexture(std::string path)
+Texture * TextureManager::getTexture(std::string path, bool gammaCorrelation)
 {
 	for (int i = 0; i < m_textures.size(); i++) {
 		if (path == m_textures.at(i)->getPath()) {
@@ -19,7 +19,7 @@ Texture * TextureManager::getTexture(std::string path)
 		}
 	}
 	Texture* tex = new Texture(path);
-	tex->init(0);
+	tex->init(0, gammaCorrelation);
 	m_textures.push_back(tex);
 	return tex;
 }

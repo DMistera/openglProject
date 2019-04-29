@@ -6,9 +6,9 @@ LightSource::LightSource(glm::vec3 position, glm::vec3 color)
 	m_ambientColor = color;
 	m_diffuseColor = color;
 	m_specularColor = color;
-	m_constant = 1.0f;
-	m_linear = 5.0f;
-	m_quadratic = 0.5f;
+	m_constant = 0.0f;
+	m_linear = 0.0f;
+	m_quadratic = 5.0f;
 }
 
 glm::vec3 LightSource::getAmbientColor()

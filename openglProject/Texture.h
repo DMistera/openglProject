@@ -1,17 +1,17 @@
 #pragma once
 
 #include <string>
-#include <lodepng.h>
 #include <GL/glew.h>
 #include <iostream>
 #include "EngineConstants.h"
 #include "GLUtils.h"
+#include <FreeImage.h>
 
 class Texture
 {
 public:
 	Texture(std::string path);
-	void init(int textureUnit);
+	void init(int textureUnit, bool gemmaCorrelation);
 	~Texture();
 	bool operator ==(Texture another);
 	std::string getPath();

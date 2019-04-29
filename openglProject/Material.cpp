@@ -25,8 +25,13 @@ void Material::use(Program * p)
 		diffuseMap->bind();
 	}
 	if (specularMap != nullptr) {
-		glActiveTexture(GL_TEXTURE2);
-		glUniform1i(p->getLocation("material.specularMap"), 2);
+		glActiveTexture(GL_TEXTURE0);
+		glUniform1i(p->getLocation("material.specularMap"), 0);
 		specularMap->bind();
+	}
+	if (normalMap != nullptr) {
+		glActiveTexture(GL_TEXTURE1);
+		glUniform1i(p->getLocation("material.normalMap"), 1);
+		normalMap->bind();
 	}
 }

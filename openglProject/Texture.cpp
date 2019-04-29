@@ -7,22 +7,24 @@ Texture::Texture(std::string path)
 	m_path = path;
 }
 
-void Texture::init(int textureUnit)
+void Texture::init(int textureUnit, bool gammaCorrelation)
 {
+
+
 	checkGLError("Before texture initialization.");
 	glActiveTexture(GL_TEXTURE0 + textureUnit);;
-	std::vector<unsigned char>  image;
-	unsigned int width, height;
-	unsigned int error = lodepng::decode(image, width, height, ASSET_PATH + m_path);
-	//width = findPower(width);
-	//height = findPower(height);
-	if (error == 0) {
+	FIBITMAP* bitmap = FreeImage_Load(FreeImage_GetFileType((ASSET_PATH + m_path).c_str(), 0), (ASSET_PATH + m_path).c_str());
+	//bitmap = FreeImage_ConvertTo32Bits(bitmap);
+	unsigned int width = FreeImage_GetWidth(bitmap);
+	unsigned int height = FreeImage_GetHeight(bitmap);
+	if (bitmap) {
 		glGenTextures(1, &m_id);
 		glBindTexture(GL_TEXTURE_2D, m_id);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*)image.data());
+		GLenum type = gammaCorrelation ? GL_SRGB : GL_RGB8;
+		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, (void*)FreeImage_GetBits(bitmap));
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else {

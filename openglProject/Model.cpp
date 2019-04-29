@@ -122,7 +122,32 @@ void Model::init(TextureManager* texManager)
 		else {
 			v.texCoord = glm::vec2(-1, -1);
 		}
+		v.tangent = glm::vec3(0.0f);
 		vertices.push_back(v);
+	}
+
+	//Calculate tangents and bitangents
+	for (int i = 0; i < indices.size(); i += 3) {
+		Vertex& v1 = vertices.at(indices.at(i));
+		Vertex& v2 = vertices.at(indices.at(i + 1));
+		Vertex& v3 = vertices.at(indices.at(i + 2));
+		glm::vec3 edge1 = v2.position - v1.position;
+		glm::vec3 edge2 = v3.position - v1.position;
+		glm::vec2 duv1 = v2.texCoord - v1.texCoord;
+		glm::vec2 duv2 = v3.texCoord - v1.texCoord;
+		float f = 1.0f / (duv1.x * duv2.y - duv2.x * duv1.y);
+		glm::vec3 tangent, bitangent;
+		tangent.x = f * (duv2.y * edge1.x - duv1.y * edge2.x);
+		tangent.y = f * (duv2.y * edge1.y - duv1.y * edge2.y);
+		tangent.z = f * (duv2.y * edge1.z - duv1.y * edge2.z);
+		tangent = glm::normalize(tangent);
+		v1.tangent += tangent;
+		v2.tangent += tangent;
+		v3.tangent += tangent;
+	}
+	for (int i = 0; i < vertices.size(); i++) {
+		Vertex& v = vertices.at(i);
+		v.tangent = glm::normalize(v.tangent);
 	}
 
 	//Default tex coordinates
@@ -196,19 +221,22 @@ std::vector<Material*> Model::parseMtl(std::string path, TextureManager* texMana
 		else if (first == "map_Ka") {
 			std::string path;
 			stream >> path;
-			material->ambientMap = texManager->getTexture(path);
+			material->ambientMap = texManager->getTexture(path, true);
 		}
 		else if (first == "map_Kd") {
 			std::string path;
 			stream >> path;
-			material->diffuseMap = texManager->getTexture(path);
+			material->diffuseMap = texManager->getTexture(path, true);
 		}
 		else if (first == "map_Ks") {
 			std::string path;
 			stream >> path;
-			material->specularMap = texManager->getTexture(path);
+			material->specularMap = texManager->getTexture(path, false);
 		}
-		else if (first == "map_Ns") {
+		else if (first == "map_Bump") {
+			std::string path;
+			stream >> path;
+			material->normalMap = texManager->getTexture(path, false);
 		}
 	}
 	if (material != nullptr) {

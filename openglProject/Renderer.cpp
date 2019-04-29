@@ -11,6 +11,9 @@ bool Renderer::init()
 {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	FreeImage_Initialise();
+
+	glEnable(GL_FRAMEBUFFER_SRGB);
 	checkGLError("Renderer initialization.");
 	return true;
 }

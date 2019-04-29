@@ -25,8 +25,21 @@ int main(void)
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		// Open a window and create its OpenGL context
-		window = glfwCreateWindow(1024, 768, "Funky", NULL, NULL);
+		bool fullscreen = false;
+		if (fullscreen) {
+			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+			const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+			glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+			glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+			glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+			glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+			// Open a window and create its OpenGL context
+			window = glfwCreateWindow(mode->width, mode->height, "Funky", monitor, NULL);
+		}
+		else {
+			window = glfwCreateWindow(1024, 768, "Funky", NULL, NULL);
+		}
 		if (window == NULL) {
 			fprintf(stderr, "Failed to open GLFW window.\n");
 			getchar();

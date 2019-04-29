@@ -19,4 +19,5 @@ public:
 	Texture* ambientMap;
 	Texture* diffuseMap;
 	Texture* specularMap;
+	Texture* normalMap;
 };

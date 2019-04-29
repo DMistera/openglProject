@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-	m_speed = 1.0f;
+	m_speed = 0.4f;
 }
 
 void Player::init(GLFWwindow* window)
@@ -12,11 +12,11 @@ void Player::init(GLFWwindow* window)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	m_camera = new Camera();
-	m_camera->setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
+	m_camera->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_camera->setRotation(glm::vec2(0.0f, 0.0f));
 
-	m_lightSource = new LightSource(m_camera->getPosition(), glm::vec3(0.0, 1.0, 0.0));
+	m_lightSource = new LightSource(m_camera->getPosition(), glm::vec3(1.0, 1.0, 0.0));
 
 	double xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
@@ -37,7 +37,6 @@ void Player::init(GLFWwindow* window)
 			m_cameraAngle.y = bottomThreshold;
 		}
 		m_camera->setRotation(m_cameraAngle);
-		//m_camera->setRotation(glm::vec2(1.0, 0.0));
 	});
 
 	InputManager::setKeyboardInputCallback([&](int key, int scancode, int action, int mods) {

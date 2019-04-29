@@ -57,7 +57,19 @@ void Mesh::init()
 		sizeof(Vertex),                  // stride
 		(void*)offsetof(Vertex, texCoord)           // array buffer offset
 	);
-
+	
+	// 4th attribute buffer : vertexTangent
+	glEnableVertexAttribArray(3);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
+	glVertexAttribPointer(
+		3,                  // attribute 3
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		sizeof(Vertex),                  // stride
+		(void*)offsetof(Vertex, tangent)           // array buffer offset
+	);
+	
 	glBindVertexArray(0);
 }
 
