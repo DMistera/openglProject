@@ -19,6 +19,7 @@ public:
 	std::string getVertexPath();
 	std::string getFragmentPath();
 	~Program();
+	bool operator ==(Program other);
 private:
 	std::string m_vertexPath;
 	std::string m_fragmentPath;

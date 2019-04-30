@@ -73,14 +73,48 @@ void Mesh::init()
 	glBindVertexArray(0);
 }
 
+void Mesh::use(Program* program)
+{
+	m_material->use(program);
+	glBindVertexArray(m_vertexArrayObject);
+}
+
+void Mesh::bind()
+{
+	glBindVertexArray(m_vertexArrayObject);
+}
+
+void Mesh::unbind()
+{
+	glBindVertexArray(0);
+}
+
+std::string Mesh::getName()
+{
+	return m_name;
+}
+
 
 void Mesh::draw(Program* program)
 {
-	m_material->use(program);
-
-	glBindVertexArray(m_vertexArrayObject);
+	use(program);
 	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
+	unbind();
+}
+
+bool Mesh::operator==(Mesh other)
+{
+	return m_name == other.getName();
+}
+
+std::vector<Vertex>* Mesh::getVertices()
+{
+	return &m_vertices;
+}
+
+std::vector<unsigned int>* Mesh::getIndices()
+{
+	return &m_indices;
 }
 
 Mesh::~Mesh()

@@ -166,15 +166,15 @@ void Model::init(TextureManager* texManager)
 		}
 	}
 
-	Mesh mesh(name, vertices, indices, material);
-	mesh.init();
+	Mesh* mesh = new Mesh(name, vertices, indices, material);
+	mesh->init();
 	m_meshes.push_back(mesh);
 }
 
 void Model::draw(Program* p)
 {
 	for (int i = 0; i < m_meshes.size(); i++) {
-		m_meshes.at(i).draw(p);
+		m_meshes.at(i)->draw(p);
 	}
 }
 
@@ -243,6 +243,11 @@ std::vector<Material*> Model::parseMtl(std::string path, TextureManager* texMana
 		result.push_back(material);
 	}
 	return result;
+}
+
+std::vector<Mesh*> Model::getMeshes()
+{
+	return m_meshes;
 }
 
 Material * Model::findMaterial(std::string name)

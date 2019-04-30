@@ -17,9 +17,12 @@ void App::start()
 	m_player->init(m_window);
 
 	m_map = new Map();
-	m_map->generate(m_resourceManager);
+	m_map->generate(m_resourceManager, m_player->getCamera());
 
 	m_map->addLightSource(m_player->getLightSource());
+
+	m_instancer = new EntityInstancer(m_map);
+	m_instancer->init();
 }
 
 double elapsed = 0;
@@ -33,5 +36,6 @@ void App::update(double time)
 
 void App::draw(Renderer * renderer)
 {
-	renderer->draw(m_map, m_player->getCamera());
+	m_instancer->draw();
+	//renderer->draw(m_map);
 }

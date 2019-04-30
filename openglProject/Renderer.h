@@ -10,7 +10,7 @@ class Renderer
 public:
 	Renderer(GLFWwindow* window);
 	bool init();
-	void draw(Entity* entity, Camera* camera);
+	void draw(Entity* entity);
 	~Renderer();
 private:
 	GLFWwindow* m_window;

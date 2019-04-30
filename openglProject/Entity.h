@@ -13,15 +13,21 @@ public:
 	Entity();
 	~Entity();
 
-	void setToDraw(Model* m, Program* program);
+	void setToDraw(Model* m, Program* program, Camera* camera);
 	void addEntity(Entity* e);
-	void draw(Camera* camera);
+	void draw();
 	Program* getProgram();
+	Model* getModel();
+	Camera* getCamera();
+	std::vector<Entity*> getEntities();
+	bool isDrawable();
 	virtual void addLightSource(LightSource* lightSource);
+	virtual void setUniforms();
 protected:
-	virtual void setUniforms(Camera* camera);
+	virtual void setInstanceUniforms();
 	Model* m_model;
 	Program* m_program;
+	Camera* m_camera;
 	std::vector<Entity*> m_entities;
 	bool m_drawable;
 };

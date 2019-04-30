@@ -1,40 +1,37 @@
-#include "BasicEntity.h"
+#include "MaterialEntity.h"
 
 
 
-BasicEntity::BasicEntity(Model * model) : Entity()
+MaterialEntity::MaterialEntity(Model * model) : Entity()
 {
 	m_model = model;
 }
 
-BasicEntity::~BasicEntity()
+MaterialEntity::~MaterialEntity()
 {
 }
 
-void BasicEntity::init(ResourceManager* manager)
+void MaterialEntity::init(ResourceManager* manager, Camera* camera)
 {
-	m_program = manager->getProgram("v_basic.glsl", "f_basic.glsl");
-	/*m_material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
-	m_material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-	m_material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
-	m_material.shininess = 128.0f;*/
+	m_program = manager->getProgram("v_material.glsl", "f_material.glsl");
+	m_camera = camera;
 	m_drawable = true;
 }
 
-void BasicEntity::setMaterial(Material material)
+void MaterialEntity::setMaterial(Material material)
 {
 	m_material = material;
 }
 
-void BasicEntity::addLightSource(LightSource * light)
+void MaterialEntity::addLightSource(LightSource * light)
 {
 	m_lightSources.push_back(light);
 	Entity::addLightSource(light);
 }
 
-void BasicEntity::setUniforms(Camera * camera)
+void MaterialEntity::setUniforms()
 {
-	Entity::setUniforms(camera);
+	Entity::setUniforms();
 
 	for (int i = 0; i < m_lightSources.size(); i++) {
 		LightSource* l = m_lightSources.at(i);

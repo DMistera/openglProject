@@ -40,11 +40,14 @@
     <Filter Include="Source Files\Engine\Managers">
       <UniqueIdentifier>{b1ae2518-e62f-4a96-a083-365c824593ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Externals">
-      <UniqueIdentifier>{b000bdf8-b332-4d09-8968-5ee0aae43e6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Static">
       <UniqueIdentifier>{98564f29-f3e9-4859-8995-f725dd376017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Entities">
+      <UniqueIdentifier>{8ebe74ac-71ba-4b8b-b02c-f66ef6ff7d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Entities\Instancing">
+      <UniqueIdentifier>{e93c0f42-20ff-4867-b06a-73a6ea719320}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +63,6 @@
     <ClCompile Include="Transformable.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -71,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\App</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicEntity.cpp">
-      <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="LightSource.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -108,11 +105,23 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\lodepng\lodepng.cpp">
-      <Filter>Source Files\Externals</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialEntity.cpp">
+      <Filter>Source Files\Engine\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceGroup.cpp">
+      <Filter>Source Files\Engine\Entities\Instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="Instancer.cpp">
+      <Filter>Source Files\Engine\Entities\Instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityInstancer.cpp">
+      <Filter>Source Files\Engine\Entities\Instancing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +161,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -188,15 +194,27 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InstanceGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Instancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityInstancer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="f_constant.glsl">
       <Filter>Source Files\Shaders\Constant</Filter>
     </None>
-    <None Include="f_basic.glsl">
+    <None Include="f_material.glsl">
       <Filter>Source Files\Shaders\Basic</Filter>
     </None>
-    <None Include="v_basic.glsl">
+    <None Include="v_material.glsl">
       <Filter>Source Files\Shaders\Basic</Filter>
     </None>
   </ItemGroup>

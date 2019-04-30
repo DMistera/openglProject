@@ -2,8 +2,9 @@
 
 #include "GameEngine.h"
 #include "Player.h"
-#include "BasicEntity.h"
+#include "MaterialEntity.h"
 #include "Map.h"
+#include "EntityInstancer.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -22,5 +23,6 @@ public:
 private:
 	Player* m_player;
 	Map* m_map;
+	EntityInstancer* m_instancer;
 };
 

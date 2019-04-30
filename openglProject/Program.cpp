@@ -76,3 +76,8 @@ std::string Program::getFragmentPath()
 Program::~Program()
 {
 }
+
+bool Program::operator==(Program other)
+{
+	return (m_vertexPath == other.getVertexPath() && m_fragmentPath == other.getFragmentPath());
+}

@@ -6,17 +6,17 @@
 #include "LightSource.h"
 #include <vector>
 
-class BasicEntity :
+class MaterialEntity :
 	public Entity
 {
 public:
-	BasicEntity(Model* mesh);
-	~BasicEntity();
-	void init(ResourceManager* manager);
+	MaterialEntity(Model* mesh);
+	~MaterialEntity();
+	void init(ResourceManager* manager, Camera* camera);
 	void setMaterial(Material material);
 	void addLightSource(LightSource* light);
 protected:
-	void setUniforms(Camera* camera);
+	void setUniforms();
 	Material m_material;
 	std::vector<LightSource*> m_lightSources;
 };

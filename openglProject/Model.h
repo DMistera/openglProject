@@ -16,10 +16,11 @@ public:
 	void draw(Program* p);
 	std::string getPath();
 	std::vector<Material*> parseMtl(std::string path, TextureManager* texManager);
+	std::vector<Mesh*> getMeshes();
 private:
 	Material* findMaterial(std::string name);
 	std::string m_objPath;
-	std::vector<Mesh> m_meshes;
+	std::vector<Mesh*> m_meshes;
 	std::vector<Material*> m_materialMap;
 };
 

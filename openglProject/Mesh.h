@@ -16,7 +16,14 @@ class Mesh
 public:
 	Mesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material* material);
 	void init();
+	void use(Program* program);
+	void bind();
+	void unbind();
+	std::string getName();
 	void draw(Program* program);
+	bool operator ==(Mesh other);
+	std::vector<Vertex>* getVertices();
+	std::vector<unsigned int>* getIndices();
 	~Mesh();
 private:
 	GLuint m_vertexArrayObject;

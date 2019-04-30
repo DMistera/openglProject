@@ -2,19 +2,18 @@
 
 uniform mat4 p_matrix;
 uniform mat4 v_matrix;
-uniform mat4 m_matrix;
+//uniform mat4 m_matrix;
 
 layout(location = 0) in vec4 vertexPosition;
 layout(location = 1) in vec3 vertexNormal;
 layout(location = 2) in vec2 texCoord;
 layout(location = 3) in vec3 vertexTangent;
+layout(location = 4) in mat4 m_matrix;
 
 out vec3 i_fragPos;
 out mat3 i_tbn;
 out vec2 i_texCoord;
 
-//DEbug
-out vec3 test;
 
 void main(){
 

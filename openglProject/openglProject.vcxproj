@@ -126,13 +126,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="BasicEntity.cpp" />
+    <ClCompile Include="EntityInstancer.cpp" />
+    <ClCompile Include="MaterialEntity.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="dependencies\lodepng\lodepng.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Instancer.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InstanceGroup.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -150,14 +152,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
-    <ClInclude Include="BasicEntity.h" />
+    <ClInclude Include="MaterialEntity.h" />
+    <ClInclude Include="EntityInstancer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EngineConstants.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Instancer.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GLUtils.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InstanceGroup.h" />
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Material.h" />
@@ -175,9 +180,9 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="f_basic.glsl" />
+    <None Include="f_material.glsl" />
     <None Include="f_constant.glsl" />
-    <None Include="v_basic.glsl" />
+    <None Include="v_material.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="v_constant.glsl" />

@@ -18,9 +18,9 @@ bool Renderer::init()
 	return true;
 }
 
-void Renderer::draw(Entity* entity, Camera* camera)
+void Renderer::draw(Entity* entity)
 {
-	entity->draw(camera);
+	entity->draw();
 	int err;
 	if ((err = glGetError())) {
 		std::cerr << "OpenGL error number " << err;
