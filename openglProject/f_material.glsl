@@ -14,8 +14,6 @@ struct Material {
 };
 
 struct LightSource {
-	vec3 position;
-
 	float constant;
 	float linear;
 	float quadratic;
@@ -27,22 +25,22 @@ struct LightSource {
 
 uniform Material material;
 uniform LightSource lights[MAX_LIGHTS];
-uniform vec3 viewPos;
 
 out vec4 color;
 
 in vec3 i_fragPos;
-in mat3 i_tbn;
 in vec2 i_texCoord;
+in vec3 i_viewPos;
+in vec3 i_lightPositions[MAX_LIGHTS];
 
 
-vec3 calcPointLight(LightSource light, vec3 normal, vec3 fragPos, vec3 viewDir) {
+vec3 calcPointLight(LightSource light, vec3 lightPos, vec3 normal, vec3 fragPos, vec3 viewDir) {
 
     // ambient
     vec3 ambient = light.ambientColor * vec3(texture(material.diffuseMap, i_texCoord));
   	
     // diffuse 
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDir = normalize(lightPos- fragPos);
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = light.diffuseColor * (diff * vec3(texture(material.diffuseMap, i_texCoord)));
     
@@ -52,7 +50,7 @@ vec3 calcPointLight(LightSource light, vec3 normal, vec3 fragPos, vec3 viewDir) 
     vec3 specular = spec * light.specularColor;  
 
 	//attenuation
-	float distance = length(light.position - fragPos);
+	float distance = length(lightPos - fragPos);
 	float attenuation = 1.0 / (0.001 + light.constant + light.linear  * distance + light.quadratic * (distance * distance));  
 
 	vec3 result = (ambient + diffuse + specular) * attenuation ;
@@ -63,14 +61,14 @@ void main() {
 
 	vec3 normal = texture(material.normalMap, i_texCoord).rgb;
 	normal = normalize(normal * 2.0 - 1.0);   
-	normal = normalize(i_tbn * normal);
+	//normal = normalize(i_tbn * normal);
 
-	vec3 viewDir = normalize(viewPos - i_fragPos);
+	vec3 viewDir = normalize(i_viewPos - i_fragPos);
 
 	vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
 
 	for(int i = 0; i < MAX_LIGHTS; i++) {
-		result += vec4(calcPointLight(lights[i], normal, i_fragPos, viewDir), 0.0);
+		result += vec4(calcPointLight(lights[i], i_lightPositions[i], normal, i_fragPos, viewDir), 0.0);
 	}
 
 	color = result;	

@@ -22,7 +22,7 @@ public:
 	std::string getName();
 	void draw(Program* program);
 	bool operator ==(Mesh other);
-	std::vector<Vertex>* getVertices();
+	std::vector<Vertex>* getBaseVertices();
 	std::vector<unsigned int>* getIndices();
 	~Mesh();
 private:

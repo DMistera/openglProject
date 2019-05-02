@@ -32,9 +32,19 @@ void Transformable::setPosition(glm::vec3 v)
 	m_position = v;
 }
 
+void Transformable::setPosition(glm::vec2 v)
+{
+	m_position = glm::vec3(v, 0.0f);
+}
+
 void Transformable::setScale(glm::vec3 v)
 {
 	m_scale = v;
+}
+
+void Transformable::setScale(glm::vec2 v)
+{
+	m_scale = glm::vec3(v, 1.0f);
 }
 
 void Transformable::setScale(float scale)
@@ -45,4 +55,14 @@ void Transformable::setScale(float scale)
 void Transformable::move(glm::vec3 v)
 {
 	m_position += v;
+}
+
+glm::vec2 Transformable::getPositionV2()
+{
+	return glm::vec2(m_position);
+}
+
+glm::vec2 Transformable::getScaleV2()
+{
+	return glm::vec2(m_scale);
 }

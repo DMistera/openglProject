@@ -36,7 +36,7 @@ void MaterialEntity::setUniforms()
 	for (int i = 0; i < m_lightSources.size(); i++) {
 		LightSource* l = m_lightSources.at(i);
 		std::string s;
-		s = std::string("lights[") + std::to_string(i) + std::string("].position");
+		s = std::string("lightPositions[") + std::to_string(i) + std::string("]");
 		glUniform3fv(m_program->getLocation(s.c_str()), 1, glm::value_ptr(l->getPosition()));
 		s = std::string("lights[")  + std::to_string(i) + std::string("].ambientColor");
 		glUniform3fv(m_program->getLocation(s.c_str()), 1, glm::value_ptr(l->getAmbientColor()));

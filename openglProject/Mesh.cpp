@@ -107,7 +107,7 @@ bool Mesh::operator==(Mesh other)
 	return m_name == other.getName();
 }
 
-std::vector<Vertex>* Mesh::getVertices()
+std::vector<Vertex>* Mesh::getBaseVertices()
 {
 	return &m_vertices;
 }
