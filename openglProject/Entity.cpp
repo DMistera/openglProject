@@ -82,5 +82,5 @@ void Entity::setUniforms()
 
 void Entity::setInstanceUniforms()
 {
-	glUniformMatrix4fv(m_program->getLocation("m_matrix"), 1, GL_FALSE, glm::value_ptr(getMatrix()));
+	glUniformMatrix4fv(m_program->getLocation("m_matrix"), 1, GL_FALSE, glm::value_ptr(*getMatrix()));
 }

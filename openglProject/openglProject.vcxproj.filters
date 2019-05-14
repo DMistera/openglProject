@@ -129,9 +129,6 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Engine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="CylinderHitbox.cpp">
-      <Filter>Source Files\Engine\Hitboxes</Filter>
-    </ClCompile>
     <ClCompile Include="MathUtils.cpp">
       <Filter>Source Files\Engine\Math</Filter>
     </ClCompile>
@@ -149,6 +146,18 @@
     </ClCompile>
     <ClCompile Include="Polygon.cpp">
       <Filter>Source Files\Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Line2D.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PrismHitbox.cpp">
+      <Filter>Source Files\Engine\Hitboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="Intersecter2D.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Chamber.cpp">
+      <Filter>Source Files\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +245,6 @@
     <ClInclude Include="Hitbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CylinderHitbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MathUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -252,6 +258,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Line2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrismHitbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersecter2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chamber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

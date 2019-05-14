@@ -13,5 +13,6 @@ private:
 	float m_height;
 
 	virtual std::vector<glm::vec2> getBaseVertices() override;
+	virtual Type getType() override;
 };
 

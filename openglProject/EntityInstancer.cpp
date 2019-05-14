@@ -25,7 +25,7 @@ void EntityInstancer::setInstancedVertexAttributes(std::vector<Entity*> entities
 {
 	std::vector<glm::mat4> modelMatrices;
 	for (Entity* e : entities) {
-		modelMatrices.push_back(e->getMatrix());
+		modelMatrices.push_back(*e->getMatrix());
 	}
 
 	glGenBuffers(1, &m_modelMatrixBuffer);

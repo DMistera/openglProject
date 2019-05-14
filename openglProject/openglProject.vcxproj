@@ -126,10 +126,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Chamber.cpp" />
     <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="CylinderHitbox.cpp" />
     <ClCompile Include="EntityInstancer.cpp" />
     <ClCompile Include="Hitbox.cpp" />
+    <ClCompile Include="Intersecter2D.cpp" />
+    <ClCompile Include="Line2D.cpp" />
     <ClCompile Include="MaterialEntity.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -147,6 +149,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="PrismHitbox.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -159,9 +162,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Chamber.h" />
     <ClInclude Include="Circle.h" />
-    <ClInclude Include="CylinderHitbox.h" />
     <ClInclude Include="Hitbox.h" />
+    <ClInclude Include="Intersecter2D.h" />
+    <ClInclude Include="Line2D.h" />
     <ClInclude Include="MaterialEntity.h" />
     <ClInclude Include="EntityInstancer.h" />
     <ClInclude Include="Camera.h" />
@@ -181,6 +186,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Polygon.h" />
+    <ClInclude Include="PrismHitbox.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer.h" />

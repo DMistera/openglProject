@@ -22,3 +22,8 @@ std::vector<glm::vec2> Rectangle::getBaseVertices()
 	result.push_back(glm::vec2(-dx, dy));
 	return result;
 }
+
+Shape::Type Rectangle::getType()
+{
+	return RECTANGLE;
+}

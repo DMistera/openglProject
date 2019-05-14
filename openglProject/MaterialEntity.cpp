@@ -9,6 +9,7 @@ MaterialEntity::MaterialEntity(Model * model) : Entity()
 
 MaterialEntity::~MaterialEntity()
 {
+
 }
 
 void MaterialEntity::init(ResourceManager* manager, Camera* camera)

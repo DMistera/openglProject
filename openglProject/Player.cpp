@@ -71,12 +71,24 @@ void Player::init(GLFWwindow* window)
 	});
 }
 
-void Player::update(GLFWwindow* window, double deltaTime)
+void Player::update(GLFWwindow* window, double deltaTime, Chamber* chamber)
 {
-	m_camera->moveForward(m_velocity.y*m_speed*deltaTime);
-	m_camera->moveSideways(m_velocity.x*m_speed*deltaTime);
-	m_lightSource->setPosition(m_camera->getPosition());
-	//m_camera->move((float)deltaTime*glm::vec3(m_velocity.x, 0.0f, m_velocity.y));
+
+	Camera cameraCopy = *m_camera;
+	cameraCopy.moveForward(m_velocity.y*m_speed*deltaTime);
+	cameraCopy.moveSideways(m_velocity.x*m_speed*deltaTime);
+	updateHitboxPosiiton(&cameraCopy);
+
+	if (m_hitbox.collide(chamber->getHitbox())) {
+		std::cout << "Collision!" << std::endl;
+		updateHitboxPosiiton(m_camera);
+	}
+	else {
+		m_camera->moveForward(m_velocity.y*m_speed*deltaTime);
+		m_camera->moveSideways(m_velocity.x*m_speed*deltaTime);
+		m_lightSource->setPosition(m_camera->getPosition());
+	}
+	m_hitbox.getBase()->updateMatrix();
 }
 
 
@@ -92,4 +104,16 @@ LightSource * Player::getLightSource()
 
 Player::~Player()
 {
+}
+
+glm::vec3 Player::getShiftVector(double deltaTime)
+{
+	glm::vec2 shift = m_velocity * m_speed * (float)deltaTime;
+	return glm::vec3(shift.x, 0, -shift.y);
+}
+
+void Player::updateHitboxPosiiton(Camera * cam)
+{
+	glm::vec3 camPos = cam->getPosition();
+	m_hitbox.getBase()->setPosition(glm::vec2(camPos.x, camPos.z));
 }

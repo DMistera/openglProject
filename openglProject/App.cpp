@@ -31,7 +31,7 @@ void App::update(double time)
 {
 	elapsed += time;
 
-	m_player->update(m_window, time);
+	m_player->update(m_window, time, m_map->getActiveChamber());
 }
 
 void App::draw(Renderer * renderer)
