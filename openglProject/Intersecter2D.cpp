@@ -21,8 +21,11 @@ bool Intersecter2D::intersect(Shape* a, Shape* b)
 		else if(b->getType() == Shape::LINE) {
 			return circle->intersects(*dynamic_cast<Line2D*>(b));
 		}
+		else if(b->getType() == Shape::RECTANGLE) {
+			return circle->intersects(*dynamic_cast<Rectangle*>(b));;
+		}
 		else {
-			return false;
+			throw "Not supported shape";
 		}
 	}
 	return false;

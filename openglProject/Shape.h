@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Transformable.h"
+#include "Transformable2D.h"
 
-class Shape : public Transformable
+class Shape : public Transformable2D
 {
 public:
 	Shape();

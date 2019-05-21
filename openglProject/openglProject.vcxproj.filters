@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Engine\Math">
       <UniqueIdentifier>{2dd8bfb7-fc1f-4b22-a596-23af4271ae5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Math\2D">
+      <UniqueIdentifier>{18ca00cc-70ce-4f5b-b625-dad598401924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Map">
+      <UniqueIdentifier>{1b5f84f3-d879-426a-828c-998001586fcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -105,9 +111,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Engine\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files\App</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Engine\Entities</Filter>
     </ClCompile>
@@ -132,32 +135,47 @@
     <ClCompile Include="MathUtils.cpp">
       <Filter>Source Files\Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
-    </ClCompile>
     <ClCompile Include="Transformable.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Line2D.cpp">
       <Filter>Source Files\Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="PrismHitbox.cpp">
       <Filter>Source Files\Engine\Hitboxes</Filter>
     </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
     <ClCompile Include="Intersecter2D.cpp">
-      <Filter>Source Files\Engine\Math</Filter>
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Line2D.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformable2D.cpp">
+      <Filter>Source Files\Engine\Math\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="HitboxGroup.cpp">
+      <Filter>Source Files\Engine\Hitboxes</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetector.cpp">
+      <Filter>Source Files\Engine\Hitboxes</Filter>
     </ClCompile>
     <ClCompile Include="Chamber.cpp">
-      <Filter>Source Files\App</Filter>
+      <Filter>Source Files\App\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\App\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ChamberWallHitbox.cpp">
+      <Filter>Source Files\App\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +288,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Chamber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformable2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChamberWallHitbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,10 +2,20 @@
 
 
 
-Rectangle::Rectangle()
+
+Rectangle::Rectangle(float width, float heigth)
 {
+	m_width = width;
+	m_height = heigth;
 }
 
+Rectangle::Rectangle(glm::vec2 a, glm::vec2 b)
+{
+	m_width = abs(a.x - b.x);
+	m_height = abs(a.y - b.y);
+	glm::vec2 middle = glm::vec2((a.x + b.x) / 2.0f, (a.y + b.y) / 2.0f);
+	setPosition(middle);
+}
 
 Rectangle::~Rectangle()
 {

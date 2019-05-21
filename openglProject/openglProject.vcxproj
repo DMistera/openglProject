@@ -127,9 +127,12 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Chamber.cpp" />
+    <ClCompile Include="ChamberWallHitbox.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="EntityInstancer.cpp" />
     <ClCompile Include="Hitbox.cpp" />
+    <ClCompile Include="HitboxGroup.cpp" />
     <ClCompile Include="Intersecter2D.cpp" />
     <ClCompile Include="Line2D.cpp" />
     <ClCompile Include="MaterialEntity.cpp" />
@@ -159,12 +162,16 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transformable.cpp" />
+    <ClCompile Include="Transformable2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Chamber.h" />
+    <ClInclude Include="ChamberWallHitbox.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Hitbox.h" />
+    <ClInclude Include="HitboxGroup.h" />
     <ClInclude Include="Intersecter2D.h" />
     <ClInclude Include="Line2D.h" />
     <ClInclude Include="MaterialEntity.h" />
@@ -196,6 +203,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transformable.h" />
+    <ClInclude Include="Transformable2D.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

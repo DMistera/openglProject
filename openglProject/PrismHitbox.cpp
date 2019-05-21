@@ -29,14 +29,43 @@ Shape * PrismHitbox::getBase()
 	return m_base;
 }
 
-bool PrismHitbox::collide(PrismHitbox * other)
+bool PrismHitbox::collidePrism(PrismHitbox * other)
 {
 	if (collideY(other)) {
-		if (Intersecter2D::intersect(m_base, other->getBase())) {
+		glm::vec3 g = getGlobalPosition();
+		m_base->setPosition(glm::vec2(g.x, -g.z));
+		glm::vec3 g2 = other->getGlobalPosition();
+		Shape* otherBase = other->getBase();
+		otherBase->setPosition(glm::vec2(g2.x, -g2.z));
+		if (Intersecter2D::intersect(m_base, otherBase)) {
 			return true;
 		}
 	}
 	return false;
+}
+
+void PrismHitbox::setPosition(glm::vec3 v)
+{
+	Transformable::setPosition(v);
+	m_base->setPosition(glm::vec2(v.x, -v.z));
+}
+
+void PrismHitbox::setRotation(glm::vec3 v)
+{
+	Transformable::setRotation(v);
+	m_base->setRotation(v.y);
+}
+
+void PrismHitbox::setScale(glm::vec3 v)
+{
+	Transformable::setScale(v);
+	m_base->setScale(glm::vec2(v.x, v.y));
+}
+
+void PrismHitbox::inheritBasePosition()
+{
+	glm::vec2 basePos = m_base->getPosition();
+	setPosition(glm::vec3(basePos.x, m_position.y, -basePos.y));
 }
 
 bool PrismHitbox::collideY(PrismHitbox * other)
@@ -49,4 +78,9 @@ bool PrismHitbox::collideY(PrismHitbox * other)
 	else {
 		return o_maxY > m_minY;
 	}
+}
+
+Hitbox::Type PrismHitbox::getType()
+{
+	return Hitbox::Type::PRISM;
 }

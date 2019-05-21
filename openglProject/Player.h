@@ -28,7 +28,7 @@ private:
 	glm::vec2 m_velocity;
 	float m_speed;
 
-	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.5f), 0.0f, 1.0f);
+	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.2f), 0.0f, 1.0f);
 
 	//Camera
 	Camera* m_camera;

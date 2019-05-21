@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MaterialEntity.h"
-#include "PrismHitbox.h"
+#include "ChamberWallHitbox.h"
 #include "Circle.h"
 
 class Chamber : public MaterialEntity
@@ -9,9 +9,11 @@ class Chamber : public MaterialEntity
 public:
 	Chamber(ResourceManager* manager);
 	~Chamber();
-	PrismHitbox* getHitbox();
-	virtual void updateMatrix() override;
+	HitboxGroup* getHitbox();
 private:
-	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.1f), 0.0f, 1.0f);;
+	HitboxGroup m_hitbox;
+	const float chamberSize = 2.0f;
+	const float wallWidth = 0.2f;
+	const float chamberHeigth = 1.0f;
 };
 

@@ -5,6 +5,7 @@
 #include "Line2D.h"
 #include "Rectangle.h"
 #include <iostream>
+#include <glm/glm.hpp>
 
 class Circle : public Shape
 {

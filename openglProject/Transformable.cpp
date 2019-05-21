@@ -4,6 +4,7 @@
 
 Transformable::Transformable()
 {
+	matrixOutdated = true;
 }
 
 
@@ -13,6 +14,9 @@ Transformable::~Transformable()
 
 glm::mat4 * Transformable::getMatrix()
 {
+	if (matrixOutdated) {
+		updateMatrix();
+	}
 	return &m_matrix;
 }
 
@@ -24,49 +28,46 @@ void Transformable::updateMatrix()
 	m = glm::rotate(m, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 	m = glm::rotate(m, m_rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
 	m = glm::scale(m, m_scale);
-	if (m_parentMatrix != nullptr) {
-		m_matrix = (*m_parentMatrix) * m;
+	if (m_parent != nullptr) {
+		m_matrix = (*m_parent->getMatrix()) * m;
 	}
 	else {
 		m_matrix = m;
 	}
-}
-
-void Transformable::setParentMatrix(glm::mat4 * matrix)
-{
-	m_parentMatrix = matrix;
+	matrixOutdated = false;
 }
 
 void Transformable::setParent(Transformable * parent)
 {
-	setParentMatrix(parent->getMatrix());
+	m_parent = parent;
 }
-
-
 
 void Transformable::setRotation(glm::vec3 v)
 {
 	m_rotation = v;
+	matrixOutdated = true;
 }
 
 void Transformable::setPosition(glm::vec3 v)
 {
 	m_position = v;
+	matrixOutdated = true;
 }
 
 void Transformable::setPosition(glm::vec2 v)
 {
-	m_position = glm::vec3(v, 0.0f);
+	setPosition(glm::vec3(v, 0.0f));
 }
 
 void Transformable::setScale(glm::vec3 v)
 {
 	m_scale = v;
+	matrixOutdated = true;
 }
 
 void Transformable::setScale(glm::vec2 v)
 {
-	m_scale = glm::vec3(v, 1.0f);
+	setScale(glm::vec3(v, 1.0f));
 }
 
 void Transformable::setScale(float scale)
@@ -81,20 +82,12 @@ void Transformable::move(glm::vec2 v)
 
 void Transformable::move(glm::vec3 v)
 {
-	m_position += v;
-}
-
-glm::vec2 Transformable::getPositionV2()
-{
-	return glm::vec2(m_position);
+	setPosition(m_position + v);
 }
 
 glm::vec3 Transformable::getGlobalPosition()
 {
-	return m_matrix * glm::vec4(m_position, 1.0f);
-}
-
-glm::vec2 Transformable::getScaleV2()
-{
-	return glm::vec2(m_scale);
+	glm::mat4 matrix = *getMatrix();
+	glm::vec3 result = matrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	return result;
 }

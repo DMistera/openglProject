@@ -59,6 +59,14 @@ int main(void)
 
 		InputManager::init(window);
 
+		bool shouldClose = false;
+
+		InputManager::setKeyboardInputCallback([&](int key, int scancode, int action, int mods) {
+			if (key == GLFW_KEY_ESCAPE) {
+				shouldClose = true;
+			}
+		});
+
 		Renderer renderer(window);
 		renderer.init();
 
@@ -69,12 +77,12 @@ int main(void)
 		glfwSetTime(0);
 
 		/* Loop until the user closes the window */
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(window) && !shouldClose)
 		{
 			app.update(glfwGetTime());
 			glfwSetTime(0);
 
-			glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			/* Render here */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

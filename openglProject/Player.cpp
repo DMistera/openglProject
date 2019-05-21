@@ -12,7 +12,7 @@ void Player::init(GLFWwindow* window)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	m_camera = new Camera();
-	m_camera->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
+	m_camera->setPosition(glm::vec3(0.5f, 1.0f, 0.5f));
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_camera->setRotation(glm::vec2(0.0f, 0.0f));
 
@@ -88,7 +88,6 @@ void Player::update(GLFWwindow* window, double deltaTime, Chamber* chamber)
 		m_camera->moveSideways(m_velocity.x*m_speed*deltaTime);
 		m_lightSource->setPosition(m_camera->getPosition());
 	}
-	m_hitbox.getBase()->updateMatrix();
 }
 
 
@@ -115,5 +114,5 @@ glm::vec3 Player::getShiftVector(double deltaTime)
 void Player::updateHitboxPosiiton(Camera * cam)
 {
 	glm::vec3 camPos = cam->getPosition();
-	m_hitbox.getBase()->setPosition(glm::vec2(camPos.x, camPos.z));
+	m_hitbox.setPosition(camPos);
 }
