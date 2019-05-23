@@ -150,6 +150,7 @@
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelFromFile.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="PrismHitbox.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="Transformable2D.cpp" />
+    <ClCompile Include="WireModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -191,6 +193,7 @@
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelFromFile.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="PrismHitbox.h" />
@@ -206,6 +209,7 @@
     <ClInclude Include="Transformable2D.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="WireModel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="f_material.glsl" />

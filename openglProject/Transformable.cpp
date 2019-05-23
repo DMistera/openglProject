@@ -91,3 +91,13 @@ glm::vec3 Transformable::getGlobalPosition()
 	glm::vec3 result = matrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	return result;
 }
+
+glm::vec3 Transformable::getGlobalRotation()
+{
+	if (m_parent != nullptr) {
+		return m_rotation + m_parent->getGlobalRotation();
+	}
+	else {
+		return m_rotation;
+	}
+}

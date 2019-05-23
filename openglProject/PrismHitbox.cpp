@@ -32,12 +32,9 @@ Shape * PrismHitbox::getBase()
 bool PrismHitbox::collidePrism(PrismHitbox * other)
 {
 	if (collideY(other)) {
-		glm::vec3 g = getGlobalPosition();
-		m_base->setPosition(glm::vec2(g.x, -g.z));
-		glm::vec3 g2 = other->getGlobalPosition();
-		Shape* otherBase = other->getBase();
-		otherBase->setPosition(glm::vec2(g2.x, -g2.z));
-		if (Intersecter2D::intersect(m_base, otherBase)) {
+		applyTransformToBase();
+		other->applyTransformToBase();
+		if (Intersecter2D::intersect(m_base, other->getBase())) {
 			return true;
 		}
 	}
@@ -66,6 +63,52 @@ void PrismHitbox::inheritBasePosition()
 {
 	glm::vec2 basePos = m_base->getPosition();
 	setPosition(glm::vec3(basePos.x, m_position.y, -basePos.y));
+}
+
+void PrismHitbox::applyTransformToBase()
+{
+	glm::vec3 g = getGlobalPosition();
+	m_base->setPosition(glm::vec2(g.x, -g.z));
+	glm::vec3 r = getGlobalRotation();
+	m_base->setRotation(r.y);
+}
+
+std::vector<glm::vec3> PrismHitbox::getVertices()
+{
+	Polygon* base = dynamic_cast<Polygon*>(m_base);
+	if (base == nullptr) {
+		throw "Invalid base to get vertices";
+	}
+	else {
+		std::vector<glm::vec3> result;
+		std::vector<glm::vec2> baseVertices = base->getVertices();
+		for (int i = 0; i < baseVertices.size(); i++) {
+			glm::vec2 v = baseVertices[i];
+			result.push_back(glm::vec3(v.x, m_minY, -v.y));
+			result.push_back(glm::vec3(v.x, m_maxY, -v.y));
+		}
+		return result;
+	}
+}
+
+#include "Entity.h"
+
+void PrismHitbox::draw(ResourceManager * resourceManger, Camera * camera)
+{
+	std::vector<Vertex> vertices;
+	std::vector<glm::vec3> positions = getVertices();
+	for (int i = 0; i < positions.size(); i++) {
+		Vertex v;
+		v.position = glm::vec4(positions[i], 1.0f);
+		vertices.push_back(v);
+	}
+
+	Program* solid = resourceManger->getProgram("v_constant.glsl", "f_constant.glsl");
+	WireModel model(vertices);
+	model;
+	Entity e;
+	e.setToDraw(&model, solid, camera);
+	e.draw();
 }
 
 bool PrismHitbox::collideY(PrismHitbox * other)

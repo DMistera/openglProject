@@ -2,6 +2,7 @@
 
 #include <glm/vec2.hpp>
 #include <glm/mat2x2.hpp>
+#include <iostream>
 
 class Transformable2D
 {
@@ -14,7 +15,7 @@ public:
 	glm::vec2 getPosition();
 	glm::vec2 getScale();
 	float getRotation();
-	glm::vec2 applyTransormation(glm::vec2 point);
+	glm::vec2 applyTransformation(glm::vec2 point);
 private:
 	glm::vec2 m_position;
 	glm::vec2 m_scale;

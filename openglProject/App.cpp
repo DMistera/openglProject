@@ -38,4 +38,5 @@ void App::draw(Renderer * renderer)
 {
 	m_instancer->draw();
 	//renderer->draw(m_map);
+	m_map->getActiveChamber()->getHitbox()->draw(m_resourceManager, m_player->getCamera());
 }

@@ -12,7 +12,7 @@ void Player::init(GLFWwindow* window)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	m_camera = new Camera();
-	m_camera->setPosition(glm::vec3(0.5f, 1.0f, 0.5f));
+	m_camera->setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_camera->setNoseVector(glm::vec3(0.0f, 1.0f, 0.0f));
 	m_camera->setRotation(glm::vec2(0.0f, 0.0f));
 

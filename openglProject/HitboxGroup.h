@@ -10,6 +10,7 @@ public:
 	~HitboxGroup();
 	void addHitbox(Hitbox* hitbox);
 	std::vector<Hitbox*> getChildren();
+	virtual void draw(ResourceManager * resourceManger, Camera * camera) override;
 private:
 	std::vector<Hitbox*> m_hitboxes;
 

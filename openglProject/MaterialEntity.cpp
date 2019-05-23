@@ -2,7 +2,7 @@
 
 
 
-MaterialEntity::MaterialEntity(Model * model) : Entity()
+MaterialEntity::MaterialEntity(ModelFromFile * model) : Entity()
 {
 	m_model = model;
 }

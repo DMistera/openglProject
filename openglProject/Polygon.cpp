@@ -16,7 +16,7 @@ std::vector<glm::vec2> Polygon::getVertices()
 	std::vector<glm::vec2> vertices = getBaseVertices();
 	std::vector<glm::vec2> result;
 	for (glm::vec2 v : vertices) {
-		glm::vec2 transformed = applyTransormation(v);
+		glm::vec2 transformed = applyTransformation(v);
 		result.push_back(transformed);
 	}
 	return result;

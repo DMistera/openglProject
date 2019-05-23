@@ -21,6 +21,7 @@ public:
 	void move(glm::vec2 v);
 	void move(glm::vec3 v);
 	glm::vec3 getGlobalPosition();
+	glm::vec3 getGlobalRotation();
 protected:
 	glm::vec3 m_position = glm::vec3(0.0f);
 	glm::vec3 m_rotation = glm::vec3(0.0f);

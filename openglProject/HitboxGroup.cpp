@@ -26,3 +26,10 @@ Hitbox::Type HitboxGroup::getType()
 {
 	return Hitbox::Type::GROUP;
 }
+
+void HitboxGroup::draw(ResourceManager * resourceManger, Camera * camera)
+{
+	for (int i = 0; i < m_hitboxes.size(); i++) {
+		m_hitboxes[i]->draw(resourceManger, camera);
+	}
+}

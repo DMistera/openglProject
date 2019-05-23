@@ -4,6 +4,8 @@
 #include "Shape.h"
 #include "Intersecter2D.h"
 
+#include "WireModel.h"
+
 class PrismHitbox : public Hitbox
 {
 public:
@@ -17,6 +19,9 @@ public:
 	void setRotation(glm::vec3 v) override;
 	void setScale(glm::vec3 v) override;
 	void inheritBasePosition();
+	void applyTransformToBase();
+	std::vector<glm::vec3> getVertices();
+	virtual void draw(ResourceManager* resourceManger, Camera* camera) override;
 private:
 	bool collideY(PrismHitbox* other);
 	Shape* m_base;

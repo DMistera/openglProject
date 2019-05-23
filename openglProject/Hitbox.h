@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Transformable.h"
+#include "ResourceManager.h"
+#include "Camera.h"
 
 class Hitbox : public Transformable
 {
@@ -12,5 +14,6 @@ public:
 	~Hitbox();
 	bool collide(Hitbox* other);
 	virtual Hitbox::Type getType() = 0;
+	virtual void draw(ResourceManager* resourceManger, Camera* camera) = 0;
 protected:
 };

@@ -75,7 +75,9 @@ void Mesh::init()
 
 void Mesh::use(Program* program)
 {
-	m_material->use(program);
+	if (m_material != nullptr) {
+		m_material->use(program);
+	}
 	glBindVertexArray(m_vertexArrayObject);
 }
 
@@ -95,10 +97,17 @@ std::string Mesh::getName()
 }
 
 
-void Mesh::draw(Program* program)
-{
+void Mesh::draw(Program* program, GLenum mode, bool wires) {
 	use(program);
-	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+	if (wires) {
+		glDisable(GL_CULL_FACE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	glDrawElements(mode, m_indices.size(), GL_UNSIGNED_INT, 0);
+	if (wires) {
+		glEnable(GL_CULL_FACE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
 	unbind();
 }
 

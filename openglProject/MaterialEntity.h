@@ -10,7 +10,7 @@ class MaterialEntity :
 	public Entity
 {
 public:
-	MaterialEntity(Model* mesh);
+	MaterialEntity(ModelFromFile* mesh);
 	~MaterialEntity();
 	void init(ResourceManager* manager, Camera* camera);
 	void setMaterial(Material material);

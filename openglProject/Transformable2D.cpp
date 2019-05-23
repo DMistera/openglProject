@@ -44,7 +44,7 @@ float Transformable2D::getRotation()
 	return m_rotation;
 }
 
-glm::vec2 Transformable2D::applyTransormation(glm::vec2 point)
+glm::vec2 Transformable2D::applyTransformation(glm::vec2 point)
 {
 	glm::vec2 result = point;
 	//Apply scale

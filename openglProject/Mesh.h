@@ -14,13 +14,13 @@
 class Mesh
 {
 public:
-	Mesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material* material);
+	Mesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material* material = nullptr);
 	void init();
 	void use(Program* program);
 	void bind();
 	void unbind();
 	std::string getName();
-	void draw(Program* program);
+	void draw(Program* program, GLenum mode = GL_TRIANGLES, bool wires = false);
 	bool operator ==(Mesh other);
 	std::vector<Vertex>* getBaseVertices();
 	std::vector<unsigned int>* getIndices();

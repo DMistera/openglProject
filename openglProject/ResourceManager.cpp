@@ -11,15 +11,15 @@ ResourceManager::~ResourceManager()
 {
 }
 
-Model * ResourceManager::getModel(std::string path)
+ModelFromFile * ResourceManager::getModel(std::string path)
 {
 	for (int i = 0; i < m_models.size(); i++) {
-		Model* m = m_models.at(i);
+		ModelFromFile* m = m_models.at(i);
 		if (path == m->getPath()) {
 			return m;
 		}
 	}
-	Model* m = new Model(path);
+	ModelFromFile* m = new ModelFromFile(path);
 	m->init(&m_textureManager);
 	m_models.push_back(m);
 	return m;
