@@ -9,6 +9,9 @@ public:
 	Line2D(glm::vec2 start, glm::vec2 end);
 	glm::vec2 getStartPoint();
 	glm::vec2 getEndPoint();
+	glm::vec2 getInterpolatedPoint(float t);
+	void getEquation(float* a, float* b);
+	float distanceToPoint(glm::vec2 point);
 	~Line2D();
 private:
 	glm::vec2 m_startPoint;

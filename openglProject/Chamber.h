@@ -14,6 +14,7 @@ public:
 	~Chamber();
 	HitboxGroup* getHitbox();
 private:
+	std::vector<Chamber*> m_adjacentChambers;
 	HitboxGroup m_hitbox;
 	const float chamberSize = 2.0f;
 	const float wallWidth = 0.2f;

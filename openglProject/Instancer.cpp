@@ -19,7 +19,7 @@ void Instancer::draw()
 			bool found = false;
 			for (InstanceGroup& o : *original) {
 				if (inSameInstanceGroup(o.getSample(), a.getSample())
-					&& (*a.getMesh()) == (*o.getMesh())
+					&& (*a.getMesh()) == o.getMesh()
 					&& (*a.getProgram()) == (*o.getProgram())) {
 					o.addEntities(a.getEntities());
 					found = true;

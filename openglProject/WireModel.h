@@ -12,5 +12,7 @@ public:
 
 	// Inherited via Model
 	virtual void draw(Program * p) override;
+private:
+	Mesh* m_mesh;
 };
 

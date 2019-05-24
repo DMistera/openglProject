@@ -10,8 +10,10 @@ public:
 	CollisionDetector();
 	~CollisionDetector();
 	static bool collide(Hitbox* first, Hitbox* second);
+	static void resolve(Hitbox* nonSolid, Hitbox* solid);
 private:
-	static bool prismToGroup(PrismHitbox* prism, HitboxGroup* group);
+	static bool prismToGroupCollision(PrismHitbox* prism, HitboxGroup* group);
+	static void prismToGroupResolve(PrismHitbox* prism, HitboxGroup* group);
 };
 
  

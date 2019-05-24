@@ -15,6 +15,7 @@ public:
 	float getMaxY();
 	Shape* getBase();
 	bool collidePrism(PrismHitbox* other);
+	void resolvePrism(PrismHitbox* solid);
 	void setPosition(glm::vec3 v) override;
 	void setRotation(glm::vec3 v) override;
 	void setScale(glm::vec3 v) override;

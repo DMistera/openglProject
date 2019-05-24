@@ -10,6 +10,10 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	for (auto e : m_entities) {
+		delete e;
+	}
+	m_entities.clear();
 }
 
 void Entity::setToDraw(Model * m, Program* program, Camera* camera)

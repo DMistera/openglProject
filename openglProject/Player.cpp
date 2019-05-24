@@ -80,8 +80,9 @@ void Player::update(GLFWwindow* window, double deltaTime, Chamber* chamber)
 	updateHitboxPosiiton(&cameraCopy);
 
 	if (m_hitbox.collide(chamber->getHitbox())) {
-		std::cout << "Collision!" << std::endl;
-		updateHitboxPosiiton(m_camera);
+		m_hitbox.resolve(chamber->getHitbox());
+		m_camera->moveTo(m_hitbox.getGlobalPosition());
+		//updateHitboxPosiiton(m_camera);
 	}
 	else {
 		m_camera->moveForward(m_velocity.y*m_speed*deltaTime);

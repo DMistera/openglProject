@@ -41,6 +41,12 @@ bool PrismHitbox::collidePrism(PrismHitbox * other)
 	return false;
 }
 
+void PrismHitbox::resolvePrism(PrismHitbox * solid)
+{
+	Intersecter2D::resolve(m_base, solid->getBase());
+	inheritBasePosition();
+}
+
 void PrismHitbox::setPosition(glm::vec3 v)
 {
 	Transformable::setPosition(v);
@@ -105,7 +111,6 @@ void PrismHitbox::draw(ResourceManager * resourceManger, Camera * camera)
 
 	Program* solid = resourceManger->getProgram("v_constant.glsl", "f_constant.glsl");
 	WireModel model(vertices);
-	model;
 	Entity e;
 	e.setToDraw(&model, solid, camera);
 	e.draw();

@@ -21,7 +21,7 @@ public:
 	void unbind();
 	std::string getName();
 	void draw(Program* program, GLenum mode = GL_TRIANGLES, bool wires = false);
-	bool operator ==(Mesh other);
+	bool operator ==(Mesh* other);
 	std::vector<Vertex>* getBaseVertices();
 	std::vector<unsigned int>* getIndices();
 	~Mesh();

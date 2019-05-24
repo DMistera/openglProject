@@ -41,6 +41,12 @@ void Camera::move(glm::vec3 v)
 	m_target += v;
 }
 
+void Camera::moveTo(glm::vec3 v)
+{
+	glm::vec3 diff = v - m_position;
+	move(diff);
+}
+
 void Camera::moveForward(float distance)
 {
 	glm::vec3 direction = glm::normalize(m_target - m_position);

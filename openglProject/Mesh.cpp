@@ -83,6 +83,8 @@ void Mesh::use(Program* program)
 
 void Mesh::bind()
 {
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_elementBufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 	glBindVertexArray(m_vertexArrayObject);
 }
 
@@ -111,9 +113,9 @@ void Mesh::draw(Program* program, GLenum mode, bool wires) {
 	unbind();
 }
 
-bool Mesh::operator==(Mesh other)
+bool Mesh::operator==(Mesh* other)
 {
-	return m_name == other.getName();
+	return m_name == other->getName();
 }
 
 std::vector<Vertex>* Mesh::getBaseVertices()
@@ -128,4 +130,17 @@ std::vector<unsigned int>* Mesh::getIndices()
 
 Mesh::~Mesh()
 {
+	std::cout << m_name << std::endl;
+	if (m_name == "Cube") {
+		std::cout << m_vertexArrayObject << std::endl;
+	}
+	glBindVertexArray(m_vertexArrayObject);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
+	glDeleteBuffers(1, &m_vertexBufferObject);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_elementBufferObject);
+	glDeleteBuffers(1, &m_elementBufferObject);
+
+	glDeleteVertexArrays(1, &m_vertexArrayObject);
 }

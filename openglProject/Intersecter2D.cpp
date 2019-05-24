@@ -30,3 +30,22 @@ bool Intersecter2D::intersect(Shape* a, Shape* b)
 	}
 	return false;
 }
+
+void Intersecter2D::resolve(Shape * nonSolid, Shape * solid)
+{
+	if (nonSolid->getType() == Shape::CIRCLE) {
+		Circle* circle = dynamic_cast<Circle*>(nonSolid);
+		if (solid->getType() == Shape::CIRCLE) {
+			throw "Not supported shape";
+		}
+		else if (solid->getType() == Shape::LINE) {
+			circle->resolve(*dynamic_cast<Line2D*>(solid));
+		}
+		else if (solid->getType() == Shape::RECTANGLE) {
+			circle->resolve(*dynamic_cast<Rectangle*>(solid));;
+		}
+		else {
+			throw "Not supported shape";
+		}
+	}
+}
