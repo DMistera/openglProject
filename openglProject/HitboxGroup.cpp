@@ -11,10 +11,12 @@ HitboxGroup::~HitboxGroup()
 {
 }
 
-void HitboxGroup::addHitbox(Hitbox * hitbox)
+void HitboxGroup::addHitbox(Hitbox * hitbox, bool setParent )
 {
 	m_hitboxes.push_back(hitbox);
-	hitbox->setParent(this);
+	if (setParent) {
+		hitbox->setParent(this);
+	}
 }
 
 std::vector<Hitbox*> HitboxGroup::getChildren()

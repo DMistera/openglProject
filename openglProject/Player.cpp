@@ -82,7 +82,6 @@ void Player::update(GLFWwindow* window, double deltaTime, Chamber* chamber)
 	if (m_hitbox.collide(chamber->getHitbox())) {
 		m_hitbox.resolve(chamber->getHitbox());
 		m_camera->moveTo(m_hitbox.getGlobalPosition());
-		//updateHitboxPosiiton(m_camera);
 	}
 	else {
 		m_camera->moveForward(m_velocity.y*m_speed*deltaTime);
@@ -100,6 +99,11 @@ Camera * Player::getCamera()
 LightSource * Player::getLightSource()
 {
 	return m_lightSource;
+}
+
+PrismHitbox * Player::getHitbox()
+{
+	return &m_hitbox;
 }
 
 Player::~Player()

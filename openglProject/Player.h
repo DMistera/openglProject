@@ -19,6 +19,7 @@ public:
 	void update(GLFWwindow* window, double deltaTime, Chamber* currentChamber);
 	Camera* getCamera();
 	LightSource* getLightSource();
+	PrismHitbox* getHitbox();
 	~Player();
 private:
 	glm::vec3 getShiftVector(double deltaTime);

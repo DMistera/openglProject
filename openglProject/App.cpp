@@ -32,6 +32,7 @@ void App::update(double time)
 	elapsed += time;
 
 	m_player->update(m_window, time, m_map->getActiveChamber());
+	m_map->checkActiveChamberChange(m_player);
 }
 
 void App::draw(Renderer * renderer)
@@ -39,4 +40,7 @@ void App::draw(Renderer * renderer)
 	m_instancer->draw();
 	//renderer->draw(m_map);
 	m_map->getActiveChamber()->getHitbox()->draw(m_resourceManager, m_player->getCamera());
+	for (Chamber* adj : m_map->getActiveChamber()->getAdjacentChambers()) {
+		adj->getDoorFrameHitboxes()->draw(m_resourceManager, m_player->getCamera());
+	}
 }
