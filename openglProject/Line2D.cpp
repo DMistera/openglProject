@@ -56,3 +56,8 @@ Shape::Type Line2D::getType()
 {
 	return LINE;
 }
+
+bool Line2D::isPointInside(glm::vec2 point)
+{
+	return false;
+}

@@ -11,6 +11,8 @@ public:
 	void addHitbox(Hitbox* hitbox, bool setParent = true);
 	std::vector<Hitbox*> getChildren();
 	virtual void draw(ResourceManager * resourceManger, Camera * camera) override;
+	virtual bool isPointInside(glm::vec3 p) override;
+
 private:
 	std::vector<Hitbox*> m_hitboxes;
 

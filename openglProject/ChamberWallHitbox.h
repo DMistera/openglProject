@@ -11,9 +11,11 @@ public:
 	~ChamberWallHitbox();
 	PrismHitbox* getDoorFrameHitbox();
 private:
-	const float doorFrameWidth = 2.0f/3.0f;
+	const float doorWidth = 2.0f/3.0f;
+	const float doorHeight = 4.0f / 3.0f;
 	PrismHitbox* m_leftWall;
 	PrismHitbox* m_rightWall;
 	PrismHitbox* m_doorFrame;
+	PrismHitbox* m_doorFrameWall;
 };
 

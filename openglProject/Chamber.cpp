@@ -34,6 +34,10 @@ Chamber::Chamber(ResourceManager* manager, int x, int z) : MaterialEntity(manage
 	m_hitbox.addHitbox(topWall);
 	m_hitbox.addHitbox(bottomWall);
 
+	float floorSize = chamberSize + wallWidth * 2;
+	PrismHitbox* floor = new PrismHitbox(new Rectangle(floorSize, floorSize), -wallWidth, 0.0f);
+	m_hitbox.addHitbox(floor);
+
 	m_doorFrameHitboxes.addHitbox(leftWall->getDoorFrameHitbox(), false);
 	m_doorFrameHitboxes.addHitbox(rightWall->getDoorFrameHitbox(), false);
 	m_doorFrameHitboxes.addHitbox(topWall->getDoorFrameHitbox(), false);

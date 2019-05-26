@@ -16,7 +16,8 @@ class Player
 public:
 	Player();
 	void init(GLFWwindow* window);
-	void update(GLFWwindow* window, double deltaTime, Chamber* currentChamber);
+	void update(double deltaTime);
+	void resolveHitbox(Chamber* currentChamber);
 	Camera* getCamera();
 	LightSource* getLightSource();
 	PrismHitbox* getHitbox();
@@ -26,14 +27,17 @@ private:
 	void updateHitboxPosiiton(Camera* cam);
 
 	LightSource* m_lightSource;
-	glm::vec2 m_velocity;
+	glm::vec3 m_velocity;
 	float m_speed;
+	const float gravityAcceleration = -0.1f;
+	bool m_canJump = true;
 
-	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 0.0f, 1.0f);
+	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 1.2f);
 
 	//Camera
 	Camera* m_camera;
 	const float m_cameraSpeed = (1.0f / 400.0f);
 	glm::vec2 m_mousePos;
 	glm::vec2 m_cameraAngle;
+	const float playerHeight = 1.0f;
 };

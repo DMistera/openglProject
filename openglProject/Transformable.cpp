@@ -59,6 +59,11 @@ void Transformable::setPosition(glm::vec2 v)
 	setPosition(glm::vec3(v, 0.0f));
 }
 
+void Transformable::setY(float y)
+{
+	setPosition(glm::vec3(m_position.x, y, m_position.z));
+}
+
 void Transformable::setScale(glm::vec3 v)
 {
 	m_scale = v;

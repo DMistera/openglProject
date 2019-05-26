@@ -5,8 +5,14 @@
 PrismHitbox::PrismHitbox(Shape* base, float minY, float maxY)
 {
 	m_base = base;
-	m_minY = minY;
-	m_maxY = maxY;
+	m_height = maxY - minY;
+	setPosition(glm::vec3(0.0f, minY, 0.0f));
+}
+
+PrismHitbox::PrismHitbox(Shape * base, float height)
+{
+	m_base = base;
+	m_height = height;
 }
 
 
@@ -16,12 +22,12 @@ PrismHitbox::~PrismHitbox()
 
 float PrismHitbox::getMinY()
 {
-	return m_minY;
+	return getGlobalPosition().y;
 }
 
 float PrismHitbox::getMaxY()
 {
-	return m_maxY;
+	return getGlobalPosition().y + m_height * m_scale.y;
 }
 
 Shape * PrismHitbox::getBase()
@@ -43,8 +49,20 @@ bool PrismHitbox::collidePrism(PrismHitbox * other)
 
 void PrismHitbox::resolvePrism(PrismHitbox * solid)
 {
-	Intersecter2D::resolve(m_base, solid->getBase());
-	inheritBasePosition();
+	if (collideY(solid)) {
+		applyTransformToBase();
+		Shape* otherBase = solid->getBase();
+		if (otherBase->isPointInside(m_base->getPosition())) {
+			resolveY(solid);
+			if (m_onResolveY) {
+				m_onResolveY();
+			}
+		}
+		else {
+			Intersecter2D::resolve(m_base, otherBase);
+			inheritBasePosition();
+		}
+	}
 }
 
 void PrismHitbox::setPosition(glm::vec3 v)
@@ -90,11 +108,16 @@ std::vector<glm::vec3> PrismHitbox::getVertices()
 		std::vector<glm::vec2> baseVertices = base->getVertices();
 		for (int i = 0; i < baseVertices.size(); i++) {
 			glm::vec2 v = baseVertices[i];
-			result.push_back(glm::vec3(v.x, m_minY, -v.y));
-			result.push_back(glm::vec3(v.x, m_maxY, -v.y));
+			result.push_back(glm::vec3(v.x, getMinY(), -v.y));
+			result.push_back(glm::vec3(v.x, getMaxY(), -v.y));
 		}
 		return result;
 	}
+}
+
+void PrismHitbox::setOnResolveY(std::function<void()> f)
+{
+	m_onResolveY = f;
 }
 
 #include "Entity.h"
@@ -120,15 +143,38 @@ bool PrismHitbox::collideY(PrismHitbox * other)
 {
 	float o_minY = other->getMinY();
 	float o_maxY = other->getMaxY();
-	if (m_minY < o_minY) {
-		return m_maxY > o_minY;
+	if (getMinY() < o_minY) {
+		return getMaxY() > o_minY;
 	}
 	else {
-		return o_maxY > m_minY;
+		return o_maxY > getMinY();
+	}
+}
+
+void PrismHitbox::resolveY(PrismHitbox * solid)
+{
+	float middleY = (getMinY() + getMaxY()) / 2.0f;
+	float otherMiddleY = (solid->getMinY() + solid->getMaxY()) / 2.0f;
+	if (middleY > otherMiddleY) {
+		setY(solid->getMaxY());
+	}
+	else {
+		setY(solid->getMinY() - m_height * m_scale.y);
 	}
 }
 
 Hitbox::Type PrismHitbox::getType()
 {
 	return Hitbox::Type::PRISM;
+}
+
+bool PrismHitbox::isPointInside(glm::vec3 p)
+{
+	applyTransformToBase();
+	if (p.y >= getMinY() && p.y <= getMaxY()) {
+		if (getBase()->isPointInside(glm::vec2(p.x, -p.z))) {
+			return true;
+		}
+	}
+	return false;
 }

@@ -31,8 +31,9 @@ void App::update(double time)
 {
 	elapsed += time;
 
-	m_player->update(m_window, time, m_map->getActiveChamber());
+	m_player->update(time);
 	m_map->checkActiveChamberChange(m_player);
+	m_player->resolveHitbox(m_map->getActiveChamber());
 }
 
 void App::draw(Renderer * renderer)

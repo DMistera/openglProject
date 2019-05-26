@@ -67,7 +67,9 @@ bool Circle::intersects(Rectangle rect)
 			return true;
 		}
 	}
-	//TODO Check if circle is not inside rectangle here;
+	if (rect.isPointInside(getPosition())) {
+		return true;
+	}
 	return false;
 }
 
@@ -130,4 +132,10 @@ float Circle::getRadius()
 Shape::Type Circle::getType()
 {
 	return CIRCLE;
+}
+
+bool Circle::isPointInside(glm::vec2 point)
+{
+	//TODO Implement this
+	return false;
 }

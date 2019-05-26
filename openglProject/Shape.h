@@ -11,5 +11,6 @@ public:
 		CIRCLE, LINE, POLYGON, RECTANGLE
 	};
 	virtual Type getType() = 0;
+	virtual bool isPointInside(glm::vec2 point) = 0;
 };
 

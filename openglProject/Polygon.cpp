@@ -33,6 +33,21 @@ std::vector<Line2D> Polygon::getLines()
 	return lines;
 }
 
+bool Polygon::isPointInside(glm::vec2 point)
+{
+	//From stack overflow
+	std::vector<glm::vec2> vertices = getVertices();
+	int i, j = 0;
+	bool c = false;
+	int nvert = vertices.size();
+	for (i = 0, j = nvert - 1; i < nvert; j = i++) {
+		if (((vertices[i].y > point.y) != (vertices[j].y > point.y)) &&
+			(point.x < (vertices[j].x - vertices[i].x) * (point.y - vertices[i].y) / (vertices[j].y - vertices[i].y) + vertices[i].x))
+			c = !c;
+	}
+	return c;
+}
+
 Shape::Type Polygon::getType()
 {
 	return POLYGON;

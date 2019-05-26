@@ -29,6 +29,16 @@ Hitbox::Type HitboxGroup::getType()
 	return Hitbox::Type::GROUP;
 }
 
+bool HitboxGroup::isPointInside(glm::vec3 p)
+{
+	for (Hitbox* h : m_hitboxes) {
+		if (h->isPointInside(p)) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void HitboxGroup::draw(ResourceManager * resourceManger, Camera * camera)
 {
 	for (int i = 0; i < m_hitboxes.size(); i++) {

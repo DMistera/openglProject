@@ -25,5 +25,8 @@ private:
 
 	// Inherited via Shape
 	virtual Type getType() override;
+
+	// Inherited via Shape
+	virtual bool isPointInside(glm::vec2 point) override;
 };
 
