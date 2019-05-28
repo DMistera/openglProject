@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Chamber.cpp" />
+    <ClCompile Include="ChamberWall.cpp" />
     <ClCompile Include="ChamberWallHitbox.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Chamber.h" />
+    <ClInclude Include="ChamberWall.h" />
     <ClInclude Include="ChamberWallHitbox.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CollisionDetector.h" />

@@ -2,7 +2,7 @@
 
 
 
-ChamberWallHitbox::ChamberWallHitbox(float width, float thickness, float height)
+ChamberWallHitbox::ChamberWallHitbox(float width, float thickness, float height, float doorWidth, float doorHeight)
 {
 
 	float leftX = - doorWidth / 2.0f;

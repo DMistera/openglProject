@@ -61,6 +61,9 @@
     <Filter Include="Source Files\App\Map">
       <UniqueIdentifier>{1b5f84f3-d879-426a-828c-998001586fcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\App\Map\Chamber">
+      <UniqueIdentifier>{3db5218d-7d9a-41b2-871c-c3cd56e89abc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -165,13 +168,7 @@
     <ClCompile Include="CollisionDetector.cpp">
       <Filter>Source Files\Engine\Hitboxes</Filter>
     </ClCompile>
-    <ClCompile Include="Chamber.cpp">
-      <Filter>Source Files\App\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Source Files\App\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="ChamberWallHitbox.cpp">
       <Filter>Source Files\App\Map</Filter>
     </ClCompile>
     <ClCompile Include="ModelFromFile.cpp">
@@ -182,6 +179,15 @@
     </ClCompile>
     <ClCompile Include="WireModel.cpp">
       <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Chamber.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
+    </ClCompile>
+    <ClCompile Include="ChamberWall.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
+    </ClCompile>
+    <ClCompile Include="ChamberWallHitbox.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +318,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WireModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChamberWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

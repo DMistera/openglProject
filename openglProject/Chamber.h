@@ -17,11 +17,11 @@ public:
 	std::vector<Chamber*> getAdjacentChambers();
 	float getX();
 	float getZ();
-	HitboxGroup* getDoorFrameHitboxes();
+	PrismHitbox* getDoorFrameHitbox();
 private:
 	std::vector<Chamber*> m_adjacentChambers;
 	HitboxGroup m_hitbox;
-	HitboxGroup m_doorFrameHitboxes;
+	PrismHitbox* m_doorFrameHitbox;
 	int m_x;
 	int m_z;
 

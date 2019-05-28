@@ -49,14 +49,17 @@ void Camera::moveTo(glm::vec3 v)
 
 void Camera::moveForward(float distance)
 {
-	glm::vec3 direction = glm::normalize(m_target - m_position);
+	glm::vec3 direction = m_target - m_position;
 	direction.y = 0;
+	direction = glm::normalize(direction);
 	move(distance * direction);
 }
 
 void Camera::moveSideways(float distance)
 {
-	glm::vec3 direction = glm::normalize(m_target - m_position);
+	glm::vec3 direction = (m_target - m_position);
+	direction.y = 0;
+	direction = glm::normalize(direction);
 	direction = glm::vec3(-direction.z, 0.0f, direction.x);
 	move(distance * direction);
 }

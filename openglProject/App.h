@@ -24,5 +24,6 @@ private:
 	Player* m_player;
 	Map* m_map;
 	EntityInstancer* m_instancer;
+	bool m_showHitboxes;
 };
 

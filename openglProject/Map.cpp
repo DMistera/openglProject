@@ -65,7 +65,7 @@ void Map::checkActiveChamberChange(Player * p)
 {
 	for (Chamber* c : m_activeChamber->getAdjacentChambers()) {
 		//if (p->getHitbox()->collide(c->getDoorFrameHitboxes())) {
-		if (c->getDoorFrameHitboxes()->isPointInside(p->getHitbox()->getGlobalPosition() + glm::vec3(0.0f, 0.5f, 0.0f))) {
+		if (c->getDoorFrameHitbox()->isPointInside(p->getHitbox()->getGlobalPosition() + glm::vec3(0.0f, 0.5f, 0.0f))) {
 			m_activeChamber = c;
 		}
 	}

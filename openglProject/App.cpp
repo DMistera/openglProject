@@ -4,11 +4,13 @@
 
 App::App()
 {
+	m_showHitboxes = false;
 }
 
 
 App::~App()
 {
+
 }
 
 void App::start()
@@ -23,6 +25,12 @@ void App::start()
 
 	m_instancer = new EntityInstancer(m_map);
 	m_instancer->init();
+
+	InputManager::setKeyboardInputCallback([&](int key, int scancode, int action, int mods) {
+		if (key == GLFW_KEY_H && action == GLFW_PRESS) {
+			m_showHitboxes = !m_showHitboxes;
+		}
+	});
 }
 
 double elapsed = 0;
@@ -40,8 +48,10 @@ void App::draw(Renderer * renderer)
 {
 	m_instancer->draw();
 	//renderer->draw(m_map);
-	m_map->getActiveChamber()->getHitbox()->draw(m_resourceManager, m_player->getCamera());
-	for (Chamber* adj : m_map->getActiveChamber()->getAdjacentChambers()) {
-		adj->getDoorFrameHitboxes()->draw(m_resourceManager, m_player->getCamera());
+	if (m_showHitboxes) {
+		m_map->getActiveChamber()->getHitbox()->draw(m_resourceManager, m_player->getCamera());
+		for (Chamber* adj : m_map->getActiveChamber()->getAdjacentChambers()) {
+			adj->getDoorFrameHitbox()->draw(m_resourceManager, m_player->getCamera());
+		}
 	}
 }

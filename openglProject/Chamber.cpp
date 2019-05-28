@@ -10,16 +10,19 @@ Chamber::Chamber(ResourceManager* manager, int x, int z) : MaterialEntity(manage
 	float fullSize = chamberSize + wallWidth * 2;
 	setPosition(glm::vec3(fullSize*m_x, 0.0f, fullSize*m_z));
 
+	m_doorFrameHitbox = new PrismHitbox(new Rectangle(fullSize, fullSize), fullSize);
 
 	m_hitbox.setParent(this);
-	m_doorFrameHitboxes.setParent(this);
+	m_doorFrameHitbox->setParent(this);
 
 	float hs = chamberSize / 2.0f + wallWidth / 2.0f;
+	float doorWidth = 2.0f / 3.0f;
+	float doorHeight = 4.0f / 3.0f;
 
-	ChamberWallHitbox* leftWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth);
-	ChamberWallHitbox* rightWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth);
-	ChamberWallHitbox* topWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth);
-	ChamberWallHitbox* bottomWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth);
+	ChamberWallHitbox* leftWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth, doorWidth, doorHeight);
+	ChamberWallHitbox* rightWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth, doorWidth, doorHeight);
+	ChamberWallHitbox* topWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth, doorWidth, doorHeight);
+	ChamberWallHitbox* bottomWall = new ChamberWallHitbox(chamberSize, wallWidth, chamberHeigth, doorWidth, doorHeight);
 
 	leftWall->setPosition(glm::vec3(-hs, 0.0f, 0.0f));
 	rightWall->setPosition(glm::vec3(hs, 0.0f, 0.0f));
@@ -38,10 +41,10 @@ Chamber::Chamber(ResourceManager* manager, int x, int z) : MaterialEntity(manage
 	PrismHitbox* floor = new PrismHitbox(new Rectangle(floorSize, floorSize), -wallWidth, 0.0f);
 	m_hitbox.addHitbox(floor);
 
-	m_doorFrameHitboxes.addHitbox(leftWall->getDoorFrameHitbox(), false);
-	m_doorFrameHitboxes.addHitbox(rightWall->getDoorFrameHitbox(), false);
-	m_doorFrameHitboxes.addHitbox(topWall->getDoorFrameHitbox(), false);
-	m_doorFrameHitboxes.addHitbox(bottomWall->getDoorFrameHitbox(), false);
+	/*m_doorFrameHitbox.addHitbox(leftWall->getDoorFrameHitbox(), false);
+	m_doorFrameHitbox.addHitbox(rightWall->getDoorFrameHitbox(), false);
+	m_doorFrameHitbox.addHitbox(topWall->getDoorFrameHitbox(), false);
+	m_doorFrameHitbox.addHitbox(bottomWall->getDoorFrameHitbox(), false);*/
 }
 
 
@@ -74,8 +77,8 @@ float Chamber::getZ()
 	return m_z;
 }
 
-HitboxGroup* Chamber::getDoorFrameHitboxes()
+PrismHitbox* Chamber::getDoorFrameHitbox()
 {
-	return &m_doorFrameHitboxes;
+	return m_doorFrameHitbox;
 }
 
