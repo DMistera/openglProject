@@ -14,5 +14,8 @@ protected:
 	virtual void setUniforms(Entity * sample) override;
 	virtual bool inSameInstanceGroup(Entity *, Entity *) override;
 	virtual void setInstancedVertexAttributes(std::vector<Entity*> entities) override;
+
+	// Inherited via Instancer
+	virtual void cleanUp() override;
 };
 

@@ -46,6 +46,12 @@ void EntityInstancer::setInstancedVertexAttributes(std::vector<Entity*> entities
 	glVertexAttribDivisor(7, 1);
 }
 
+void EntityInstancer::cleanUp()
+{
+	glDeleteBuffers(1, &m_modelMatrixBuffer);
+}
+
 void EntityInstancer::init()
 {
+	Instancer::init();
 }

@@ -33,7 +33,7 @@ void MaterialEntity::addLightSource(LightSource * light)
 void MaterialEntity::setUniforms()
 {
 	Entity::setUniforms();
-
+	//TODO Optimise this
 	for (int i = 0; i < m_lightSources.size(); i++) {
 		LightSource* l = m_lightSources.at(i);
 		std::string s;

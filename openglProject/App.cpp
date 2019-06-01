@@ -47,6 +47,8 @@ void App::update(double time)
 void App::draw(Renderer * renderer)
 {
 	m_instancer->draw();
+
+
 	//renderer->draw(m_map);
 	if (m_showHitboxes) {
 		m_map->getActiveChamber()->getHitbox()->draw(m_resourceManager, m_player->getCamera());

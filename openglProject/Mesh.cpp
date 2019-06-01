@@ -115,6 +115,9 @@ void Mesh::draw(Program* program, GLenum mode, bool wires) {
 
 bool Mesh::operator==(Mesh* other)
 {
+	if (m_indices.size() != other->getIndices()->size()) {
+		return false;
+	}
 	return m_name == other->getName();
 }
 

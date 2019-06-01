@@ -5,6 +5,8 @@
 #include "ResourceManager.h"
 #include "Chamber.h"
 #include "Player.h"
+#include <algorithm> 
+#include <ctime> 
 
 class Map : public Entity
 {
@@ -13,10 +15,15 @@ public:
 	Chamber* getActiveChamber();
 	void generate(ResourceManager* manager, Camera* camera);
 	Chamber* getChamber(int x, int z);
+	void addChamber(Chamber* c);
 	void setChamberAdjacents(Chamber* c);
 	void checkActiveChamberChange(Player* p);
 	~Map();
 private:
 	Chamber* m_activeChamber;
+	void generateMaze();
+	int linearise(int x, int y);
+	const int maxX = 30;
+	const int maxZ = 30;
 };
 

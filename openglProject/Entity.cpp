@@ -27,6 +27,12 @@ void Entity::setToDraw(Model * m, Program* program, Camera* camera)
 void Entity::addEntity(Entity * e)
 {
 	m_entities.push_back(e);
+	e->setParent(this);
+	e->setChildrenUpdateCallback([&]() -> void {
+		if (m_onChildrenUpdate != nullptr) {
+			m_onChildrenUpdate();
+		}
+	});
 }
 
 
@@ -82,6 +88,11 @@ void Entity::setUniforms()
 	glUniformMatrix4fv(m_program->getLocation("p_matrix"), 1, GL_FALSE, glm::value_ptr(m_camera->getPerspectiveMatrix()));
 	glUniformMatrix4fv(m_program->getLocation("v_matrix"), 1, GL_FALSE, glm::value_ptr(m_camera->getViewMatrix()));
 	glUniform3fv(m_program->getLocation("viewPos"), 1, glm::value_ptr(m_camera->getPosition()));
+}
+
+void Entity::setChildrenUpdateCallback(std::function<void()> f)
+{
+	m_onChildrenUpdate = f;
 }
 
 void Entity::setInstanceUniforms()

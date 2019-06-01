@@ -32,12 +32,12 @@ private:
 	const float gravityAcceleration = -0.1f;
 	bool m_canJump = true;
 
-	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 1.2f);
+	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 0.6f);
 
 	//Camera
 	Camera* m_camera;
 	const float m_cameraSpeed = (1.0f / 400.0f);
 	glm::vec2 m_mousePos;
 	glm::vec2 m_cameraAngle;
-	const float playerHeight = 1.0f;
+	const float playerHeight = 0.4f;
 };

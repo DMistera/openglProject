@@ -16,14 +16,16 @@ public:
 	ChamberWall(ResourceManager* manager, ChamberWall::Position position);
 	~ChamberWall();
 	void open();
+	Hitbox* getHitbox();
+	void generateHitbox();
+	static const float THICKNESS;
 private:
-	ChamberWallHitbox* m_hitbox;
+	Hitbox* m_hitbox;
 	bool m_open = false;
 	ResourceManager* m_resourceManagerP;
 	const float doorWidth = 2.0f / 5.0f;
 	const float doorHeight = 4.0f / 5.0f;
 	const float size = 2.0f;
-	const float thickness = 0.1f;
 	ChamberWall::Position m_position;
 };
 

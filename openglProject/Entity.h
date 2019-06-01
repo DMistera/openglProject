@@ -23,6 +23,7 @@ public:
 	bool isDrawable();
 	virtual void addLightSource(LightSource* lightSource);
 	virtual void setUniforms();
+	void setChildrenUpdateCallback(std::function<void()> f);
 protected:
 	virtual void setInstanceUniforms();
 	Model* m_model;
@@ -30,5 +31,6 @@ protected:
 	Camera* m_camera;
 	std::vector<Entity*> m_entities;
 	bool m_drawable;
+	std::function<void()> m_onChildrenUpdate;
 };
 

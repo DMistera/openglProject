@@ -17,7 +17,7 @@ ChamberWallHitbox::ChamberWallHitbox(float width, float thickness, float height,
 	m_rightWall = new PrismHitbox(new Rectangle(wallWidth, thickness), 0, height);
 	m_rightWall->setPosition(glm::vec3(middleRightX, 0.0f, 0.0f));
 	float doorFrameWallHeight = height - doorHeight;
-	m_doorFrameWall = new PrismHitbox(new Rectangle(doorFrameWallHeight, thickness), height - doorFrameWallHeight, height);
+	m_doorFrameWall = new PrismHitbox(new Rectangle(doorWidth, thickness), height - doorFrameWallHeight, height);
 	m_doorFrame = new PrismHitbox(new Rectangle(doorWidth, thickness), 0, height);
 	m_doorFrame->setParent(this);
 	addHitbox(m_leftWall);

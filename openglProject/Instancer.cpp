@@ -14,6 +14,28 @@ Instancer::~Instancer()
 
 void Instancer::draw()
 {
+	for (InstanceGroup g : m_instanceGroups) {
+		g.getProgram()->use();
+		setUniforms(g.getSample());
+		g.getMesh()->use(g.getProgram());
+		g.getMesh()->bind();
+		setInstancedVertexAttributes(g.getEntities());
+		glDrawElementsInstanced(GL_TRIANGLES, g.getMesh()->getIndices()->size(), GL_UNSIGNED_INT, 0, g.getEntities().size());
+		cleanUp();
+		g.getMesh()->unbind();
+	}
+}
+
+void Instancer::init()
+{
+	updateInstanceGroups();
+	m_entity->setChildrenUpdateCallback([&]() -> void {
+		updateInstanceGroups();
+	});
+}
+
+void Instancer::updateInstanceGroups()
+{
 	auto merge = [&](std::vector<InstanceGroup>* original, std::vector<InstanceGroup>* additional) -> void {
 		for (InstanceGroup& a : *additional) {
 			bool found = false;
@@ -50,14 +72,5 @@ void Instancer::draw()
 		return result;
 	};
 
-	std::vector<InstanceGroup> instances = f(m_entity);
-	for (InstanceGroup g : instances) {
-		g.getProgram()->use();
-		setUniforms(g.getSample());
-		g.getMesh()->use(g.getProgram());
-		g.getMesh()->bind();
-		setInstancedVertexAttributes(g.getEntities());
-		glDrawElementsInstanced(GL_TRIANGLES, g.getMesh()->getIndices()->size(), GL_UNSIGNED_INT, 0, g.getEntities().size());
-		g.getMesh()->unbind();
-	}
+	m_instanceGroups = f(m_entity);
 }
