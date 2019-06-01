@@ -32,7 +32,7 @@ private:
 	ChamberWall* m_rightWall;
 	ChamberWall* m_topWall;
 	ChamberWall* m_bottomWall;
-
+	MaterialEntity* m_floor;
 
 	const float chamberSize = 2.0f;
 	const float chamberHeigth = 2.0f;

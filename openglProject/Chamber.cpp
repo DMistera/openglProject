@@ -24,7 +24,9 @@ Chamber::Chamber(ResourceManager* manager, Camera* camera, int x, int z) : Entit
 	m_topWall->init(manager, camera);
 	m_bottomWall->init(manager, camera);
 
-
+	m_floor = new MaterialEntity(manager->getModel("floor.obj"));
+	m_floor->init(manager, camera);
+	addEntity(m_floor);
 }
 
 
