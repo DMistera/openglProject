@@ -72,7 +72,7 @@ glm::mat4 Camera::getViewMatrix()
 
 glm::mat4 Camera::getPerspectiveMatrix()
 {
-	return glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+	return glm::perspective(glm::radians(60.0f), 1.5f, 0.1f, 100.0f);
 }
 
 glm::vec3 Camera::getPosition()

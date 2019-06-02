@@ -189,6 +189,12 @@
     <ClCompile Include="ChamberWallHitbox.cpp">
       <Filter>Source Files\App\Map\Chamber</Filter>
     </ClCompile>
+    <ClCompile Include="WoodenBox.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
@@ -321,6 +327,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChamberWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodenBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

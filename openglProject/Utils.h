@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "Random.h"
 
 static std::vector<std::string> split(std::string line, char separator) {
 	std::vector<std::string> result;
@@ -25,3 +26,5 @@ static void pushVec3(std::vector<float>* vector, glm::vec3 vertex) {
 	vector->push_back(vertex.y);
 	vector->push_back(vertex.z);
 }
+
+static Random RANDOM;

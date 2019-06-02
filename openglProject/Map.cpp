@@ -17,7 +17,6 @@ void Map::generate(ResourceManager* manager, Camera* camera)
 	for (int x = 0; x < maxX; x++) {
 		for (int y = 0; y < maxZ; y++) {
 			Chamber* chamber = new Chamber(manager, camera, x, y);
-			chamber->updateMatrix();
 			addChamber(chamber);
 		}
 	}

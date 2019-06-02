@@ -156,6 +156,7 @@
     <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="PrismHitbox.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="Transformable2D.cpp" />
     <ClCompile Include="WireModel.cpp" />
+    <ClCompile Include="WoodenBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="Polygon.h" />
     <ClInclude Include="PrismHitbox.h" />
     <ClInclude Include="Program.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="WireModel.h" />
+    <ClInclude Include="WoodenBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="f_material.glsl" />

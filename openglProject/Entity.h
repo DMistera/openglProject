@@ -29,8 +29,8 @@ protected:
 	Model* m_model;
 	Program* m_program;
 	Camera* m_camera;
-	std::vector<Entity*> m_entities;
 	bool m_drawable;
 	std::function<void()> m_onChildrenUpdate;
+	std::vector<Entity*> m_entities;
 };
 

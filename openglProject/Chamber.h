@@ -3,6 +3,9 @@
 #include "MaterialEntity.h"
 #include "ChamberWall.h"
 #include "Circle.h"
+#include "WoodenBox.h"
+#include "Utils.h"
+
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -20,7 +23,8 @@ public:
 	PrismHitbox* getDoorFrameHitbox();
 	void open(ChamberWall::Position pos);
 	void generateHitbox();
-	float fullSize();
+	float getFullSize();
+	void fill(ResourceManager* manager, Camera* camera);
 private:
 	std::vector<Chamber*> m_adjacentChambers;
 	HitboxGroup m_hitbox;

@@ -12,9 +12,10 @@ void Texture::init(int textureUnit, bool gammaCorrelation)
 
 
 	checkGLError("Before texture initialization.");
-	glActiveTexture(GL_TEXTURE0 + textureUnit);;
-	FIBITMAP* bitmap = FreeImage_Load(FreeImage_GetFileType((ASSET_PATH + m_path).c_str(), 0), (ASSET_PATH + m_path).c_str());
-	//bitmap = FreeImage_ConvertTo32Bits(bitmap);
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	FREE_IMAGE_FORMAT format = FreeImage_GetFileType((ASSET_PATH + m_path).c_str(), 0);
+	FIBITMAP* bitmap = FreeImage_Load(format, (ASSET_PATH + m_path).c_str());
+	bitmap = FreeImage_ConvertTo32Bits(bitmap);
 	unsigned int width = FreeImage_GetWidth(bitmap);
 	unsigned int height = FreeImage_GetHeight(bitmap);
 	if (bitmap) {
@@ -24,7 +25,9 @@ void Texture::init(int textureUnit, bool gammaCorrelation)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 		GLenum type = gammaCorrelation ? GL_SRGB : GL_RGB8;
-		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, (void*)FreeImage_GetBits(bitmap));
+		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		BYTE* data = FreeImage_GetBits(bitmap);
+		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else {
