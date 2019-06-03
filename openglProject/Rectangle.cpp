@@ -21,6 +21,26 @@ Rectangle::~Rectangle()
 {
 }
 
+bool Rectangle::intersects(Rectangle other)
+{
+	std::vector<Line2D> lines = getLines();
+	std::vector<Line2D> lines2 = other.getLines();
+	for (Line2D l : lines) {
+		for (Line2D l2 : lines2) {
+			if (l.instersects(l2)) {
+				return true;
+			}
+		}
+	}
+	if (isPointInside(other.getCentre())) {
+		return true;
+	}
+	if (other.isPointInside(getCentre())) {
+		return true;
+	}
+	return false;
+}
+
 std::vector<glm::vec2> Rectangle::getBaseVertices()
 {
 	float dx = m_width / 2.0f;

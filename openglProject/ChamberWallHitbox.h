@@ -7,7 +7,7 @@
 class ChamberWallHitbox : public HitboxGroup
 {
 public:
-	ChamberWallHitbox(float width, float thickness, float height, float doorWidth, float doorHeight);
+	ChamberWallHitbox(float width, float thickness, float height, float DOOR_WIDTH, float DOOR_HEIGHT);
 	~ChamberWallHitbox();
 	PrismHitbox* getDoorFrameHitbox();
 private:

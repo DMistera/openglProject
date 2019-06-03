@@ -33,6 +33,17 @@ std::vector<Line2D> Polygon::getLines()
 	return lines;
 }
 
+glm::vec2 Polygon::getCentre()
+{
+	glm::vec2 result(0.0f, 0.0f);
+	std::vector<glm::vec2> vertices = getVertices();
+	for (glm::vec2 v : vertices) {
+		result += v;
+	}
+	result /= vertices.size();
+	return result;
+}
+
 bool Polygon::isPointInside(glm::vec2 point)
 {
 	//From stack overflow

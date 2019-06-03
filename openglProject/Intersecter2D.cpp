@@ -28,6 +28,18 @@ bool Intersecter2D::intersect(Shape* a, Shape* b)
 			throw "Not supported shape";
 		}
 	}
+	else if (a->getType() == Shape::RECTANGLE) {
+		Rectangle* rect = dynamic_cast<Rectangle*>(a);
+		if (b->getType() == Shape::CIRCLE) {
+			return dynamic_cast<Circle*>(b)->intersects(*rect);
+		}
+		else if (b->getType() == Shape::RECTANGLE) {
+			return rect->intersects(*dynamic_cast<Rectangle*>(b));;
+		}
+		else {
+			throw "Not supported shape";
+		}
+	}
 	return false;
 }
 

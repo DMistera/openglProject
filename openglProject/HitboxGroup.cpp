@@ -9,6 +9,10 @@ HitboxGroup::HitboxGroup()
 
 HitboxGroup::~HitboxGroup()
 {
+	for (Hitbox* h : m_hitboxes) {
+		delete h;
+	}
+	m_hitboxes.clear();
 }
 
 void HitboxGroup::addHitbox(Hitbox * hitbox, bool setParent )

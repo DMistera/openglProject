@@ -27,8 +27,6 @@ Chamber::Chamber(ResourceManager* manager, Camera* camera, int x, int z) : Entit
 	m_floor = new MaterialEntity(manager->getModel("floor.obj"));
 	m_floor->init(manager, camera);
 	addEntity(m_floor);
-
-	fill(manager, camera);
 }
 
 
@@ -114,7 +112,11 @@ float Chamber::getFullSize()
 
 void Chamber::fill(ResourceManager* manager, Camera* camera)
 {
-	//TODO Hitboxes
+	HitboxGroup* hallwayHitbox = new HitboxGroup();
+	hallwayHitbox->setParent(this);
+	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle(chamberSize, ChamberWall::DOOR_WIDTH), chamberHeigth));
+	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle( ChamberWall::DOOR_WIDTH, chamberSize), chamberHeigth));
+
 	for (int i = 0; i < 10; i++) {
 		float randSize = 0.05f + RANDOM.nextFloat()*0.1f ;
 		float randX = RANDOM.nextFloat()*2.0f - 1.0f;
@@ -124,7 +126,12 @@ void Chamber::fill(ResourceManager* manager, Camera* camera)
 		box->setScale(randSize);
 		box->setPosition(glm::vec3(randX, 0.0f, randZ));
 		box->setRotationY(randRot);
-		addEntity(box);
+		box->setParent(this);
+		Hitbox* boxHitbox = box->getHitbox();
+		if (!boxHitbox->collide(hallwayHitbox)) {
+			addEntity(box);
+			m_hitbox.addHitbox(box->getHitbox(), false);
+		}
 	}
 }
 

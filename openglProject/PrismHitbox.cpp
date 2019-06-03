@@ -18,6 +18,7 @@ PrismHitbox::PrismHitbox(Shape * base, float height)
 
 PrismHitbox::~PrismHitbox()
 {
+	delete m_base;
 }
 
 float PrismHitbox::getMinY()
@@ -27,7 +28,7 @@ float PrismHitbox::getMinY()
 
 float PrismHitbox::getMaxY()
 {
-	return getGlobalPosition().y + m_height * m_scale.y;
+	return getGlobalPosition().y + m_height * getGlobalScale().y;
 }
 
 Shape * PrismHitbox::getBase()
@@ -94,7 +95,9 @@ void PrismHitbox::applyTransformToBase()
 	glm::vec3 g = getGlobalPosition();
 	m_base->setPosition(glm::vec2(g.x, -g.z));
 	glm::vec3 r = getGlobalRotation();
-	m_base->setRotation(r.y);
+	m_base->setRotation(-r.y);
+	glm::vec3 s = getGlobalScale();
+	m_base->setScale(glm::vec2(s.x, s.z));
 }
 
 std::vector<glm::vec3> PrismHitbox::getVertices()

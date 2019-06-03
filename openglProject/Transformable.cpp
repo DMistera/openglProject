@@ -4,7 +4,7 @@
 
 Transformable::Transformable()
 {
-	matrixOutdated = true;
+	m_matrixOutdated = true;
 }
 
 
@@ -14,7 +14,7 @@ Transformable::~Transformable()
 
 glm::mat4 * Transformable::getMatrix()
 {
-	if (matrixOutdated) {
+	if (m_matrixOutdated) {
 		updateMatrix();
 	}
 	return &m_matrix;
@@ -34,24 +34,25 @@ void Transformable::updateMatrix()
 	else {
 		m_matrix = m;
 	}
-	matrixOutdated = false;
+	m_matrixOutdated = false;
 }
 
 void Transformable::setParent(Transformable * parent)
 {
 	m_parent = parent;
+	m_matrixOutdated = true;
 }
 
 void Transformable::setRotation(glm::vec3 v)
 {
 	m_rotation = v;
-	matrixOutdated = true;
+	m_matrixOutdated = true;
 }
 
 void Transformable::setPosition(glm::vec3 v)
 {
 	m_position = v;
-	matrixOutdated = true;
+	m_matrixOutdated = true;
 }
 
 void Transformable::setPosition(glm::vec2 v)
@@ -72,7 +73,7 @@ void Transformable::setRotationY(float r)
 void Transformable::setScale(glm::vec3 v)
 {
 	m_scale = v;
-	matrixOutdated = true;
+	m_matrixOutdated = true;
 }
 
 void Transformable::setScale(glm::vec2 v)
@@ -111,3 +112,15 @@ glm::vec3 Transformable::getGlobalRotation()
 		return m_rotation;
 	}
 }
+
+glm::vec3 Transformable::getGlobalScale()
+{
+	if (m_parent != nullptr) {
+		return m_scale * m_parent->getGlobalScale();
+	}
+	else {
+		return m_scale;
+	}
+}
+
+

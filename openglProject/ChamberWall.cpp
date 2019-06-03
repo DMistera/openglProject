@@ -1,6 +1,8 @@
 #include "ChamberWall.h"
 
 const float ChamberWall::THICKNESS = 0.1f;
+const float ChamberWall::DOOR_WIDTH = 2.0f / 5.0f;
+const float ChamberWall::DOOR_HEIGHT = 4.0f / 5.0f;
 
 ChamberWall::ChamberWall(ResourceManager* manager, ChamberWall::Position position) : MaterialEntity(manager->getModel("closedWall.obj"))
 {
@@ -22,7 +24,6 @@ ChamberWall::ChamberWall(ResourceManager* manager, ChamberWall::Position positio
 		setPosition(glm::vec3(dx, 0.0f, 0.0f));
 		setRotationY(M_PI*(0.5f));
 	}
-
 }
 
 
@@ -44,7 +45,7 @@ Hitbox * ChamberWall::getHitbox()
 void ChamberWall::generateHitbox()
 {
 	if (m_open) {
-		m_hitbox = new ChamberWallHitbox(size, ChamberWall::THICKNESS, size, doorWidth, doorHeight);
+		m_hitbox = new ChamberWallHitbox(size, ChamberWall::THICKNESS, size, DOOR_WIDTH, DOOR_HEIGHT);
 	}
 	else {
 		m_hitbox = new PrismHitbox(new Rectangle(size, ChamberWall::THICKNESS), size);

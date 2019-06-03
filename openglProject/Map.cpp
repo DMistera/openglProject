@@ -25,7 +25,9 @@ void Map::generate(ResourceManager* manager, Camera* camera)
 	}
 	generateMaze();
 	for (Entity* e : m_entities) {
-		dynamic_cast<Chamber*>(e)->generateHitbox();
+		Chamber* c = dynamic_cast<Chamber*>(e);
+		c->generateHitbox();
+		c->fill(manager, camera);
 	}
 	m_activeChamber = dynamic_cast<Chamber*>(m_entities[0]);
 }
