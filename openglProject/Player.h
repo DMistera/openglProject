@@ -29,7 +29,7 @@ private:
 	LightSource* m_lightSource;
 	glm::vec3 m_velocity;
 	float m_speed;
-	const float gravityAcceleration = -0.1f;
+	const float gravityAcceleration = -0.0f;
 	bool m_canJump = true;
 
 	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 0.6f);

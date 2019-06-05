@@ -14,7 +14,7 @@ public:
 	Map();
 	Chamber* getActiveChamber();
 	void generate(ResourceManager* manager, Camera* camera);
-	Chamber* getChamber(int x, int z);
+	Chamber* getChamber(int x, int y, int z);
 	void addChamber(Chamber* c);
 	void setChamberAdjacents(Chamber* c);
 	void checkActiveChamberChange(Player* p);
@@ -22,8 +22,9 @@ public:
 private:
 	Chamber* m_activeChamber;
 	void generateMaze();
-	int linearise(int x, int y);
-	const int maxX = 30;
-	const int maxZ = 30;
+	int linearise(int x, int y, int z);
+	const int maxX = 3;
+	const int maxY = 3;
+	const int maxZ = 3;
 };
 

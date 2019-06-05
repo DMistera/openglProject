@@ -13,11 +13,13 @@ Chamber * Map::getActiveChamber()
 
 void Map::generate(ResourceManager* manager, Camera* camera)
 {
-	m_entities = std::vector<Entity*>(maxX*maxZ);
+	m_entities = std::vector<Entity*>(maxX*maxZ*maxY);
 	for (int x = 0; x < maxX; x++) {
-		for (int y = 0; y < maxZ; y++) {
-			Chamber* chamber = new Chamber(manager, camera, x, y);
-			addChamber(chamber);
+		for (int y = 0; y < maxY; y++) {
+			for (int z = 0; z < maxZ; z++) {
+				Chamber* chamber = new Chamber(manager, camera, x, y, z);
+				addChamber(chamber);
+			}
 		}
 	}
 	for (Entity* e : m_entities) {
@@ -35,20 +37,23 @@ void Map::generate(ResourceManager* manager, Camera* camera)
 
 
 
-Chamber * Map::getChamber(int x, int z)
+Chamber * Map::getChamber(int x, int y, int z)
 {
 	if (x < 0 || x >= maxX) {
+		return nullptr;
+	}
+	if (y < 0 || y >= maxY) {
 		return nullptr;
 	}
 	if (z < 0 || z >= maxZ) {
 		return nullptr;
 	}
-	return dynamic_cast<Chamber*>( m_entities[linearise(x, z)]);
+	return dynamic_cast<Chamber*>( m_entities[linearise(x, y, z)]);
 }
 
 void Map::addChamber(Chamber * c)
 {
-	m_entities[linearise(c->getX(), c->getZ())] = c;
+	m_entities[linearise(c->getX(), c->getY(), c->getZ())] = c;
 }
 
 
@@ -57,21 +62,18 @@ void Map::setChamberAdjacents(Chamber * c)
 {
 	int x = c->getX();
 	int z = c->getZ();
-	Chamber* c1 = getChamber(x + 1, z);
-	Chamber* c2 = getChamber(x - 1, z);
-	Chamber* c3 = getChamber(x, z + 1);
-	Chamber* c4 = getChamber(x, z - 1);
-	if (c1 != nullptr) {
-		c->addAdjacentChamber(c1);
-	}
-	if (c2 != nullptr) {
-		c->addAdjacentChamber(c2);
-	}
-	if (c3 != nullptr) {
-		c->addAdjacentChamber(c3);
-	}
-	if (c4 != nullptr) {
-		c->addAdjacentChamber(c4);
+	int y = c->getY();
+	std::vector<Chamber*> adj(6);
+	adj[0] = getChamber(x + 1, y, z);
+	adj[1] = getChamber(x - 1, y, z);
+	adj[2] = getChamber(x, y, z + 1);
+	adj[3] = getChamber(x, y, z - 1);
+	adj[4] = getChamber(x, y - 1, z);
+	adj[5] = getChamber(x, y + 1, z);
+	for (Chamber* ch : adj) {
+		if (ch != nullptr) {
+			c->addAdjacentChamber(ch);
+		}
 	}
 }
 
@@ -101,49 +103,61 @@ void Map::generateMaze()
 	};
 	std::vector<Node*> nodes(m_entities.size());
 	for (int x = 0; x < maxX; x++) {
-		for (int z = 0; z < maxZ; z++) {
-			Node* n = new Node();
-			nodes[linearise(x, z)] = n;
-			Chamber* c = getChamber(x, z);
-			n->chamber = c;
+		for (int y = 0; y < maxY; y++) {
+			for (int z = 0; z < maxZ; z++) {
+				Node* n = new Node();
+				nodes[linearise(x, y, z)] = n;
+				Chamber* c = getChamber(x, y, z);
+				n->chamber = c;
+			}
 		}
 	}
 
 	std::srand(unsigned(std::time(0)));
 
-	auto getNode = [&](int x, int z) -> Node* {
+	auto getNode = [&](int x, int y, int z) -> Node* {
 		if (x < 0 || x >= maxX) {
+			return nullptr;
+		}
+		if (y < 0 || y >= maxY) {
 			return nullptr;
 		}
 		if (z < 0 || z >= maxZ) {
 			return nullptr;
 		}
-		return nodes[linearise(x, z)];
+		return nodes[linearise(x, y, z)];
 	};
 
-	Node* first = getNode(0, 0);
+	Node* first = getNode(0, 0, 0);
 
 	std::function<void(Node*)> f = [&](Node* currentNode) -> void {
 		std::vector<int> v;
-		for (int i = 0; i < 4; ++i) v.push_back(i); // 1 2 3 4
+		for (int i = 0; i < 6; i++) v.push_back(i); // 0 1 2 3 4 5
 		std::random_shuffle(v.begin(), v.end());
 
 		int x = currentNode->chamber->getX();
+		int y = currentNode->chamber->getY();
 		int z = currentNode->chamber->getZ();
 
 		for (int i : v) {
 			Node* n = nullptr;
 			if (i == 0) {
-				n = getNode(x + 1, z);
+				n = getNode(x + 1, y, z);
 			}
 			else if(i == 1) {
-				n = getNode(x - 1, z);
+				n = getNode(x - 1, y, z);
 			}
 			else if (i == 2) {
-				n = getNode(x, z + 1);
+				n = getNode(x, y, z + 1);
 			}
 			else if (i == 3) {
-				n = getNode(x, z - 1);
+				n = getNode(x, y, z - 1);
+			}
+			else if (i == 4) {
+				n = getNode(x, y - 1, z);
+			}
+			else if (i == 5) {
+				n = getNode(x, y + 1, z);
 			}
 
 			if (n == nullptr) continue;
@@ -159,12 +173,20 @@ void Map::generateMaze()
 				n->chamber->open(ChamberWall::Position::RIGHT);
 			}
 			else if (i == 2) {
-				currentNode->chamber->open(ChamberWall::Position::BOTTOM);
-				n->chamber->open(ChamberWall::Position::TOP);
+				currentNode->chamber->open(ChamberWall::Position::BACK);
+				n->chamber->open(ChamberWall::Position::FRONT);
 			}
 			else if (i == 3) {
-				currentNode->chamber->open(ChamberWall::Position::TOP);
-				n->chamber->open(ChamberWall::Position::BOTTOM);
+				currentNode->chamber->open(ChamberWall::Position::FRONT);
+				n->chamber->open(ChamberWall::Position::BACK);
+			}
+			else if (i == 4) {
+				currentNode->chamber->open(ChamberWall::Position::DOWN);
+				n->chamber->open(ChamberWall::Position::UP);
+			}
+			else if (i == 5) {
+				currentNode->chamber->open(ChamberWall::Position::UP);
+				n->chamber->open(ChamberWall::Position::DOWN);
 			}
 			n->visited = true;
 			f(n);
@@ -178,7 +200,7 @@ void Map::generateMaze()
 	nodes.clear();
 }
 
-int Map::linearise(int x, int y)
+int Map::linearise(int x, int y, int z)
 {
-	return x * maxX + y;
+	return z * maxX * maxY + y * maxX + x;
 }

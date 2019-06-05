@@ -2,7 +2,7 @@
 
 
 
-WoodenBox::WoodenBox(ResourceManager* manager, Camera* camera) : MaterialEntity(manager->getModel("Box.obj"))
+WoodenBox::WoodenBox(ResourceManager* manager, Camera* camera) : MaterialEntity()
 {
 	init(manager, camera);
 
@@ -18,4 +18,9 @@ WoodenBox::~WoodenBox()
 PrismHitbox * WoodenBox::getHitbox()
 {
 	return m_hitbox;
+}
+
+ModelFromFile * WoodenBox::setModel(ResourceManager * res)
+{
+	return res->getModel("Box.obj");
 }

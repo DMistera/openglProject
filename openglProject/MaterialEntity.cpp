@@ -2,9 +2,8 @@
 
 
 
-MaterialEntity::MaterialEntity(ModelFromFile * model) : Entity()
+MaterialEntity::MaterialEntity() : Entity()
 {
-	m_model = model;
 }
 
 MaterialEntity::~MaterialEntity()
@@ -14,6 +13,7 @@ MaterialEntity::~MaterialEntity()
 
 void MaterialEntity::init(ResourceManager* manager, Camera* camera)
 {
+	m_model = setModel(manager);
 	m_program = manager->getProgram("v_material.glsl", "f_material.glsl");
 	m_camera = camera;
 	m_drawable = true;

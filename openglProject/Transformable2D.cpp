@@ -58,3 +58,8 @@ glm::vec2 Transformable2D::applyTransformation(glm::vec2 point)
 	result.y += m_position.y;
 	return result;
 }
+
+bool Transformable2D::isinStartPosition()
+{
+	return m_position.x == 0.0f && m_position.y == 0.0f;
+}

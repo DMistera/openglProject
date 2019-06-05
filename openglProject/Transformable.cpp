@@ -70,6 +70,11 @@ void Transformable::setRotationY(float r)
 	setRotation(glm::vec3(m_rotation.x, r, m_rotation.z));
 }
 
+void Transformable::setPositionY(float y)
+{
+	setPosition(glm::vec3(m_position.x, y, m_position.z));
+}
+
 void Transformable::setScale(glm::vec3 v)
 {
 	m_scale = v;

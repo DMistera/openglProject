@@ -2,31 +2,34 @@
 
 
 //TODO make floor and ceiling in blender and also add them
-Chamber::Chamber(ResourceManager* manager, Camera* camera, int x, int z) : Entity()
+Chamber::Chamber(ResourceManager* manager, Camera* camera, int x, int y, int z) : Entity()
 {
 	m_x = x;
+	m_y = y;
 	m_z = z;
 
-	setPosition(glm::vec3(getFullSize()*m_x, 0.0f, getFullSize()*m_z));
+	setPosition(glm::vec3(getFullSize()*m_x, getFullSize()*m_y, getFullSize()*m_z));
 
-	m_leftWall = new ChamberWall(manager, ChamberWall::Position::LEFT);
-	m_rightWall = new ChamberWall(manager, ChamberWall::Position::RIGHT);
-	m_topWall = new ChamberWall(manager, ChamberWall::Position::TOP);
-	m_bottomWall = new ChamberWall(manager, ChamberWall::Position::BOTTOM);
+	m_leftWall = new ChamberSideWall(manager, ChamberWall::Position::LEFT);
+	m_rightWall = new ChamberSideWall(manager, ChamberWall::Position::RIGHT);
+	m_topWall = new ChamberSideWall(manager, ChamberWall::Position::FRONT);
+	m_bottomWall = new ChamberSideWall(manager, ChamberWall::Position::BACK);
+	m_floor = new ChamberFloor(manager, ChamberWall::Position::DOWN);
+	m_ceiling = new ChamberFloor(manager, ChamberWall::Position::UP);
 
 	addEntity(m_leftWall);
 	addEntity(m_rightWall);
 	addEntity(m_topWall);
 	addEntity(m_bottomWall);
+	addEntity(m_floor);
+	addEntity(m_ceiling);
 
 	m_leftWall->init(manager, camera);
 	m_rightWall->init(manager, camera);
 	m_topWall->init(manager, camera);
 	m_bottomWall->init(manager, camera);
-
-	m_floor = new MaterialEntity(manager->getModel("floor.obj"));
 	m_floor->init(manager, camera);
-	addEntity(m_floor);
+	m_ceiling->init(manager, camera);
 }
 
 
@@ -50,14 +53,19 @@ std::vector<Chamber*> Chamber::getAdjacentChambers()
 	return m_adjacentChambers;
 }
 
-float Chamber::getX()
+int Chamber::getX()
 {
 	return m_x;
 }
 
-float Chamber::getZ()
+int Chamber::getZ()
 {
 	return m_z;
+}
+
+int Chamber::getY()
+{
+	return m_y;
 }
 
 PrismHitbox* Chamber::getDoorFrameHitbox()
@@ -68,18 +76,24 @@ PrismHitbox* Chamber::getDoorFrameHitbox()
 void Chamber::open(ChamberWall::Position pos)
 {
 	switch (pos) {
-	case ChamberWall::Position::LEFT:
-		m_leftWall->open();
-		break;
-	case ChamberWall::Position::RIGHT:
-		m_rightWall->open();
-		break;
-	case ChamberWall::Position::TOP:
-		m_topWall->open();
-		break;
-	case ChamberWall::Position::BOTTOM:
-		m_bottomWall->open();
-		break;
+		case ChamberWall::Position::LEFT:
+			m_leftWall->open();
+			break;
+		case ChamberWall::Position::RIGHT:
+			m_rightWall->open();
+			break;
+		case ChamberWall::Position::FRONT:
+			m_topWall->open();
+			break;
+		case ChamberWall::Position::BACK:
+			m_bottomWall->open();
+			break;
+		case ChamberWall::Position::UP:
+			m_ceiling->open();
+			break;
+		case ChamberWall::Position::DOWN:
+			m_floor->open();
+			break;
 	}
 }
 
@@ -95,14 +109,15 @@ void Chamber::generateHitbox()
 	m_rightWall->generateHitbox();
 	m_topWall->generateHitbox();
 	m_bottomWall->generateHitbox();
+	m_floor->generateHitbox();
+	m_ceiling->generateHitbox();
 
 	m_hitbox.addHitbox(m_leftWall->getHitbox(), false);
 	m_hitbox.addHitbox(m_rightWall->getHitbox(), false);
 	m_hitbox.addHitbox(m_topWall->getHitbox(), false);
 	m_hitbox.addHitbox(m_bottomWall->getHitbox(), false);
-
-	PrismHitbox* floor = new PrismHitbox(new Rectangle(getFullSize(), getFullSize()), -ChamberWall::THICKNESS, 0.0f);
-	m_hitbox.addHitbox(floor);
+	m_hitbox.addHitbox(m_floor->getHitbox(), false);
+	m_hitbox.addHitbox(m_ceiling->getHitbox(), false);
 }
 
 float Chamber::getFullSize()
@@ -114,10 +129,10 @@ void Chamber::fill(ResourceManager* manager, Camera* camera)
 {
 	HitboxGroup* hallwayHitbox = new HitboxGroup();
 	hallwayHitbox->setParent(this);
-	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle(chamberSize, ChamberWall::DOOR_WIDTH), chamberHeigth));
-	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle( ChamberWall::DOOR_WIDTH, chamberSize), chamberHeigth));
+	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle(chamberSize, ChamberSideWall::DOOR_WIDTH), chamberHeigth));
+	hallwayHitbox->addHitbox(new PrismHitbox(new Rectangle(ChamberSideWall::DOOR_WIDTH, chamberSize), chamberHeigth));
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 40; i++) {
 		float randSize = 0.05f + RANDOM.nextFloat()*0.1f ;
 		float randX = RANDOM.nextFloat()*2.0f - 1.0f;
 		float randZ = RANDOM.nextFloat()*2.0f - 1.0f;
@@ -128,10 +143,12 @@ void Chamber::fill(ResourceManager* manager, Camera* camera)
 		box->setRotationY(randRot);
 		box->setParent(this);
 		Hitbox* boxHitbox = box->getHitbox();
-		if (!boxHitbox->collide(hallwayHitbox)) {
+		if (!boxHitbox->collide(hallwayHitbox) && !boxHitbox->collide(&m_hitbox)) {
 			addEntity(box);
 			m_hitbox.addHitbox(box->getHitbox(), false);
 		}
 	}
+
+	delete hallwayHitbox;
 }
 

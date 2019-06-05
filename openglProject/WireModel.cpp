@@ -21,5 +21,7 @@ WireModel::~WireModel()
 
 void WireModel::draw(Program * p)
 {
+	glDisable(GL_CULL_FACE);
 	m_meshes[0]->draw(p, GL_TRIANGLE_STRIP, true);
+	glEnable(GL_CULL_FACE);
 }

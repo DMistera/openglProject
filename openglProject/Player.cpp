@@ -54,10 +54,13 @@ void Player::init(GLFWwindow* window)
 				m_velocity.z -= m_speed;
 			}
 			else if (key == GLFW_KEY_SPACE) {
-				if (m_canJump) {
+				//if (m_canJump) {
 					m_velocity.y = 0.04f;
 					m_canJump = false;
-				}
+				//}
+			}
+			else if (key == GLFW_KEY_LEFT_CONTROL) {
+				m_velocity.y = -0.04f;
 			}
 		}
 		else if (action == GLFW_RELEASE) {

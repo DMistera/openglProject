@@ -10,11 +10,12 @@ class MaterialEntity :
 	public Entity
 {
 public:
-	MaterialEntity(ModelFromFile* mesh);
+	MaterialEntity();
 	~MaterialEntity();
 	void init(ResourceManager* manager, Camera* camera);
 	void setMaterial(Material material);
 	void addLightSource(LightSource* light);
+	virtual ModelFromFile* setModel(ResourceManager* res) = 0;
 protected:
 	void setUniforms();
 	Material m_material;

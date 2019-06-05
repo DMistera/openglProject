@@ -2,17 +2,18 @@
 
 
 
-PrismHitbox::PrismHitbox(Shape* base, float minY, float maxY)
+PrismHitbox::PrismHitbox(Shape* base, float minY, float maxY) : PrismHitbox(base, maxY - minY)
 {
-	m_base = base;
-	m_height = maxY - minY;
-	setPosition(glm::vec3(0.0f, minY, 0.0f));
+	setPositionY(minY);
 }
 
 PrismHitbox::PrismHitbox(Shape * base, float height)
 {
 	m_base = base;
 	m_height = height;
+	if (!m_base->isinStartPosition()) {
+		inheritBasePosition();
+	}
 }
 
 

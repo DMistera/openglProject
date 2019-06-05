@@ -12,5 +12,8 @@ public:
 	PrismHitbox* getHitbox();
 private:
 	PrismHitbox* m_hitbox;
+
+	// Inherited via MaterialEntity
+	virtual ModelFromFile * setModel(ResourceManager * res) override;
 };
 

@@ -17,6 +17,7 @@ public:
 	void setPosition(glm::vec2 v);
 	void setY(float y);
 	void setRotationY(float r);
+	void setPositionY(float y);
 	virtual void setScale(glm::vec3 v);
 	void setScale(glm::vec2 v);
 	void setScale(float scale);

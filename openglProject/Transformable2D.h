@@ -16,6 +16,7 @@ public:
 	glm::vec2 getScale();
 	float getRotation();
 	glm::vec2 applyTransformation(glm::vec2 point);
+	bool isinStartPosition();
 private:
 	glm::vec2 m_position;
 	glm::vec2 m_scale;
