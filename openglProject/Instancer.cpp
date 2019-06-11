@@ -5,6 +5,7 @@
 Instancer::Instancer(Entity* entity)
 {
 	m_entity = entity;
+
 }
 
 
@@ -14,6 +15,9 @@ Instancer::~Instancer()
 
 void Instancer::draw()
 {
+	if (m_outdated) {
+		updateInstanceGroups();
+	}
 	for (InstanceGroup g : m_instanceGroups) {
 		g.getProgram()->use();
 		setUniforms(g.getSample());
@@ -30,7 +34,7 @@ void Instancer::init()
 {
 	updateInstanceGroups();
 	m_entity->setChildrenUpdateCallback([&]() -> void {
-		updateInstanceGroups();
+		m_outdated = true;
 	});
 }
 
@@ -73,4 +77,5 @@ void Instancer::updateInstanceGroups()
 	};
 
 	m_instanceGroups = f(m_entity);
+	m_outdated = false;
 }

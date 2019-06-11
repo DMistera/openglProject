@@ -16,6 +16,7 @@ public:
 	void setToDraw(Model* m, Program* program, Camera* camera);
 	void addEntity(Entity* e);
 	void draw();
+	void setProgram(Program* p);
 	Program* getProgram();
 	Model* getModel();
 	Camera* getCamera();

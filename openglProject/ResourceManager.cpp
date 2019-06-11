@@ -13,16 +13,23 @@ ResourceManager::~ResourceManager()
 
 ModelFromFile * ResourceManager::getModel(std::string path)
 {
+	ModelFromFile* m = new ModelFromFile(path, &m_textureManager);
+	m = dynamic_cast<ModelFromFile*>(makeUniqueModel(m));
+	return m;
+}
+
+Model * ResourceManager::makeUniqueModel(Model * model)
+{
 	for (int i = 0; i < m_models.size(); i++) {
-		ModelFromFile* m = m_models.at(i);
-		if (path == m->getPath()) {
+		Model* m = m_models.at(i);
+		if (model == m) {
+			delete model;
 			return m;
 		}
 	}
-	ModelFromFile* m = new ModelFromFile(path);
-	m->init(&m_textureManager);
-	m_models.push_back(m);
-	return m;
+	model->init();
+	m_models.push_back(model);
+	return model;
 }
 
 Program * ResourceManager::getProgram(std::string vertex, std::string fragment)
@@ -37,4 +44,9 @@ Program * ResourceManager::getProgram(std::string vertex, std::string fragment)
 	p->init();
 	m_programs.push_back(p);
 	return p;
+}
+
+TextureManager * ResourceManager::getTextureManager()
+{
+	return &m_textureManager;
 }

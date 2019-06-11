@@ -13,6 +13,9 @@ bool Renderer::init()
 	glEnable(GL_CULL_FACE);
 	FreeImage_Initialise();
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
 	glEnable(GL_FRAMEBUFFER_SRGB);
 	checkGLError("Renderer initialization.");
 	return true;

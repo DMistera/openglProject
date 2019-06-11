@@ -118,7 +118,15 @@ bool Mesh::operator==(Mesh* other)
 	if (m_indices.size() != other->getIndices()->size()) {
 		return false;
 	}
+	if (getMaterial()->diffuseMap->getPath() != other->getMaterial()->diffuseMap->getPath()) {
+		return false;
+	}
 	return m_name == other->getName();
+}
+
+Material * Mesh::getMaterial()
+{
+	return m_material;
 }
 
 std::vector<Vertex>* Mesh::getBaseVertices()
@@ -134,9 +142,7 @@ std::vector<unsigned int>* Mesh::getIndices()
 Mesh::~Mesh()
 {
 	std::cout << m_name << std::endl;
-	if (m_name == "Cube") {
-		std::cout << m_vertexArrayObject << std::endl;
-	}
+
 	glBindVertexArray(m_vertexArrayObject);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
@@ -146,4 +152,6 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &m_elementBufferObject);
 
 	glDeleteVertexArrays(1, &m_vertexArrayObject);
+
+	delete m_material;
 }

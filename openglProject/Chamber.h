@@ -6,6 +6,7 @@
 #include "Circle.h"
 #include "WoodenBox.h"
 #include "Utils.h"
+#include "Beam.h"
 
 
 #define _USE_MATH_DEFINES
@@ -27,6 +28,9 @@ public:
 	void generateHitbox();
 	float getFullSize();
 	void fill(ResourceManager* manager, Camera* camera);
+	void update(double deltaTime);
+	bool hasBeam();
+	Beam* getBeam();
 private:
 	std::vector<Chamber*> m_adjacentChambers;
 	HitboxGroup m_hitbox;
@@ -41,6 +45,7 @@ private:
 	ChamberWall* m_bottomWall;
 	ChamberWall* m_floor;
 	ChamberWall* m_ceiling;
+	Beam* m_beam;
 
 	const float chamberSize = 2.0f;
 	const float chamberHeigth = 2.0f;

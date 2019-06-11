@@ -1,7 +1,7 @@
 #include "Chamber.h"
 
 
-//TODO make floor and ceiling in blender and also add them
+
 Chamber::Chamber(ResourceManager* manager, Camera* camera, int x, int y, int z) : Entity()
 {
 	m_x = x;
@@ -150,5 +150,27 @@ void Chamber::fill(ResourceManager* manager, Camera* camera)
 	}
 
 	delete hallwayHitbox;
+
+	if (m_ceiling->isOpen() || m_floor->isOpen()) {
+		m_beam = new Beam(manager, camera);
+		addEntity(m_beam);
+	}
+}
+
+void Chamber::update(double deltaTime)
+{
+	if (hasBeam()) {
+		m_beam->update(deltaTime);
+	}
+}
+
+bool Chamber::hasBeam()
+{
+	return m_beam != nullptr;
+}
+
+Beam * Chamber::getBeam()
+{
+	return m_beam;
 }
 

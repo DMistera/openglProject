@@ -65,12 +65,17 @@ void main() {
 
 	vec3 viewDir = normalize(i_viewPos - i_fragPos);
 
-	vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
+	float alpha = texture(material.diffuseMap, i_texCoord).a;
+
+	if(alpha <= 0.0001) {
+		discard;
+	}
+
+	vec4 result = vec4(0.0, 0.0, 0.0, alpha);
 
 	for(int i = 0; i < MAX_LIGHTS; i++) {
-		result += vec4(calcPointLight(lights[i], i_lightPositions[i], normal, i_fragPos, viewDir), 0.0);
+		result += vec4(calcPointLight(lights[i], i_lightPositions[i], normal, i_fragPos, viewDir), 0.0f);
 	}
 
 	color = result;	
-	//color = vec4(1.0, 0.0, 0.0, 1.0);
 }

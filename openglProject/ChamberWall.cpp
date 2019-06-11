@@ -37,7 +37,12 @@ void ChamberWall::generateHitbox()
 	m_hitbox->setParent(this);
 }
 
-ModelFromFile * ChamberWall::setModel(ResourceManager * res)
+bool ChamberWall::isOpen()
+{
+	return m_open;
+}
+
+Model * ChamberWall::setModel(ResourceManager * res)
 {
 	if (m_open) {
 		return getModelWhenOpen();

@@ -198,6 +198,18 @@
     <ClCompile Include="ChamberSideWall.cpp">
       <Filter>Source Files\App\Map\Chamber</Filter>
     </ClCompile>
+    <ClCompile Include="Beam.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleModel.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files\Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamParticle.cpp">
+      <Filter>Source Files\App\Map\Chamber</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
@@ -339,6 +351,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChamberSideWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Beam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BeamParticle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

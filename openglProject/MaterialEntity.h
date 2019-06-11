@@ -15,7 +15,7 @@ public:
 	void init(ResourceManager* manager, Camera* camera);
 	void setMaterial(Material material);
 	void addLightSource(LightSource* light);
-	virtual ModelFromFile* setModel(ResourceManager* res) = 0;
+	virtual Model* setModel(ResourceManager* res) = 0;
 protected:
 	void setUniforms();
 	Material m_material;

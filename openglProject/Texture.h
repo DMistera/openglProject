@@ -13,7 +13,7 @@ public:
 	Texture(std::string path);
 	void init(int textureUnit, bool gemmaCorrelation);
 	~Texture();
-	bool operator ==(Texture another);
+	bool operator ==(Texture* another);
 	std::string getPath();
 	void bind();
 private:

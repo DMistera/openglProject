@@ -54,10 +54,7 @@ void Player::init(GLFWwindow* window)
 				m_velocity.z -= m_speed;
 			}
 			else if (key == GLFW_KEY_SPACE) {
-				//if (m_canJump) {
-					m_velocity.y = 0.04f;
-					m_canJump = false;
-				//}
+				m_spacePressed = true;
 			}
 			else if (key == GLFW_KEY_LEFT_CONTROL) {
 				m_velocity.y = -0.04f;
@@ -73,6 +70,9 @@ void Player::init(GLFWwindow* window)
 			else if (key == GLFW_KEY_S) {
 				m_velocity.z -= m_speed;
 			}
+			else if (key == GLFW_KEY_SPACE) {
+				m_spacePressed = false;
+			}
 			else if (key == GLFW_KEY_W) {
 				m_velocity.z += m_speed;
 			}
@@ -85,16 +85,25 @@ void Player::init(GLFWwindow* window)
 	});
 }
 
-void Player::update(double deltaTime)
+void Player::update(double deltaTime, Chamber * currentChamber)
 {
+	spaceAction();
+	bool inBeam;
+	if (currentChamber->hasBeam()) {
+		inBeam = m_hitbox.collide(currentChamber->getBeam()->getHitbox());
+	}
+	else {
+		inBeam = false;
+	}
+	if (inBeam) {
+		m_canJump = true;
+	}
 	m_velocity.y += deltaTime * gravityAcceleration;
-
 
 	m_camera->moveForward(-m_velocity.z*deltaTime);
 	m_camera->moveSideways(m_velocity.x*deltaTime);
 	m_camera->move(glm::vec3(0.0f, m_velocity.y, 0.0f));
 	updateHitboxPosiiton(m_camera);
-
 }
 
 void Player::resolveHitbox(Chamber * currentChamber)
@@ -139,4 +148,14 @@ void Player::updateHitboxPosiiton(Camera * cam)
 {
 	glm::vec3 camPos = cam->getPosition();
 	m_hitbox.setPosition(glm::vec3(camPos.x, camPos.y - playerHeight, camPos.z));
+}
+
+void Player::spaceAction()
+{
+	if (m_spacePressed) {
+		if (m_canJump) {
+			m_velocity.y = 0.04f;
+			m_canJump = false;
+		}
+	}
 }

@@ -20,6 +20,7 @@ public:
 	void generateHitbox();
 	static const float THICKNESS;
 	static const float SIZE;
+	bool isOpen();
 protected:
 	Hitbox* m_hitbox;
 	bool m_open;
@@ -27,7 +28,7 @@ protected:
 	Position m_position;
 
 	// Inherited via MaterialEntity
-	virtual ModelFromFile * setModel(ResourceManager * res) override;
+	virtual Model * setModel(ResourceManager * res) override;
 
 	virtual ModelFromFile* getModelWhenClosed() = 0;
 	virtual ModelFromFile* getModelWhenOpen() = 0;

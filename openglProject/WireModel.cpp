@@ -25,3 +25,13 @@ void WireModel::draw(Program * p)
 	m_meshes[0]->draw(p, GL_TRIANGLE_STRIP, true);
 	glEnable(GL_CULL_FACE);
 }
+
+bool WireModel::operator==(Model * another)
+{
+	//TODO
+	return false;
+}
+
+void WireModel::init()
+{
+}

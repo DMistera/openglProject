@@ -2,9 +2,10 @@
 
 
 
-ModelFromFile::ModelFromFile(std::string name)
+ModelFromFile::ModelFromFile(std::string name, TextureManager* texManager)
 {
 	m_objPath = name;
+	m_texManager = texManager;
 }
 
 
@@ -12,7 +13,7 @@ ModelFromFile::~ModelFromFile()
 {
 }
 
-void ModelFromFile::init(TextureManager* texManager)
+void ModelFromFile::init()
 {
 
 	std::vector<glm::vec4> verticesPos;
@@ -62,7 +63,7 @@ void ModelFromFile::init(TextureManager* texManager)
 		else if (first == "mtllib") {
 			std::string path;
 			s >> path;
-			m_materialMap = parseMtl(path, texManager);
+			m_materialMap = parseMtl(path, m_texManager);
 		}
 		else if (first == "usemtl") {
 			std::string materialName;
@@ -253,4 +254,13 @@ Material * ModelFromFile::findMaterial(std::string name)
 		}
 	}
 	return nullptr;
+}
+
+bool ModelFromFile::operator==(Model * another)
+{
+	ModelFromFile* m = dynamic_cast<ModelFromFile*>(another);
+	if (m == nullptr) {
+		return false;
+	}
+	return getPath() == m->getPath();
 }

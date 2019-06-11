@@ -25,6 +25,9 @@ void Texture::init(int textureUnit, bool gammaCorrelation)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 		GLenum type = gammaCorrelation ? GL_SRGB : GL_RGB8;
+		if (format == FIF_PNG) {
+			type = gammaCorrelation ? GL_SRGB8_ALPHA8 : GL_RGBA;
+		}
 		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		BYTE* data = FreeImage_GetBits(bitmap);
 		glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
@@ -41,9 +44,9 @@ Texture::~Texture()
 {
 }
 
-bool Texture::operator==(Texture another)
+bool Texture::operator==(Texture* another)
 {
-	return another.getPath() == m_path;
+	return another->getPath() == m_path;
 }
 
 std::string Texture::getPath()

@@ -10,9 +10,9 @@
 class ModelFromFile : public Model
 {
 public:
-	ModelFromFile(std::string name);
+	ModelFromFile(std::string name, TextureManager* texManager);
 	~ModelFromFile();
-	void init(TextureManager* texManager);
+	void init() override;
 	void draw(Program* p) override;
 	std::string getPath();
 	std::vector<Material*> parseMtl(std::string path, TextureManager* texManager);
@@ -20,5 +20,8 @@ private:
 	Material* findMaterial(std::string name);
 	std::string m_objPath;
 	std::vector<Material*> m_materialMap;
+	TextureManager* m_texManager;
+	// Inherited via Model
+	virtual bool operator==(Model * another) override;
 };
 

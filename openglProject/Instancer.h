@@ -19,7 +19,7 @@ protected:
 	virtual void setInstancedVertexAttributes(std::vector<Entity*> entities) = 0;
 	virtual void cleanUp() = 0;
 	void updateInstanceGroups();
-	
+	bool m_outdated;
 	std::vector<InstanceGroup> m_instanceGroups;
 };
 

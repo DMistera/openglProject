@@ -1,24 +1,24 @@
 #pragma once
 
 #include "Model.h"
-#include <vector>
-#include "Vertex.h"
 
-class WireModel : public Model
+class RectangleModel : public Model
 {
 public:
-	WireModel(std::vector<Vertex> vertices);
-	~WireModel();
+	RectangleModel(float width, float height, Material* m);
+	~RectangleModel();
 
 	// Inherited via Model
 	virtual void draw(Program * p) override;
-private:
-	Mesh* m_mesh;
 
 	// Inherited via Model
 	virtual bool operator==(Model * another) override;
 
 	// Inherited via Model
 	virtual void init() override;
+private:
+	float m_width;
+	float m_height;
+	Material* m_material;
 };
 

@@ -51,6 +51,11 @@ void Entity::draw()
 	}
 }
 
+void Entity::setProgram(Program * p)
+{
+	m_program = p;
+}
+
 Program * Entity::getProgram()
 {
 	return m_program;
