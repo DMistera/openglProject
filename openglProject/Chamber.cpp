@@ -144,8 +144,12 @@ void Chamber::fill(ResourceManager* manager, Camera* camera)
 		box->setParent(this);
 		Hitbox* boxHitbox = box->getHitbox();
 		if (!boxHitbox->collide(hallwayHitbox) && !boxHitbox->collide(&m_hitbox)) {
+			box->init(manager, camera);
 			addEntity(box);
 			m_hitbox.addHitbox(box->getHitbox(), false);
+		}
+		else {
+			delete box;
 		}
 	}
 

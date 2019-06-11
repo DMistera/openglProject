@@ -16,7 +16,7 @@ public:
 	float getMaxY();
 	Shape* getBase();
 	bool collidePrism(PrismHitbox* other);
-	void resolvePrism(PrismHitbox* solid);
+	void resolvePrism(PrismHitbox* solid, glm::vec3 shift);
 	void setPosition(glm::vec3 v) override;
 	void setRotation(glm::vec3 v) override;
 	void setScale(glm::vec3 v) override;
@@ -28,7 +28,7 @@ public:
 	virtual bool isPointInside(glm::vec3 p) override;
 private:
 	bool collideY(PrismHitbox* other);
-	void resolveY(PrismHitbox* solid);
+	void resolveY(PrismHitbox* solid, glm::vec3 shift);
 	Shape* m_base;
 	float m_height;
 	std::function<void()> m_onResolveY;

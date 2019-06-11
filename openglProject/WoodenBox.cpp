@@ -4,7 +4,6 @@
 
 WoodenBox::WoodenBox(ResourceManager* manager, Camera* camera) : MaterialEntity()
 {
-	init(manager, camera);
 
 	m_hitbox = new PrismHitbox(new Rectangle(2.0f, 2.0f), 2.0f);
 	m_hitbox->setParent(this);

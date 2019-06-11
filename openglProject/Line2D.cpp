@@ -96,6 +96,11 @@ bool Line2D::instersects(Line2D other)
 	return false; // Doesn't fall in any of the above cases 
 }
 
+bool Line2D::isPoint()
+{
+	return m_startPoint == m_endPoint;
+}
+
 
 Line2D::~Line2D()
 {

@@ -8,7 +8,7 @@ LightSource::LightSource(glm::vec3 position, glm::vec3 color)
 	m_specularColor = color;
 	m_constant = 0.0f;
 	m_linear = 0.0f;
-	m_quadratic = 5.0f;
+	m_quadratic = 20.0f;
 }
 
 glm::vec3 LightSource::getAmbientColor()

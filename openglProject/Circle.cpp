@@ -17,7 +17,6 @@ bool Circle::intersects(Circle other)
 	glm::vec2 p = getPosition();
 	glm::vec2 p2 = other.getPosition();
 	float dist = MathUtils::distance(getPosition(), other.getPosition());
-	std::cout << dist << std::endl;
 	return getRadius() + other.getRadius() > dist;
 }
 
@@ -73,7 +72,7 @@ bool Circle::intersects(Rectangle rect)
 	return false;
 }
 
-void Circle::resolve(Rectangle rect)
+void Circle::resolve(Rectangle rect, glm::vec2 shift)
 {
 	struct LineToResolve {
 		Line2D* line;
@@ -104,6 +103,22 @@ void Circle::resolve(Rectangle rect)
 		lp->taken = true;
 		resolve(*(lp->line));
 	}
+	/*std::vector<Line2D> lines = rect.getLines();
+	for (int i = 0; i < lines.size(); i++) {
+		glm::vec2 p1;
+		glm::vec2 p2;
+		if (intersects(lines[i], &p1, &p2)) {
+			glm::vec2 middle = (p1 + p2) / 2.0f;
+			glm::vec2 dir = glm::normalize(middle - getPosition());
+			glm::vec2 p = getPosition() + dir * m_radius;
+			Line2D path(p - shift, p);
+			if (path.instersects(lines[i])) {
+				std::cout << "Intersecting!" << std::endl;
+				resolve(lines[i]);
+			}
+
+		}
+	}*/
 }
 
 

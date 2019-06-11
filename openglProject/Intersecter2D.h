@@ -10,6 +10,6 @@ public:
 	Intersecter2D();
 	~Intersecter2D();
 	static bool intersect(Shape* a, Shape* b);
-	static void resolve(Shape* nonSolid, Shape* solid);
+	static void resolve(Shape* nonSolid, Shape* solid, glm::vec2 shift);
 };
 

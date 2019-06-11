@@ -32,14 +32,14 @@ bool CollisionDetector::collide(Hitbox * first, Hitbox * second)
 	return false;
 }
 
-void CollisionDetector::resolve(Hitbox * nonSolid, Hitbox * solid)
+void CollisionDetector::resolve(Hitbox * nonSolid, Hitbox * solid, glm::vec3 shift)
 {
 	if (nonSolid->getType() == Hitbox::Type::PRISM) {
 		if (solid->getType() == Hitbox::Type::PRISM) {
-			 dynamic_cast<PrismHitbox*>(nonSolid)->resolvePrism(dynamic_cast<PrismHitbox*>(solid));
+			 dynamic_cast<PrismHitbox*>(nonSolid)->resolvePrism(dynamic_cast<PrismHitbox*>(solid), shift);
 		}
 		else if (solid->getType() == Hitbox::Type::GROUP) {
-			 prismToGroupResolve(dynamic_cast<PrismHitbox*>(nonSolid), dynamic_cast<HitboxGroup*>(solid));
+			 prismToGroupResolve(dynamic_cast<PrismHitbox*>(nonSolid), dynamic_cast<HitboxGroup*>(solid), shift);
 		}
 	}
 }
@@ -57,10 +57,12 @@ bool CollisionDetector::prismToGroupCollision(PrismHitbox * prism, HitboxGroup *
 	return false;
 }
 
-void CollisionDetector::prismToGroupResolve(PrismHitbox * prism, HitboxGroup * group)
+void CollisionDetector::prismToGroupResolve(PrismHitbox * prism, HitboxGroup * group, glm::vec3 shift)
 {
+	glm::vec3 startPos = prism->getPosition() - shift;
 	std::vector<Hitbox*> groupHitboxes = group->getChildren();
 	for (int i = 0; i < groupHitboxes.size(); i++) {
-		resolve(prism, groupHitboxes[i]);
+		resolve(prism, groupHitboxes[i], shift);
+		shift = prism->getPosition() - startPos;
 	}
 }

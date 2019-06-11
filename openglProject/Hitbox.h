@@ -13,7 +13,7 @@ public:
 	Hitbox();
 	~Hitbox();
 	bool collide(Hitbox* other);
-	void resolve(Hitbox* solid);
+	void resolve(Hitbox* solid, glm::vec3 shift);
 	virtual Hitbox::Type getType() = 0;
 	virtual void draw(ResourceManager* resourceManger, Camera* camera) = 0;
 	virtual bool isPointInside(glm::vec3 p) = 0;

@@ -19,6 +19,7 @@ public:
 	void setChamberAdjacents(Chamber* c);
 	void checkActiveChamberChange(Player* p);
 	~Map();
+	void updateAll(double deltaTime);
 private:
 	Chamber* m_activeChamber;
 	void generateMaze();

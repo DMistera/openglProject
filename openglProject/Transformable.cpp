@@ -128,4 +128,9 @@ glm::vec3 Transformable::getGlobalScale()
 	}
 }
 
+glm::vec3 Transformable::getPosition()
+{
+	return m_position;
+}
+
 

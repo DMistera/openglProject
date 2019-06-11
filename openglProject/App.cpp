@@ -43,7 +43,7 @@ void App::update(double time)
 	m_player->update(time, activeChamber);
 	m_map->checkActiveChamberChange(m_player);
 	m_player->resolveHitbox(activeChamber);
-	m_map->getActiveChamber()->update(time);
+	m_map->updateAll(time);
 }
 
 void App::draw(Renderer * renderer)

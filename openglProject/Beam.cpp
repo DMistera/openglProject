@@ -7,7 +7,7 @@ Beam::Beam(ResourceManager* manager, Camera* camera)
 {
 	TextureManager* texManager = manager->getTextureManager();
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 40; i++) {
 		BeamParticle* b = new BeamParticle();
 		b->init(manager, camera);
 		addEntity(b);

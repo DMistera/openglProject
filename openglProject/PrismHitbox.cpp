@@ -49,19 +49,16 @@ bool PrismHitbox::collidePrism(PrismHitbox * other)
 	return false;
 }
 
-void PrismHitbox::resolvePrism(PrismHitbox * solid)
+void PrismHitbox::resolvePrism(PrismHitbox * solid, glm::vec3 shift)
 {
 	if (collideY(solid)) {
 		applyTransformToBase();
 		Shape* otherBase = solid->getBase();
 		if (otherBase->isPointInside(m_base->getPosition())) {
-			resolveY(solid);
-			if (m_onResolveY) {
-				m_onResolveY();
-			}
+			resolveY(solid, shift);
 		}
 		else {
-			Intersecter2D::resolve(m_base, otherBase);
+			Intersecter2D::resolve(m_base, otherBase, glm::vec2(shift.x, -shift.z));
 			inheritBasePosition();
 		}
 	}
@@ -155,12 +152,13 @@ bool PrismHitbox::collideY(PrismHitbox * other)
 	}
 }
 
-void PrismHitbox::resolveY(PrismHitbox * solid)
+void PrismHitbox::resolveY(PrismHitbox * solid, glm::vec3 shift)
 {
-	float middleY = (getMinY() + getMaxY()) / 2.0f;
-	float otherMiddleY = (solid->getMinY() + solid->getMaxY()) / 2.0f;
-	if (middleY > otherMiddleY) {
+	if (shift.y < 0.0f) {
 		setY(solid->getMaxY());
+		if (m_onResolveY) {
+			m_onResolveY();
+		}
 	}
 	else {
 		setY(solid->getMinY() - m_height * m_scale.y);

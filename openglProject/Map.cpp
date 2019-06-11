@@ -94,6 +94,13 @@ Map::~Map()
 {
 }
 
+void Map::updateAll(double deltaTime)
+{
+	for (Entity* e : m_entities) {
+		dynamic_cast<Chamber*>(e)->update(deltaTime);
+	}
+}
+
 void Map::generateMaze()
 {
 	//Using depth first

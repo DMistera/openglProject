@@ -141,7 +141,6 @@ std::vector<unsigned int>* Mesh::getIndices()
 
 Mesh::~Mesh()
 {
-	std::cout << m_name << std::endl;
 
 	glBindVertexArray(m_vertexArrayObject);
 

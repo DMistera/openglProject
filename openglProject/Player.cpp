@@ -102,14 +102,14 @@ void Player::update(double deltaTime, Chamber * currentChamber)
 
 	m_camera->moveForward(-m_velocity.z*deltaTime);
 	m_camera->moveSideways(m_velocity.x*deltaTime);
-	m_camera->move(glm::vec3(0.0f, m_velocity.y, 0.0f));
+	m_camera->move(glm::vec3(0.0f, m_velocity.y*deltaTime, 0.0f));
 	updateHitboxPosiiton(m_camera);
 }
 
 void Player::resolveHitbox(Chamber * currentChamber)
 {
 	if (m_hitbox.collide(currentChamber->getHitbox())) {
-		m_hitbox.resolve(currentChamber->getHitbox());
+		m_hitbox.resolve(currentChamber->getHitbox(), m_lastHitboxShift);
 		glm::vec3 hbpos = m_hitbox.getGlobalPosition();
 		m_camera->moveTo(glm::vec3(hbpos.x, hbpos.y + playerHeight, hbpos.z));
 	}
@@ -147,14 +147,16 @@ glm::vec3 Player::getShiftVector(double deltaTime)
 void Player::updateHitboxPosiiton(Camera * cam)
 {
 	glm::vec3 camPos = cam->getPosition();
+	glm::vec3 hPos = m_hitbox.getPosition();
 	m_hitbox.setPosition(glm::vec3(camPos.x, camPos.y - playerHeight, camPos.z));
+	m_lastHitboxShift = m_hitbox.getPosition() - hPos;
 }
 
 void Player::spaceAction()
 {
 	if (m_spacePressed) {
 		if (m_canJump) {
-			m_velocity.y = 0.04f;
+			m_velocity.y = 2.0f;
 			m_canJump = false;
 		}
 	}

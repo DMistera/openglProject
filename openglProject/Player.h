@@ -29,12 +29,13 @@ private:
 	LightSource* m_lightSource;
 	glm::vec3 m_velocity;
 	float m_speed;
-	const float gravityAcceleration = -0.1f;
+	const float gravityAcceleration = -6.5f;
 	bool m_canJump = true;
 	bool m_spacePressed = false;
 	void spaceAction();
 
 	PrismHitbox m_hitbox = PrismHitbox(new Circle(0.15f), 0.6f);
+	glm::vec3 m_lastHitboxShift;
 
 	//Camera
 	Camera* m_camera;

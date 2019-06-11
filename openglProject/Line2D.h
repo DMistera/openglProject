@@ -18,6 +18,7 @@ public:
 	float distanceToPoint(glm::vec2 point);
 	Orientation getOrientation(glm::vec2 p, glm::vec2 q, glm::vec2 r);
 	bool instersects(Line2D other);
+	bool isPoint();
 	~Line2D();
 private:
 	glm::vec2 m_startPoint;

@@ -10,7 +10,7 @@ public:
 	Transformable();
 	~Transformable();
 	glm::mat4 * getMatrix();
-	virtual void updateMatrix();
+	void updateMatrix();
 	void setParent(Transformable* parent);
 	virtual void setRotation(glm::vec3 v);
 	virtual void setPosition(glm::vec3 v);
@@ -26,6 +26,7 @@ public:
 	glm::vec3 getGlobalPosition();
 	glm::vec3 getGlobalRotation();
 	glm::vec3 getGlobalScale();
+	glm::vec3 getPosition();
 protected:
 	glm::vec3 m_position = glm::vec3(0.0f);
 	glm::vec3 m_rotation = glm::vec3(0.0f);

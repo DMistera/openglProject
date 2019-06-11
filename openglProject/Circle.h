@@ -16,7 +16,7 @@ public:
 	bool intersects(Circle other);
 	bool intersects(Line2D line, glm::vec2* p1 = nullptr, glm::vec2* p2 = nullptr);
 	bool intersects(Rectangle rect);
-	void resolve(Rectangle rect);
+	void resolve(Rectangle rect, glm::vec2 shift);
 	void resolve(Line2D line);
 	float distance(Line2D line);
 	float getRadius();
